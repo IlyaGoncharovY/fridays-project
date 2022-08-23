@@ -1,6 +1,6 @@
 {
-  "name": "fridays",
-  "homepage": "https://ilyagoncharovy.github.io/fridays/",
+  "name": "fridays-project",
+  "homepage": "https://ilyagoncharovy.github.io/fridays-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
