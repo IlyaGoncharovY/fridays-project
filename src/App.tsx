@@ -8,6 +8,7 @@ import {Profile} from "./component/Profile";
 import {PasswordRecovery} from "./component/Password-recovery";
 import {EnteringNewPassword} from "./component/Entering-new-password";
 import {TestComponent} from "./component/TestComponent";
+import {Component404} from "./component/Component404";
 
 export const PATH = {
     ORGANIZATION: "/organization",
@@ -16,6 +17,7 @@ export const PATH = {
     PASSWORD_RECOVERY: "/password_recovery",
     ENTERING_PASSWORD: "/entering_new_password",
     TEST_COMPONENT: "/test_component",
+    ERROR: "/component404",
     MAIN: "/"
 }
 
@@ -30,6 +32,7 @@ function App() {
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.ENTERING_PASSWORD} element={<EnteringNewPassword/>}/>
                 <Route path={PATH.TEST_COMPONENT} element={<TestComponent/>}/>
+                <Route path={PATH.ERROR} element={<Component404/>}/>
                 <Route path={PATH.MAIN} element={<TestComponent/>}/>
             </Routes>
         </div>
