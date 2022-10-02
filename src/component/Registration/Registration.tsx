@@ -1,8 +1,9 @@
 import React from 'react';
+import s from "./registration.module.scss"
 
 export const Registration = () => {
     return (
-        <div>
+        <div className={s.registrationContainer}>
             Registration
         </div>
     );
