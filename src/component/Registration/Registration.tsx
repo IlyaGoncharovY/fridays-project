@@ -1,18 +1,66 @@
 import {Button, TextField} from '@mui/material';
+import {useFormik} from 'formik';
 import React from 'react';
+import {useAppDispatch, useAppSelector } from '../../bll/hook/hook';
 import s from "./registration.module.scss"
 
+type FormikErrorType = {
+    email?: string,
+    password?: string,
+    confirmPassword?: string
+}
+
 export const Registration = () => {
+
+    const subscribe = useAppSelector(state => state.registration.subscribe)
+    const dispatch = useAppDispatch()
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: "",
+            confirmPassword: ""
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+            formik.resetForm()
+        },
+    });
+
     return (
-        <div className={s.registrationContainer}>
-            <div className={s.label}>
-                Sign Up
-            </div>
-            <TextField id="outlined-basic" label="Email" variant="outlined" sx={{p: 1}}/>
-            <TextField id="outlined-basic" label="Password" variant="outlined" sx={{p: 1}}/>
-            <TextField id="outlined-basic" label="Confirm password" variant="outlined" sx={{p: 1}}/>
-            <Button variant="outlined">Sign Up</Button>
-        </div>
+        <>
+            <form onSubmit={formik.handleSubmit}>
+                <div className={s.registrationContainer}>
+                    <div className={s.label}>
+                        Sign Up
+                    </div>
+
+                    <TextField
+                        id={"email"}
+                        type={"email"}
+                        label="Email"
+                        variant="outlined"
+                        sx={{p: 1}}
+                        {...formik.getFieldProps("email")}
+                    />
+                    <TextField
+                        id={"password"}
+                        label="Password"
+                        variant="outlined"
+                        sx={{p: 1}}
+                        {...formik.getFieldProps("password")}
+                    />
+                    <TextField
+                        id={"confirmPassword"}
+                        label="Confirm password"
+                        variant="outlined"
+                        sx={{p: 1}}
+                        {...formik.getFieldProps("confirmPassword")}
+                    />
+                    <Button type={"submit"} variant="outlined">Sign Up</Button>
+                </div>
+            </form>
+        </>
     );
 };
 
