@@ -18,9 +18,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
 
 
 const rootReducer = combineReducers({
-    profileReducer,
-    authReducer,
-    registration: registrationReducer
+    registration: registrationReducer,
+    // profileReducer,
+    // authReducer,
+
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

@@ -1,9 +1,13 @@
 import {Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
 import React from 'react';
+import {useAppDispatch, useAppSelector } from '../../bll/hook/hook';
 import s from "./registration.module.scss"
 
 export const Registration = () => {
+
+    const subscribe = useAppSelector(store => store.registration.subscribe)
+    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
