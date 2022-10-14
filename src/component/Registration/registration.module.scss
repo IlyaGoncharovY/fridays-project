@@ -1,7 +1,12 @@
 .registrationContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
   height: 400px;
+
+  .label {
+    color: white;
+    padding: 10px;
+  }
 }
