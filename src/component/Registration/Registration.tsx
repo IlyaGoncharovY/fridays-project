@@ -1,19 +1,9 @@
 import {Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
 import React from 'react';
-import {useAppDispatch, useAppSelector } from '../../bll/hook/hook';
 import s from "./registration.module.scss"
 
-type FormikErrorType = {
-    email?: string,
-    password?: string,
-    confirmPassword?: string
-}
-
 export const Registration = () => {
-
-    const subscribe = useAppSelector(state => state.registration.subscribe)
-    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
