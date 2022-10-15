@@ -1,7 +1,10 @@
 import {Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
 import React from 'react';
-import {useAppDispatch, useAppSelector } from '../../bll/hook/hook';
+import {Navigate} from 'react-router-dom';
+import {userDataType} from '../../api/regApi';
+import {useAppDispatch, useAppSelector} from '../../bll/hook/hook';
+import {regTC} from '../../bll/reducers/registration-Reducer';
 import s from "./registration.module.scss"
 
 type formikErrorType = {
@@ -12,7 +15,7 @@ type formikErrorType = {
 
 export const Registration = () => {
 
-    const subscribe = useAppSelector(store => store.registration.subscribe)
+    const registered = useAppSelector(store => store.registration.registered)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -33,8 +36,8 @@ export const Registration = () => {
 
             if (!values.password) {
                 errors.password = "Required"
-            } else if (values.password.length < 5) {
-                errors.password = "Invalid password"
+            } else if (values.password.length < 9) {
+                errors.password = "the password must contain at least 9 characters"
             }
 
             if (values.password !== values.confirmPassword) {
@@ -43,11 +46,16 @@ export const Registration = () => {
 
             return errors
         },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: (values: userDataType) => {
+            // alert(JSON.stringify(values, null, 2));
+            dispatch(regTC(values))
             formik.resetForm()
         },
     });
+
+    if (registered) {
+        return <Navigate to={"/organization"}/>
+    }
 
     return (
         <>
@@ -90,4 +98,3 @@ export const Registration = () => {
         </>
     );
 };
-
