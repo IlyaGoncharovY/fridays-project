@@ -6,7 +6,7 @@ type initialStateType = typeof initialState
 type AuthReducerType = setAuthACType
 
 
-export const authReducer = (state:initialStateType, action:AuthReducerType):initialStateType=> {
+export const authReducer = (state:initialStateType = initialState, action:AuthReducerType):initialStateType=> {
     switch (action.type) {
         case "AUTH": {
             return {
