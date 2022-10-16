@@ -21,7 +21,7 @@ export const profileReducer = (state: initialStateType=initialState, action:prof
 }
 
 //AC
-type setUserACType = ReturnType<typeof setUserAC>
+export type setUserACType = ReturnType<typeof setUserAC>
 export const setUserAC = (name:string, id:string) => {
     return {
         type: "SET_USER",

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import {Menu} from "./component/common/Menu/Menu";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Organization} from "./component/organization/Organization";
 import {Registration} from "./component/Registration/Registration";
 import {Profile} from "./component/Profile/Profile";
@@ -23,12 +23,14 @@ export const PATH = {
     LOGIN : "/login"
 }
 
+
 function App() {
     return (
         <div className="App">
             <div>
                 <Menu/>
                 <Routes>
+                    <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.ORGANIZATION} element={<Organization/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
