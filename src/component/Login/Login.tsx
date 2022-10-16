@@ -12,7 +12,7 @@ import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {ErrorMessage} from "../SnackBar/Snackbar";
 
 
-const Login = () => {
+export const Login = () => {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -101,5 +101,3 @@ const Login = () => {
         </Grid>
     );
 };
-
-export default Login;
