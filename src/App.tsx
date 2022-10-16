@@ -9,7 +9,7 @@ import {PasswordRecovery} from "./component/passwordRecovery/Password-recovery";
 import {EnteringNewPassword} from "./component/enteringNewPassword/Entering-new-password";
 import {TestComponent} from "./component/testComponent/TestComponent";
 import {Component404} from "./component/component404/Component404";
-import Login from "./component/Login/Login";
+import {Login} from "./component/Login/Login";
 
 export const PATH = {
     ORGANIZATION: "/organization",
