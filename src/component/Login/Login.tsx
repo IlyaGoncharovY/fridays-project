@@ -3,18 +3,18 @@ import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField/TextField';
 import {Box, Button, Checkbox, FormControlLabel, Paper} from "@mui/material";
 import FormGroup from '@mui/material/FormGroup'
-import {useFormik, validateYupSchema} from 'formik';
+import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import style from './login.module.css'
-import {useNavigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {loginTC} from "../../bll/reducers/loginReducer";
-import {useDispatch} from "react-redux";
+import {useAppDispatch, useAppSelector} from "../../bll/store";
+import {ErrorMessage} from "../SnackBar/Snackbar";
 
 
 const Login = () => {
-    // const isLogged = appUseSelector(state => state.auth.isLogged)
-    // const captcha = appUseSelector(state => state.auth.captcha)
-     const dispatch = useDispatch<any>()
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -34,8 +34,7 @@ const Login = () => {
 
         }),
         onSubmit: values => {
-
-             dispatch(loginTC(values))
+            dispatch(loginTC(values))
             alert(JSON.stringify(values))
             formik.resetForm()
 
@@ -43,6 +42,9 @@ const Login = () => {
     });
     const onClickHandler = () => {
         navigate('/registration')
+    }
+    if(isLoggedIn){
+      return <Navigate to='/profile'/>
     }
 
     return (
@@ -55,6 +57,7 @@ const Login = () => {
                         padding: '40px'
                     }}>
                         <h3 className={style.signIn}>Sign in</h3>
+                        <ErrorMessage/>
                         <FormGroup>
                             <TextField
                                 type='email'

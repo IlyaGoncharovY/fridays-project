@@ -1,5 +1,6 @@
 const initialState = {
-    isAuth: false
+    isAuth: false,
+
 }
 
 type initialStateType = typeof initialState
@@ -20,7 +21,7 @@ export const authReducer = (state:initialStateType = initialState, action:AuthRe
 }
 
 //AC
-type setAuthACType = ReturnType<typeof setAuthAC>
+export type setAuthACType = ReturnType<typeof setAuthAC>
 export const setAuthAC = (isAuth:boolean) => {
   return {
       type: "AUTH",
