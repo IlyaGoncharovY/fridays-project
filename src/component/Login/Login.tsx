@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField/TextField';
 import {Box, Button, Checkbox, FormControlLabel, Paper} from "@mui/material";
 import FormGroup from '@mui/material/FormGroup'
-import {useFormik} from 'formik';
+import {useFormik, validateYupSchema} from 'formik';
 import * as Yup from 'yup';
 import style from './login.module.css'
 import {useNavigate} from 'react-router-dom';
@@ -61,21 +61,20 @@ const Login = () => {
                                 label="Email"
                                 variant="standard"
                                 margin='normal'
+                                error={!!(formik.touched.email && formik.errors.email)}
+                                helperText={formik.errors.email}
                                 {...formik.getFieldProps('email')}
                             />
-                            {formik.touched.email && formik.errors.email ? (
-                                <div style={{color: "red"}}>{formik.errors.email}</div>
-                            ) : null}
+
                             <TextField
                                 type='password'
                                 label="Password"
                                 variant="standard"
                                 margin='normal'
+                                error={!!(formik.touched.password && formik.errors.password)}
+                                helperText={formik.errors.password}
                                 {...formik.getFieldProps('password')}
                             />
-                            {formik.touched.password && formik.errors.password ? (
-                                <div style={{color: "red"}}>{formik.errors.password}</div>
-                            ) : null}
                             <FormControlLabel
                                 control={
                                     <Checkbox
