@@ -16,10 +16,10 @@ export type RootState = ReturnType<typeof store.getState>
 export type allReducersType = setAuthACType | setUserACType | cgangeStatusRegistrationACType | ActionLoginType
 export type AppDispatch = ThunkDispatch<RootState, unknown, allReducersType>
 // export type AppDispatch = any
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+// export const useAppDispatch = () => useDispatch<AppDispatch>()
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     RootState, unknown, allReducersType>
-export const useAppSelector : TypedUseSelectorHook<RootState> = useSelector
+// export const useAppSelector : TypedUseSelectorHook<RootState> = useSelector
 
 const rootReducer = combineReducers({
     registration: registrationReducer,

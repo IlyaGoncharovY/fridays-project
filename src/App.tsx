@@ -2,7 +2,6 @@ import React from 'react';
 import './App.scss';
 import {Menu} from "./component/common/Menu/Menu";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Organization} from "./component/organization/Organization";
 import {Registration} from "./component/Registration/Registration";
 import {Profile} from "./component/Profile/Profile";
 import {PasswordRecovery} from "./component/passwordRecovery/Password-recovery";
@@ -12,7 +11,6 @@ import {Component404} from "./component/component404/Component404";
 import {Login} from "./component/Login/Login";
 
 export const PATH = {
-    ORGANIZATION: "/organization",
     REGISTRATION: "/registration",
     PROFILE: "/profile",
     PASSWORD_RECOVERY: "/password_recovery",
@@ -31,7 +29,6 @@ function App() {
                 <Menu/>
                 <Routes>
                     <Route path={'*'} element={<Navigate to={PATH.PROFILE}/>}/>
-                    <Route path={PATH.ORGANIZATION} element={<Organization/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
