@@ -6,7 +6,6 @@ export const Menu = () => {
 
     return (
         <div className={s.Menu}>
-            <NavLink to={"/organization"}>organization</NavLink>
             <NavLink to={"/registration"}>registration</NavLink>
             <NavLink to={"/profile"}>profile</NavLink>
             <NavLink to={"/password_recovery"}>password_recovery</NavLink>

@@ -1,5 +1,6 @@
 import {registartionAPI, userDataType} from "../../api/regApi"
 import {Dispatch} from "redux";
+import { AppThunk } from "../store";
 
 const initialState = {
     registered: false
@@ -31,7 +32,7 @@ export const cgangeStatusRegistrationAC = (value: boolean) => {
 }
 
 //TC
-export const regTC = (data: userDataType) => async (dispatch: Dispatch<any>) => {
+export const regTC = (data: userDataType): AppThunk => async dispatch => {
     try {
         const res = await registartionAPI.registration(data)
         dispatch(cgangeStatusRegistrationAC(true))

@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 import style from './login.module.css'
 import {Navigate, useNavigate} from 'react-router-dom';
 import {loginTC} from "../../bll/reducers/loginReducer";
-import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {ErrorMessage} from "../SnackBar/Snackbar";
+import {useAppDispatch, useAppSelector } from '../../bll/hook/hook';
 
 
 export const Login = () => {
