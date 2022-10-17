@@ -1,0 +1,24 @@
+.signIn{
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+
+}
+.password{
+    text-align: right;
+    margin: 30px;
+}
+.account , .signUp{
+    text-align: center;
+    margin: 10px;
+
+}
+.box{
+    margin-top: 60px;
+}
+
+.signUp span{
+    color: #366EFF;
+    text-decoration: underline;
+    cursor: pointer;
+}
