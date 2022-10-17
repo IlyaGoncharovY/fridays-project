@@ -1,11 +1,11 @@
+import React from 'react';
 import {Button, TextField} from '@mui/material';
 import {useFormik} from 'formik';
-import React from 'react';
 import {Navigate} from 'react-router-dom';
 import {userDataType} from '../../api/regApi';
 import {useAppDispatch, useAppSelector} from '../../bll/hook/hook';
 import {regTC} from '../../bll/reducers/registration-Reducer';
-import s from "./registration.module.scss"
+import s from "./registration.module.scss";
 
 type formikErrorType = {
     email?: string,
