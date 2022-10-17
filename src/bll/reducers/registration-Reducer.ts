@@ -1,7 +1,5 @@
 import {registartionAPI, userDataType} from "../../api/regApi"
-import {
-    Dispatch
-} from "../../../../../../Program Files/JetBrains/WebStorm 2021.3.1/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
+import {Dispatch} from "redux";
 
 const initialState = {
     registered: false
