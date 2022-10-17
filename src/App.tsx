@@ -30,7 +30,7 @@ function App() {
             <div>
                 <Menu/>
                 <Routes>
-                    <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
+                    <Route path={'*'} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.ORGANIZATION} element={<Organization/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>

@@ -54,7 +54,7 @@ export const Registration = () => {
     });
 
     if (registered) {
-        return <Navigate to={"/organization"}/>
+        return <Navigate to={"/login"}/>
     }
 
     return (
