@@ -58,41 +58,48 @@ export const Registration = () => {
     }
 
     return (
-        <>
+        <div className={s.rootReg}>
             <form onSubmit={formik.handleSubmit}>
                 <div className={s.registrationContainer}>
-                    <div className={s.label}>
+
+                    <div className={s.label_top}>
                         Sign Up
                     </div>
 
-                    <Input
-                        id={"email"}
-                        type={"email"}
-                        placeholder="Email"
-                        {...formik.getFieldProps("email")}
-                    />
-                    {formik.touched.email && <div>{formik.errors.email}</div>}
-                    <Input
-                        id={"password"}
-                        type={"password"}
-                        placeholder="Password"
-                        {...formik.getFieldProps("password")}
-                    />
-                    {formik.touched.password && <div>{formik.errors.password}</div>}
-                    <Input
-                        id={"confirmPassword"}
-                        type={"password"}
-                        placeholder="Confirm password"
-                        {...formik.getFieldProps("confirmPassword")}
-                    />
-                    {formik.touched.confirmPassword && <div>{formik.errors.confirmPassword}</div>}
-                    <Button type={"submit"} variant="outlined">Sign Up</Button>
-                    <div className={s.label}>
-                        <h4>Already have an account?</h4>
-                        <NavLink to="/login">{registered ? "Return to login" : "Sign In"}</NavLink>
+                    <div className={s.inputContainer}>
+                        <Input
+                            id={"email"}
+                            type={"email"}
+                            placeholder="Email"
+                            sx={{p: 1}}
+                            {...formik.getFieldProps("email")}
+                        />
+                        {formik.touched.email && <div>{formik.errors.email}</div>}
+                        <Input
+                            id={"password"}
+                            type={"password"}
+                            placeholder="Password"
+                            sx={{p: 1}}
+                            {...formik.getFieldProps("password")}
+                        />
+                        {formik.touched.password && <div>{formik.errors.password}</div>}
+                        <Input
+                            id={"confirmPassword"}
+                            type={"password"}
+                            placeholder="Confirm password"
+                            sx={{p: 1}}
+                            {...formik.getFieldProps("confirmPassword")}
+                        />
+                        {formik.touched.confirmPassword && <div>{formik.errors.confirmPassword}</div>}
+                    </div>
+                    <div className={s.footerContainer}>
+                        <Button type={"submit"} variant="contained" style={{borderRadius: '50px'}}>Sign Up</Button>
+                        <h4 className={s.footerText}>Already have an account?</h4>
+                        <NavLink to="/login"
+                                 className={s.footerLink}>{registered ? "Return to login" : "Sign In"}</NavLink>
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     );
 };
