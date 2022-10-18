@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, TextField} from '@mui/material';
+import {Button, Input} from '@mui/material';
 import {useFormik} from 'formik';
-import {Navigate} from 'react-router-dom';
+import {Navigate, NavLink} from 'react-router-dom';
 import {userDataType} from '../../api/regApi';
 import {useAppDispatch, useAppSelector} from '../../bll/hook/hook';
 import {regTC} from '../../bll/reducers/registration-Reducer';
@@ -65,34 +65,32 @@ export const Registration = () => {
                         Sign Up
                     </div>
 
-                    <TextField
+                    <Input
                         id={"email"}
                         type={"email"}
-                        label="Email"
-                        variant="outlined"
-                        sx={{p: 1}}
+                        placeholder="Email"
                         {...formik.getFieldProps("email")}
                     />
                     {formik.touched.email && <div>{formik.errors.email}</div>}
-                    <TextField
+                    <Input
                         id={"password"}
                         type={"password"}
-                        label="Password"
-                        variant="outlined"
-                        sx={{p: 1}}
+                        placeholder="Password"
                         {...formik.getFieldProps("password")}
                     />
                     {formik.touched.password && <div>{formik.errors.password}</div>}
-                    <TextField
+                    <Input
                         id={"confirmPassword"}
                         type={"password"}
-                        label="Confirm password"
-                        variant="outlined"
-                        sx={{p: 1}}
+                        placeholder="Confirm password"
                         {...formik.getFieldProps("confirmPassword")}
                     />
                     {formik.touched.confirmPassword && <div>{formik.errors.confirmPassword}</div>}
                     <Button type={"submit"} variant="outlined">Sign Up</Button>
+                    <div className={s.label}>
+                        <h4>Already have an account?</h4>
+                        <NavLink to="/login">{registered ? "Return to login" : "Sign In"}</NavLink>
+                    </div>
                 </div>
             </form>
         </>
