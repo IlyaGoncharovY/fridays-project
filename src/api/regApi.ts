@@ -27,6 +27,7 @@ export type LoginDataType = {
 
 export type responseRegType = {
 	addedUser: ResponseRegTypeAddedUser;
+	error?: string;
 }
 export type ResponseRegTypeAddedUser = {
 	_id: string;
