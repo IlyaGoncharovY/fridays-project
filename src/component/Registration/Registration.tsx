@@ -6,6 +6,7 @@ import {userDataType} from '../../api/regApi';
 import {useAppDispatch, useAppSelector} from '../../bll/hook/hook';
 import {regTC} from '../../bll/reducers/registration-Reducer';
 import s from "./registration.module.scss";
+import {ErrorMessage} from '../SnackBar/Snackbar';
 
 type formikErrorType = {
     email?: string,
@@ -66,6 +67,8 @@ export const Registration = () => {
                         Sign Up
                     </div>
 
+                    <ErrorMessage/>
+
                     <div className={s.inputContainer}>
                         <Input
                             id={"email"}
@@ -96,7 +99,7 @@ export const Registration = () => {
                         <Button type={"submit"} variant="contained" style={{borderRadius: '50px'}}>Sign Up</Button>
                         <h4 className={s.footerText}>Already have an account?</h4>
                         <NavLink to="/login"
-                                 className={s.footerLink}>{registered ? "Return to login" : "Sign In"}</NavLink>
+                                 className={s.footerLink}>{registered ? "Return to profile" : "Sign In"}</NavLink>
                     </div>
                 </div>
             </form>
