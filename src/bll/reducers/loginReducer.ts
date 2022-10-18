@@ -28,7 +28,6 @@ export const loginAC = (value : boolean)=>({type : 'login/SET-LOGIN', value} as 
 //THUNK
 export const loginTC = (data : LoginDataType) : AppThunk => async dispatch  => {
     try {
-        debugger
         await registartionAPI.login(data)
         dispatch(loginAC(true))
     }catch (e) {
