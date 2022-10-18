@@ -28,7 +28,7 @@ function App() {
             <div>
                 <Menu/>
                 <Routes>
-                    <Route path={'*'} element={<Navigate to={PATH.PROFILE}/>}/>
+                    <Route path={"fridays-project"} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
