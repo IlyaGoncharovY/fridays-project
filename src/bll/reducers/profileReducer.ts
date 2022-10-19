@@ -15,7 +15,9 @@ const initialState: profileStateType = {
     publicCardPacksCount: 0,
     created: "",
     updated: "string",
-    __v: 0
+    __v: 0,
+    tokenDeathTime : 0,
+    token : ''
 }
 
 export const profileReducer = (state: profileStateType=initialState, action:ProfileActionType):profileStateType => {
@@ -82,4 +84,6 @@ type profileStateType = {
     created: string;
     updated: string;
     __v: number;
+    tokenDeathTime? : null  | number,
+    token? : null | string
 }
