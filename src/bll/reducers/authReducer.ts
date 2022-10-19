@@ -3,6 +3,7 @@ import {registartionAPI} from "../../api/regApi";
 import {loginAC} from "./loginReducer";
 import {errorUtil} from "../../utils/error-util";
 import {AxiosError} from "axios";
+import {setProfileAC} from "./profileReducer";
 
 const initialState = {
     isAuth: false,
@@ -39,7 +40,9 @@ export const setAuthAC = (isAuth: boolean) => {
 
 export const initializingTC = (): AppThunk => async dispatch => {
     try {
-        await registartionAPI.me()
+      const res =   await registartionAPI.me()
+        console.log(res.data)
+        dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
 
     } catch (e) {

@@ -38,6 +38,7 @@ function App() {
                 <Menu/>
                 {!isAuth && <Loader/>}
                 <Routes>
+                    <Route path={PATH.MAIN} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={"fridays-project"} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>

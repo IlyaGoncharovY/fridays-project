@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "./profile.module.scss"
 import {useAppDispatch, useAppSelector} from '../../bll/hook/hook';
 import photoProfile from '../common/assets/images/photoProfile.png'
 import {Button} from "@mui/material";
 import EditableSpan from "./EditableSpan";
-import {fetchProfileTC, updateProfileTC} from "../../bll/reducers/profileReducer";
+import {updateProfileTC} from "../../bll/reducers/profileReducer";
 import {Navigate} from "react-router-dom";
 
 export const Profile = () => {
@@ -12,9 +12,9 @@ export const Profile = () => {
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
     const profileName = useAppSelector(state => state.profile.name)
     const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(fetchProfileTC())
-    },[])
+    // useEffect(() => {
+    //     dispatch(fetchProfileTC())
+    // },[])
     const onChangeNameHandler = (name: string) => {
         dispatch(updateProfileTC(name))
     }

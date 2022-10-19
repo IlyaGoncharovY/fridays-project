@@ -28,8 +28,10 @@ export const loginAC = (value : boolean)=>({type : 'login/SET-LOGIN', value} as 
 //THUNK
 export const loginTC = (data : LoginDataType) : AppThunk => async dispatch  => {
     try {
-        await registartionAPI.login(data)
+       const res =  await registartionAPI.login(data)
         dispatch(loginAC(true))
+        debugger
+
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
