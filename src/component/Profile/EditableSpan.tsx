@@ -31,12 +31,14 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
         editMode
             ?
             <div className={s.editableForm}>
-                <TextField value={newName}
-                           variant={"standard"}
-                           onChange={onChangeHandler}
-                           autoFocus
+                <TextField
+                    value={newName}
+                    variant={"standard"}
+                    onChange={onChangeHandler}
+                    autoFocus
+
                 />
-                <Button className={s.buttonSave} variant="outlined" size="small" onClick={addNewName}>
+                <Button style={{position:"absolute"}} variant="outlined" size="small" onClick={addNewName}>
                     Save
                 </Button>
             </div>
