@@ -14,6 +14,14 @@ export const registartionAPI = {
 		return instance.post<T,AxiosResponse<T>,LoginDataType>('auth/login',data)
 	}
 }
+export const profileAPI = {
+	updateProfile(data: ProfileDataType){
+		return instance.put('auth/me', data)
+	},
+	setProfile(){
+		return instance.post('auth/me')
+	}
+}
 
 export type userDataType = {
     email: string;
@@ -23,6 +31,10 @@ export type LoginDataType = {
 	email: string;
 	password: string;
 	rememberMe? : boolean
+}
+export type ProfileDataType ={
+	name: string
+	avatar: string
 }
 
 export type responseRegType = {
@@ -53,3 +65,4 @@ export type ResponseLoginType = {
 	rememberMe: boolean;
 	error?: string;
 }
+

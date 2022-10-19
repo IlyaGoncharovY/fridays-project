@@ -1,7 +1,26 @@
-.profileContainer {
+.profile{
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+}
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
   height: 400px;
+  width: 400px;
+  background-color: white;
+}
+.img{
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.name, .email{
+  font-size: 30px;
+}
+.button{
+  margin: 10px;
 }
