@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/' ,
@@ -10,8 +10,8 @@ export const registartionAPI = {
     registration(userData: userDataType) {
         return instance.post<responseRegType>('auth/register', userData)
     },
-	login<T = LoginDataType >(data : LoginDataType){
-		return instance.post<T,AxiosResponse<T>,LoginDataType>('auth/login',data)
+	login(data : LoginDataType){
+		return instance.post<ResponseUserType>('auth/login',data)
 	},
 	me(){
 		return instance.post('auth/me',{})
@@ -22,7 +22,7 @@ export const registartionAPI = {
 }
 export const profileAPI = {
 	updateProfile(data: ProfileDataType){
-		return instance.put('auth/me', data)
+		return instance.put<UpdateUserResponseType>('auth/me', data)
 	},
 	setProfile(){
 		return instance.post('auth/me')
@@ -37,6 +37,20 @@ export type LoginDataType = {
 	email: string;
 	password: string;
 	rememberMe? : boolean
+}
+export type ResponseUserType = {
+	_id: string;
+	email: string;
+	rememberMe: boolean;
+	isAdmin: boolean;
+	name: string;
+	verified: boolean;
+	publicCardPacksCount: number;
+	created: string;
+	updated: string;
+	__v: number;
+	tokenDeathTime? : null  | number,
+	token? : null | string
 }
 export type ProfileDataType ={
 	name: string
@@ -72,4 +86,24 @@ export type ResponseLoginType = {
 	rememberMe: boolean;
 	error?: string;
 }
+type UpdateUserResponseType = {
+	updatedUser: {
+		_id: string;
+		email: string;
+		rememberMe: boolean;
+		isAdmin: boolean;
+		name: string;
+		verified: boolean;
+		publicCardPacksCount: number;
+		created: string;
+		updated: string;
+		__v: number;
+		token: string;
+		tokenDeathTime: number;
+		avatar: string;
+	};
+	token: string;
+	tokenDeathTime: number;
+};
+
 
