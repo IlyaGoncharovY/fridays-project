@@ -10,6 +10,7 @@ import {Navigate} from "react-router-dom";
 export const Profile = () => {
 
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
+
     const profileName = useAppSelector(state => state.profile.name)
     const dispatch = useAppDispatch()
     // useEffect(() => {
