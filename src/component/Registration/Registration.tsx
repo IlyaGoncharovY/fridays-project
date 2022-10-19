@@ -17,6 +17,7 @@ type formikErrorType = {
 export const Registration = () => {
 
     const registered = useAppSelector(store => store.registration.registered)
+    const isLogin = useAppSelector(store => store.login.isLoggedIn)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -99,7 +100,7 @@ export const Registration = () => {
                         <Button type={"submit"} variant="contained" style={{borderRadius: '50px'}}>Sign Up</Button>
                         <h4 className={s.footerText}>Already have an account?</h4>
                         <NavLink to="/login"
-                                 className={s.footerLink}>{registered ? "Return to profile" : "Sign In"}</NavLink>
+                                 className={s.footerLink}>{isLogin ? "Return to profile" : "Sign In"}</NavLink>
                     </div>
                 </div>
             </form>
