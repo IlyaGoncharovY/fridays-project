@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import {Menu} from "./component/common/Menu/Menu";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -9,6 +9,9 @@ import {EnteringNewPassword} from "./component/enteringNewPassword/Entering-new-
 import {TestComponent} from "./component/testComponent/TestComponent";
 import {Component404} from "./component/component404/Component404";
 import {Login} from "./component/Login/Login";
+import {useAppDispatch, useAppSelector} from "./bll/hook/hook";
+import {initializingTC} from "./bll/reducers/authReducer";
+import {Loader} from "./component/Loader/Loader";
 
 export const PATH = {
     REGISTRATION: "/registration",
@@ -18,15 +21,22 @@ export const PATH = {
     TEST_COMPONENT: "/test_component",
     ERROR: "/component404",
     MAIN: "/",
-    LOGIN : "/login"
+    LOGIN: "/login"
 }
 
 
 function App() {
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+
+        dispatch(initializingTC())
+    }, [])
     return (
         <div className="App">
             <div>
                 <Menu/>
+                {!isAuth && <Loader/>}
                 <Routes>
                     <Route path={"fridays-project"} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
@@ -37,6 +47,7 @@ function App() {
                     <Route path={PATH.ERROR} element={<Component404/>}/>
                     <Route path={PATH.MAIN} element={<TestComponent/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
+                    <Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>
                 </Routes>
             </div>
         </div>
