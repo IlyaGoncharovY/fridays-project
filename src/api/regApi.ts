@@ -12,6 +12,12 @@ export const registartionAPI = {
     },
 	login<T = LoginDataType >(data : LoginDataType){
 		return instance.post<T,AxiosResponse<T>,LoginDataType>('auth/login',data)
+	},
+	me(){
+		return instance.post('auth/me',{})
+	},
+	logout(){
+		return instance.delete('auth/me')
 	}
 }
 
