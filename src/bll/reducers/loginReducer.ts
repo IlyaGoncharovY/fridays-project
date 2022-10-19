@@ -2,6 +2,7 @@ import {LoginDataType, registartionAPI} from "../../api/regApi";
 import {AppThunk} from "../store";
 import {errorUtil} from "../../utils/error-util";
 import {AxiosError} from "axios";
+import {setProfileAC} from "./profileReducer";
 
 const initialState : initialStateType = {
     isLoggedIn: false
@@ -29,8 +30,8 @@ export const loginAC = (value : boolean)=>({type : 'login/SET-LOGIN', value} as 
 export const loginTC = (data : LoginDataType) : AppThunk => async dispatch  => {
     try {
        const res =  await registartionAPI.login(data)
+        dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
-        debugger
 
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
