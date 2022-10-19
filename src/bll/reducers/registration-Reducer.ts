@@ -1,13 +1,14 @@
+import {AxiosError} from "axios";
 import {registartionAPI, userDataType} from "../../api/regApi"
-import {Dispatch} from "redux";
-import { AppThunk } from "../store";
+import {errorUtil} from "../../utils/error-util";
+import {AppThunk} from "../store";
 
 const initialState = {
     registered: false
 }
 
 type initialStateType = typeof initialState
-type profileReducerActionType = cgangeStatusRegistrationACType
+type profileReducerActionType = changeStatusRegistrationACType
 
 export const registrationReducer = (state: initialStateType = initialState, action: profileReducerActionType): initialStateType => {
     switch (action.type) {
@@ -23,8 +24,8 @@ export const registrationReducer = (state: initialStateType = initialState, acti
 }
 
 //AC
-export type cgangeStatusRegistrationACType = ReturnType<typeof cgangeStatusRegistrationAC>
-export const cgangeStatusRegistrationAC = (value: boolean) => {
+export type changeStatusRegistrationACType = ReturnType<typeof changeStatusRegistrationAC>
+export const changeStatusRegistrationAC = (value: boolean) => {
     return {
         type: "REGIS/CHANGE_STATUS",
         value
@@ -34,9 +35,10 @@ export const cgangeStatusRegistrationAC = (value: boolean) => {
 //TC
 export const regTC = (data: userDataType): AppThunk => async dispatch => {
     try {
-        const res = await registartionAPI.registration(data)
-        dispatch(cgangeStatusRegistrationAC(true))
+        await registartionAPI.registration(data)
+        dispatch(changeStatusRegistrationAC(true))
     } catch (e) {
-
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 }

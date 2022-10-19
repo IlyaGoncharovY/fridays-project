@@ -41,61 +41,59 @@ export const Login = () => {
     const onClickHandler = () => {
         navigate('/registration')
     }
-    if(isLoggedIn){
-      return <Navigate to='/profile'/>
-    }
+
 
     return (
-        <Grid container justifyContent={'center'}>
-            <Grid item justifyContent={"center"}>
-                <Paper elevation={3}>
-                    <Box className={style.box} component='form' onSubmit={formik.handleSubmit} sx={{
-                        backgroundColor: 'white',
-                        width: '300px',
-                        padding: '40px'
-                    }}>
-                        <h3 className={style.signIn}>Sign in</h3>
-                        <ErrorMessage/>
-                        <FormGroup>
-                            <TextField
-                                type='email'
-                                label="Email"
-                                variant="standard"
-                                margin='normal'
-                                error={!!(formik.touched.email && formik.errors.email)}
-                                helperText={formik.errors.email}
-                                {...formik.getFieldProps('email')}
-                            />
+        (!!isLoggedIn) ? <Navigate to='/profile'/> : <Grid container justifyContent={'center'}>
+                <Grid item justifyContent={"center"}>
+                    <Paper elevation={3}>
+                        <Box className={style.box} component='form' onSubmit={formik.handleSubmit} sx={{
+                            backgroundColor: 'white',
+                            width: '300px',
+                            padding: '40px'
+                        }}>
+                            <h3 className={style.signIn}>Sign in</h3>
+                            <ErrorMessage/>
+                            <FormGroup>
+                                <TextField
+                                    type='email'
+                                    label="Email"
+                                    variant="standard"
+                                    margin='normal'
+                                    error={!!(formik.touched.email && formik.errors.email)}
+                                    helperText={formik.errors.email}
+                                    {...formik.getFieldProps('email')}
+                                />
 
-                            <TextField
-                                type='password'
-                                label="Password"
-                                variant="standard"
-                                margin='normal'
-                                error={!!(formik.touched.password && formik.errors.password)}
-                                helperText={formik.errors.password}
-                                {...formik.getFieldProps('password')}
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        id='checkboxed'
-                                        checked={formik.values.rememberMe}
-                                        {...formik.getFieldProps('rememberMe')}
-                                    />
-                                }
-                                label="Remember me"
+                                <TextField
+                                    type='password'
+                                    label="Password"
+                                    variant="standard"
+                                    margin='normal'
+                                    error={!!(formik.touched.password && formik.errors.password)}
+                                    helperText={formik.errors.password}
+                                    {...formik.getFieldProps('password')}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            id='checkboxed'
+                                            checked={formik.values.rememberMe}
+                                            {...formik.getFieldProps('rememberMe')}
+                                        />
+                                    }
+                                    label="Remember me"
 
-                            />
-                            <div className={style.password}>Forgot Password?</div>
-                            <Button variant="contained" style={{borderRadius: '50px'}} type='submit'>Sign in</Button>
-                            <div className={style.account}>Already have an account?</div>
-                            <div className={style.signUp}><span onClick={onClickHandler} className={style.signUp}>Sign Up</span>
-                            </div>
-                        </FormGroup>
-                    </Box>
-                </Paper>
+                                />
+                                <div className={style.password}>Forgot Password?</div>
+                                <Button variant="contained" style={{borderRadius: '50px'}} type='submit'>Sign in</Button>
+                                <div className={style.account}>Already have an account?</div>
+                                <div className={style.signUp}><span onClick={onClickHandler} className={style.signUp}>Sign Up</span>
+                                </div>
+                            </FormGroup>
+                        </Box>
+                    </Paper>
+                </Grid>
             </Grid>
-        </Grid>
     );
 };

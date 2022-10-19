@@ -34,8 +34,15 @@ export const loginTC = (data : LoginDataType) : AppThunk => async dispatch  => {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
     }
-
-
+}
+export const logoutTC = () : AppThunk => async dispatch  => {
+    try {
+        await registartionAPI.logout()
+        dispatch(loginAC(false))
+    }catch (e) {
+        const error = e as Error | AxiosError<{error : string}>
+        errorUtil(error,dispatch)
+    }
 }
 
 
