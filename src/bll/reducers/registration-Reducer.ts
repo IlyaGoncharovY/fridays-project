@@ -8,9 +8,8 @@ const initialState = {
 }
 
 type initialStateType = typeof initialState
-type profileReducerActionType = changeStatusRegistrationACType
 
-export const registrationReducer = (state: initialStateType = initialState, action: profileReducerActionType): initialStateType => {
+export const registrationReducer = (state: initialStateType = initialState, action: RegistrationActionType): initialStateType => {
     switch (action.type) {
         case "REGIS/CHANGE_STATUS": {
             return {
@@ -24,7 +23,6 @@ export const registrationReducer = (state: initialStateType = initialState, acti
 }
 
 //AC
-export type changeStatusRegistrationACType = ReturnType<typeof changeStatusRegistrationAC>
 export const changeStatusRegistrationAC = (value: boolean) => {
     return {
         type: "REGIS/CHANGE_STATUS",
@@ -42,3 +40,5 @@ export const regTC = (data: userDataType): AppThunk => async dispatch => {
         errorUtil(error, dispatch)
     }
 }
+//type
+export type RegistrationActionType = ReturnType<typeof changeStatusRegistrationAC>

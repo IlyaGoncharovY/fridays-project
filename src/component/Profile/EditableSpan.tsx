@@ -1,5 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {Button, TextField} from "@mui/material";
+import s from "./profile.module.scss"
 
 type EditableSpanType = {
     onChangeName: (name: string) => void
@@ -29,13 +30,13 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
     return (
         editMode
             ?
-            <div>
+            <div className={s.editableForm}>
                 <TextField value={newName}
-                          variant={"standard"}
-                          onChange={onChangeHandler}
-                          autoFocus
-            />
-                <Button variant="outlined" size="small" onClick={addNewName}>
+                           variant={"standard"}
+                           onChange={onChangeHandler}
+                           autoFocus
+                />
+                <Button className={s.buttonSave} variant="outlined" size="small" onClick={addNewName}>
                     Save
                 </Button>
             </div>
