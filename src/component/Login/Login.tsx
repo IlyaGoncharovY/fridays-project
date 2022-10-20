@@ -30,7 +30,7 @@ export const Login = () => {
             password: Yup
                 .string()
                 .required("Please Entry Password")
-                .min(8, 'Should be more then 8 symbols')
+                .min(8, 'Should be more then 7 symbols')
 
         }),
         onSubmit: values => {
