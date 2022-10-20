@@ -105,5 +105,57 @@ export const Registration = () => {
                 </div>
             </form>
         </div>
+
+
+        //сюда положил контейнер с гридом
+        // <Grid container justifyContent={'center'}>
+        //     <Grid item justifyContent={"center"}>
+        //         <Paper elevation={3}>
+        //             <Box className={style.box} component='form' onSubmit={formik.handleSubmit} sx={{
+        //                 backgroundColor: 'white',
+        //                 width: '300px',
+        //                 padding: '40px'
+        //             }}>
+        //                 <h3 className={style.signIn}>Sign Up</h3>
+        //                 <ErrorMessage/>
+        //                 <FormGroup>
+        //                     <TextField
+        //                         id={"email"}
+        //                         type='email'
+        //                         label="Email"
+        //                         variant="standard"
+        //                         margin='normal'
+        //                         error={!!(formik.touched.email && formik.errors.email)}
+        //                         helperText={formik.errors.email}
+        //                         {...formik.getFieldProps('email')}
+        //                     />
+        //
+        //                     <TextField
+        //                         type='password'
+        //                         label="Password"
+        //                         variant="standard"
+        //                         margin='normal'
+        //                         error={!!(formik.touched.password && formik.errors.password)}
+        //                         helperText={formik.errors.password}
+        //                         {...formik.getFieldProps('password')}
+        //                     />
+        //                     <TextField
+        //                         type='password'
+        //                         label="Confirm password"
+        //                         variant="standard"
+        //                         margin='normal'
+        //                         error={!!(formik.touched.password && formik.errors.password)}
+        //                         helperText={formik.errors.password}
+        //                         {...formik.getFieldProps('confirmPassword')}
+        //                     />
+        //                     <Button type={"submit"} variant="contained" style={{borderRadius: '50px'}}>Sign Up</Button>
+        //                     <h4 className={s.footerText}>Already have an account?</h4>
+        //                     <NavLink to="/login"
+        //                              className={s.footerLink}>{isLogin ? "Return to profile" : "Sign In"}</NavLink>
+        //                 </FormGroup>
+        //             </Box>
+        //         </Paper>
+        //     </Grid>
+        // </Grid>
     );
 };
