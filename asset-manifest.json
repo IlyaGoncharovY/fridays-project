@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/fridays-project/static/css/main.a745d472.css",
-    "main.js": "/fridays-project/static/js/main.d27167b7.js",
+    "main.css": "/fridays-project/static/css/main.2373d942.css",
+    "main.js": "/fridays-project/static/js/main.d4f27cc4.js",
     "static/js/787.4321dd1c.chunk.js": "/fridays-project/static/js/787.4321dd1c.chunk.js",
+    "static/media/photoProfile.png": "/fridays-project/static/media/photoProfile.be9163b6d27728c887d4.png",
+    "static/media/email-message-svgrepo-com.svg": "/fridays-project/static/media/email-message-svgrepo-com.a8810e6b451a1985a3efff39c7776bbb.svg",
     "index.html": "/fridays-project/index.html",
-    "main.a745d472.css.map": "/fridays-project/static/css/main.a745d472.css.map",
-    "main.d27167b7.js.map": "/fridays-project/static/js/main.d27167b7.js.map",
+    "main.2373d942.css.map": "/fridays-project/static/css/main.2373d942.css.map",
+    "main.d4f27cc4.js.map": "/fridays-project/static/js/main.d4f27cc4.js.map",
     "787.4321dd1c.chunk.js.map": "/fridays-project/static/js/787.4321dd1c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a745d472.css",
-    "static/js/main.d27167b7.js"
+    "static/css/main.2373d942.css",
+    "static/js/main.d4f27cc4.js"
   ]
 }
