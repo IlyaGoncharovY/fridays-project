@@ -11,7 +11,7 @@ export const registartionAPI = {
         return instance.post<responseRegType>('auth/register', userData)
     },
     login(data: LoginDataType) {
-        return instance.post<ResponseUserType>('auth/login', data)
+        return instance.post<ResponseRegTypeAddedUser>('auth/login', data)
     },
     me() {
         return instance.post('auth/me', {})
@@ -39,34 +39,18 @@ export type userDataType = {
     email: string;
     password: string;
 }
+
+export type responseRegType = {
+    addedUser: ResponseRegTypeAddedUser;
+    success: boolean;
+}
+
 export type LoginDataType = {
     email: string;
     password: string;
     rememberMe?: boolean
 }
-export type ResponseUserType = {
-    _id: string;
-    email: string;
-    rememberMe: boolean;
-    isAdmin: boolean;
-    name: string;
-    verified: boolean;
-    publicCardPacksCount: number;
-    created: string;
-    updated: string;
-    __v: number;
-    tokenDeathTime?: null | number,
-    token?: null | string
-}
-export type ProfileDataType = {
-    name: string
-    avatar: string
-}
 
-export type responseRegType = {
-    addedUser: ResponseRegTypeAddedUser;
-    error?: string;
-}
 export type ResponseRegTypeAddedUser = {
     _id: string;
     email: string;
@@ -79,19 +63,23 @@ export type ResponseRegTypeAddedUser = {
     updated: string;
     __v: number;
 }
-export type ResponseLoginType = {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number;
-    created: string;
-    updated: string;
-    isAdmin: boolean;
-    verified: boolean;
-    rememberMe: boolean;
-    error?: string;
+
+export type ForgotPasswordType = {
+    email: string
+    from: string
+    message: string
 }
+
+export type NewPasswordType = {
+    password : string
+    resetPasswordToken : string | undefined
+}
+
+export type ProfileDataType = {
+    name: string
+    avatar: string
+}
+
 type UpdateUserResponseType = {
     updatedUser: {
         _id: string;
@@ -111,14 +99,3 @@ type UpdateUserResponseType = {
     token: string;
     tokenDeathTime: number;
 };
-
-
-export type ForgotPasswordType = {
-    email: string
-    from: string
-    message: string
-}
-export type NewPasswordType = {
-    password : string
-    resetPasswordToken : string | undefined
-}
