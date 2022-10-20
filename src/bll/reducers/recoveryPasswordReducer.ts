@@ -52,7 +52,6 @@ link</a>
         // ссылка для локал хоста
         //<a href='http://localhost:3000/set-new-password/$token$'>
     }
-    debugger
     try {
         await registartionAPI.forgotPassword(data)
         dispatch(correctEmail(true))
