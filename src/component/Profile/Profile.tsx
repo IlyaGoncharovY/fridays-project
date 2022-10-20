@@ -6,6 +6,7 @@ import {Button} from "@mui/material";
 import EditableSpan from "./EditableSpan";
 import {updateProfileTC} from "../../bll/reducers/profileReducer";
 import {Navigate} from "react-router-dom";
+import {logoutTC} from '../../bll/reducers/loginReducer';
 
 export const Profile = () => {
 
@@ -13,13 +14,15 @@ export const Profile = () => {
 
     const profileName = useAppSelector(state => state.profile.name)
     const dispatch = useAppDispatch()
-    // useEffect(() => {
-    //     dispatch(fetchProfileTC())
-    // },[])
+
+    const logoUtHandler = () => {
+        dispatch(logoutTC())
+    }
+
     const onChangeNameHandler = (name: string) => {
         dispatch(updateProfileTC(name))
     }
-   if(!isLogin){
+    if (!isLogin) {
         return <Navigate to={'/login'}/>
     }
 
@@ -30,7 +33,7 @@ export const Profile = () => {
                 <div className={s.img}><img className={s.img} src={photoProfile}/></div>
                 <div className={s.name}><EditableSpan name={profileName} onChangeName={onChangeNameHandler}/></div>
                 <div className={s.email}>email</div>
-                <div className={s.button}><Button variant="contained">Log out</Button></div>
+                <div className={s.button}><Button variant="contained" onClick={logoUtHandler}>Log out</Button></div>
             </div>
         </div>
     )
