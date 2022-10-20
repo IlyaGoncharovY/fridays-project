@@ -1,52 +1,70 @@
-.rootReg {
-  display: flex;
-  justify-content: center;
+//.rootReg {
+//  display: flex;
+//  justify-content: center;
+//
+//  .registrationContainer {
+//    display: flex;
+//    flex-direction: column;
+//    justify-content: center;
+//    align-items: center;
+//    position: relative;
+//    width: 413px;
+//    height: 528px;
+//    margin-top: 60px;
+//    background: #FFFFFF;
+//    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+//    border-radius: 2px;
+//
+//    .label_top {
+//      position: absolute;
+//      top: 35px;
+//      text-align: center;
+//      font-size: 26px;
+//      font-weight: bold;
+//      margin-bottom: 35px;
+//    }
+//
+//    .inputContainer {
+//      display: flex;
+//      flex-direction: column;
+//      justify-content: center;
+//      width: 80%;
+//      margin: 10px;
+//    }
+//
+//    .footerContainer {
+//      display: flex;
+//      flex-direction: column;
+//      justify-content: center;
+//      margin-top: 60px;
+//      width: 80%;
+//
+//      .footerText {
+//        text-align: center;
+//      }
+//
+//      .footerLink {
+//        text-align: center;
+//      }
+//    }
+//  }
+//}
 
-  .registrationContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 413px;
-    height: 528px;
-    margin-top: 60px;
-    background: #FFFFFF;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+.box {
+  margin-top: 60px;
 
-    .label_top {
-      position: absolute;
-      top: 35px;
-      text-align: center;
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 35px;
-    }
+  .signIn {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+  }
 
-    .inputContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 80%;
-      margin: 10px;
-    }
+  .footerText {
+    text-align: center;
+  }
 
-    .footerContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-top: 60px;
-      width: 80%;
-
-      .footerText {
-        text-align: center;
-      }
-
-      .footerLink {
-        text-align: center;
-      }
-    }
+  .footerLink {
+    text-align: center;
   }
 }
 
