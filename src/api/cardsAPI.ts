@@ -10,7 +10,7 @@ export const cardsAPI = {
     addCard(card: { cardsPack_id: string; question: string; answer: string }) {
         return instance.post("cards/card", card)
     },
-    updateCard(card: { _id: string; question: string; answer?: string }) {
+    updateCard(card: { _id: string; question?: string; answer?: string }) {
         return instance.put("cards/card", {card})
     },
     deleteCard(params: { id: string }) {
