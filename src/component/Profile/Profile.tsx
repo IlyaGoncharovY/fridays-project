@@ -5,7 +5,7 @@ import photoProfile from '../common/assets/images/photoProfile.png'
 import {Button} from "@mui/material";
 import EditableSpan from "./EditableSpan";
 import {updateProfileTC} from "../../bll/reducers/profileReducer";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {logoutTC} from '../../bll/reducers/loginReducer';
 
 export const Profile = () => {
@@ -30,6 +30,7 @@ export const Profile = () => {
         <div className={s.profile}>
             <div className={s.profileContainer}>
                 <h3 className={s.title}>Personal information</h3>
+                <NavLink to={"/pack-list"}>Go to PackList</NavLink>
                 <div className={s.img}><img className={s.img} src={photoProfile}/></div>
                 <div className={s.name}><EditableSpan name={profileName} onChangeName={onChangeNameHandler}/></div>
                 <div className={s.email}>email</div>
