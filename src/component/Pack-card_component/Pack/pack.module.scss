@@ -1,0 +1,29 @@
+.componentBody {
+  display: flex;
+  flex-direction: column;
+  .header{
+   display: flex;
+    justify-content: space-between;
+    .title {
+
+    }
+    .button {
+
+    }
+  }
+  .filterWindow {
+    display: flex;
+    justify-content: space-between;
+    .doubleButton{
+
+    }
+  }
+  .tableHeader {
+    display: flex;
+    justify-content: space-around;
+  }
+  .packsList{
+    display: flex;
+    justify-content: space-around;
+  }
+}

@@ -30,8 +30,11 @@ export const PackList = () => {
             </div>
             <div className={s.filterWindow}>
                 <SuperInputText title={"Search"}/>
-                <SuperButton title={"My"}/>
-                <SuperButton title={"All"}/>
+                <div className={s.doubleButton}>
+                    <button>My</button>
+                    <button>All</button>
+                </div>
+
             </div>
             <div className={s.tableHeader}>
                 <div>Name</div>
@@ -40,7 +43,7 @@ export const PackList = () => {
                 <div>Created by</div>
                 <div>Actions</div>
             </div>
-            <div className={s.paksList}>
+            <div>
                 {
                     cards.map(el => {
                         return (
