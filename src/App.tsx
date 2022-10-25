@@ -13,6 +13,8 @@ import {useAppDispatch, useAppSelector} from "./bll/hook/hook";
 import {initializingTC} from "./bll/reducers/authReducer";
 import {Loader} from "./component/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
+import { PackList } from './component/Pack-card_component/Pack/Pack-list';
+import { CardList } from './component/Pack-card_component/Card/Card-list';
 
 export const PATH = {
     REGISTRATION: "/registration",
@@ -24,7 +26,9 @@ export const PATH = {
     MAIN: "/",
     LOGIN: "/login",
     NEW_PASSWORD: 'set-new-password/*',
-    CHECK_EMAIL: 'check-email'
+    CHECK_EMAIL: 'check-email',
+    PACK: "/pack-list",
+    CARD: "/card-list"
 }
 
 
@@ -53,6 +57,8 @@ function App() {
                     <Route path={PATH.MAIN} element={<TestComponent/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
+                    <Route path={PATH.PACK} element={<PackList/>}/>
+                    {/*<Route path={PATH.CARD} element={<CardList/>}/>*/}
                     <Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>
                 </Routes>
             </div>
