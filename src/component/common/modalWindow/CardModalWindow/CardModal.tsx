@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material';
-import s from "./packModal.module.scss"
+import s from "./CardModal.module.scss"
 import {useState} from 'react';
 
 const style = {
