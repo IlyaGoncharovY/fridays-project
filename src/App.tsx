@@ -13,6 +13,7 @@ import {useAppDispatch, useAppSelector} from "./bll/hook/hook";
 import {initializingTC} from "./bll/reducers/authReducer";
 import {Loader} from "./component/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
+import {Settings} from "./component/Settings/Settings";
 import { CardList } from './component/Pack-card_component/Card/Card-list';
 import { PackList } from './component/Pack-card_component/Pack/PackList/PackList';
 
@@ -28,7 +29,8 @@ export const PATH = {
     NEW_PASSWORD: 'set-new-password/*',
     CHECK_EMAIL: 'check-email',
     PACK: "/pack-list",
-    CARD: "/card-list"
+    CARD: "/card-list",
+    TEST_SET : "/ts"
 }
 
 
@@ -56,6 +58,7 @@ function App() {
                     <Route path={PATH.ERROR} element={<Component404/>}/>
                     <Route path={PATH.MAIN} element={<TestComponent/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
+                    <Route path={PATH.TEST_SET} element={<Settings/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={PATH.PACK} element={<PackList/>}/>
                     {/*<Route path={PATH.CARD} element={<CardList/>}/>*/}
