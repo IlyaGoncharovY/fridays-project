@@ -15,7 +15,7 @@ export const PackFilter = () => {
             id: "232323"
         }
     ]
-    // const cards = useAppSelector(state => state.cards.cards)
+    // const packs = useAppSelector(state => state.cards.packs)
     // const dispatch = useAppDispatch()
 
 
