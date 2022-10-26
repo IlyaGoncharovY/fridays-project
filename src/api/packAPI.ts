@@ -5,7 +5,7 @@ export const packsAPI = {
         return instance.get<ResponseGetPackType>("cards/pack", {params: {...params}})
     },
     addPack(cardsPack: CardsPackType) {
-        return instance.post<ResponsePackType>("cards/pack", cardsPack)
+        return instance.post<ResponsePackType>("cards/pack", {cardsPack: {...cardsPack}})
     },
     updatePack(cardsPack: UpdatePackParamsType) {
         return instance.put<ResponsePackType>("cards/pack", cardsPack)
@@ -27,7 +27,7 @@ type GetPacksParamsType = {
     block?: boolean
 }
 
-type ResponseGetPackType = {
+export type ResponseGetPackType = {
     user_id: string
     cardPacks: PackType[]
     cardPacksTotalCount: number
