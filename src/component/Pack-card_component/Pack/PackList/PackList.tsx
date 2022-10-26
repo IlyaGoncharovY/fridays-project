@@ -14,7 +14,7 @@ export const PackList = () => {
                     Pack list
                 </div>
                 <div className={s.PackListHeaderButton}>
-                    <PacksModal title={"Add new pack"}/>
+                    <PacksModal title={"Add new pack"} nameModal={"Add new pack"}/>
                 </div>
             </div>
             <PackFilter/>
