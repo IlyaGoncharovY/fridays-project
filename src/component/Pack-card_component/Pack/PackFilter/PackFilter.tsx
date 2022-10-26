@@ -1,6 +1,7 @@
 import {Button, TextField} from "@mui/material"
 import {Packs} from "../Packs/Packs"
 import s from "./packFilter.module.scss"
+import AutoFixOffIcon from '@mui/icons-material/AutoFixOff';
 
 export const PackFilter = () => {
     //fake state
@@ -29,8 +30,8 @@ export const PackFilter = () => {
                 <div>
                     Slider
                 </div>
-                <div>
-                    filter
+                <div className={s.delFilter}>
+                    <AutoFixOffIcon/>
                 </div>
             </div>
             <div className={s.tableHeader}>
