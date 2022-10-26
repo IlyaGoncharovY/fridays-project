@@ -3,6 +3,7 @@ import s from "./pasks.module.scss"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { NavLink } from "react-router-dom";
 
 type PacksType = {
     name: string,
@@ -29,9 +30,11 @@ export const Packs = (props: PacksType) => {
         <div className={s.packsContainer}>
 
             <div className={s.packBody}>
-                <div>{props.name}</div>
-                <div>{props.cards}</div>
-                <div>{props.lastUpdated}</div>
+                <NavLink to={"/card-list"}>
+                    <div>{props.name}</div>
+                </NavLink>
+                    <div>{props.cards}</div>
+                    <div>{props.lastUpdated}</div>
                 <div>{props.userName}</div>
                 <div>
                     <AddCircleOutlineIcon onClick={addHandler}/>
