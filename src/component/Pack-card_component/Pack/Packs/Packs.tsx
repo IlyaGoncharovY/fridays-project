@@ -1,30 +1,44 @@
+import {Icon, IconButton} from "@mui/material"
 import s from "./pasks.module.scss"
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 type PacksType = {
     name: string,
     cards: number,
     lastUpdated: string,
     userName: string,
-    actions: string,
 }
 
 export const Packs = (props: PacksType) => {
 
+    const addHandler = () => {
+
+    }
+
+    const editHandler = () => {
+
+    }
+
+    const deleteHandler = () => {
+
+    }
+
     return (
         <div className={s.packsContainer}>
-            <div className={s.tableHeader}>
-                <div className={s.tableHeaderText}>Name</div>
-                <div className={s.tableHeaderText}>Cards</div>
-                <div className={s.tableHeaderText}>Last Updated</div>
-                <div className={s.tableHeaderText}>Created by</div>
-                <div className={s.tableHeaderText}>Actions</div>
-            </div>
+
             <div className={s.packBody}>
                 <div>{props.name}</div>
                 <div>{props.cards}</div>
                 <div>{props.lastUpdated}</div>
                 <div>{props.userName}</div>
-                <div>{props.actions}</div>
+                <div>
+                    <AddCircleOutlineIcon onClick={addHandler}/>
+                    <EditIcon onClick={editHandler}/>
+                    <DeleteIcon onClick={deleteHandler}/>
+                </div>
+
             </div>
         </div>
 
