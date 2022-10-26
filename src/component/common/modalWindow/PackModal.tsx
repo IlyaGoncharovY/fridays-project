@@ -21,6 +21,7 @@ const style = {
 
 type ModalType = {
     title: string
+    nameModal: string
 }
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -48,7 +49,7 @@ export const PacksModal = (props: ModalType) => {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add new pack
+                        {props.nameModal}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <div className={s.modalBody}>
