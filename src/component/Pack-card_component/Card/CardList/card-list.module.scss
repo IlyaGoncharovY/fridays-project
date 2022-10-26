@@ -1,0 +1,18 @@
+.CardListContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 20px 3% 20px 3%;
+  padding: 20px 3% 20px 3%;
+  .CardListHeader{
+    display: flex;
+    justify-content: space-between;
+    .CardListHeaderTitle{
+      width: 600px;
+      font-size: 22pt
+    }
+    s.CardListHeaderButton{
+
+    }
+  }
+}

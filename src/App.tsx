@@ -14,8 +14,8 @@ import {initializingTC} from "./bll/reducers/authReducer";
 import {Loader} from "./component/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
 import {Settings} from "./component/Settings/Settings";
-import { CardList } from './component/Pack-card_component/Card/Card-list';
 import { PackList } from './component/Pack-card_component/Pack/PackList/PackList';
+import { CardList } from './component/Pack-card_component/Card/CardList/CardList';
 
 export const PATH = {
     REGISTRATION: "/registration",
@@ -61,7 +61,7 @@ function App() {
                     <Route path={PATH.TEST_SET} element={<Settings/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={PATH.PACK} element={<PackList/>}/>
-                    {/*<Route path={PATH.CARD} element={<CardList/>}/>*/}
+                    <Route path={PATH.CARD} element={<CardList/>}/>
                     <Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>
                 </Routes>
             </div>
