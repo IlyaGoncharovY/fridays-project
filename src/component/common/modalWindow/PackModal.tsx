@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {Checkbox, FormControlLabel, TextField } from '@mui/material';
+import {Checkbox, FormControlLabel, TextField} from '@mui/material';
 import s from "./packModal.module.scss"
-import { useState } from 'react';
+import {useState} from 'react';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -24,7 +24,7 @@ type ModalType = {
     nameModal: string
 }
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+const label = {inputProps: {'aria-label': 'Checkbox demo'}}
 
 export const PacksModal = (props: ModalType) => {
 
@@ -36,6 +36,10 @@ export const PacksModal = (props: ModalType) => {
 
     const closeHandler = () => {
         setOpen(false)
+    }
+
+    const addPackHandler = () => {
+
     }
 
     return (
@@ -51,10 +55,11 @@ export const PacksModal = (props: ModalType) => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {props.nameModal}
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography id="modal-modal-description" sx={{mt: 2}}>
                         <div className={s.modalBody}>
-                            <TextField id="standard-basic" label="name pack" variant="standard" />
-                            <FormControlLabel control={<Checkbox defaultChecked />} label="Private pack" />
+                            <TextField id="standard-basic" label="name pack" variant="standard"/>
+                            <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
+                            <Button variant="outlined" onClick={addPackHandler}>add</Button>
                         </div>
                     </Typography>
                 </Box>
