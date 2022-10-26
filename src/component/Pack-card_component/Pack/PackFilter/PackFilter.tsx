@@ -26,6 +26,19 @@ export const PackFilter = () => {
                     <Button variant="contained">My</Button>
                     <Button variant="contained">All</Button>
                 </div>
+                <div>
+                    Slider
+                </div>
+                <div>
+                    filter
+                </div>
+            </div>
+            <div className={s.tableHeader}>
+                <div className={s.tableHeaderText}>Name</div>
+                <div className={s.tableHeaderText}>Cards</div>
+                <div className={s.tableHeaderText}>Last Updated</div>
+                <div className={s.tableHeaderText}>Created by</div>
+                <div className={s.tableHeaderText}>Actions</div>
             </div>
 
             {packs.map(el => {
@@ -35,7 +48,6 @@ export const PackFilter = () => {
                            cards={el.cards}
                            lastUpdated={el.lastUpdated}
                            userName={el.userName}
-                           actions={el.actions}
                     />
                 )
             })}
