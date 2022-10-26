@@ -7,7 +7,6 @@ import {setProfileAC} from "./profileReducer";
 
 const initialState = {
     isAuth: false,
-
 }
 
 type initialStateType = typeof initialState

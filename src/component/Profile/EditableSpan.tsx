@@ -1,6 +1,7 @@
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Button, TextField} from "@mui/material";
 import s from "./profile.module.scss"
+import EditIcon from "@mui/icons-material/Edit";
 
 type EditableSpanType = {
     onChangeName: (name: string) => void
@@ -17,9 +18,14 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
 
     }
     const addNewName = () => {
-        setEditMode(!editMode)
-        if (newName !== "") {
+
+        if (newName.trim().length === 0 || newName.length > 40) {
+            return alert('Please enter correct field: Name')
+
+        }
+        else{
             onChangeName(newName)
+            setEditMode(!editMode)
         }
     }
     const editHandler = () => {
@@ -43,7 +49,7 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
                 </Button>
             </div>
 
-            : <span onDoubleClick={editHandler}>{name}</span>
+            : <span onDoubleClick={editHandler}>{name}<EditIcon/></span>
     );
 }
 

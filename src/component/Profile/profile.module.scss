@@ -31,4 +31,12 @@
 .buttonSave{
   position: absolute;
 }
-
+.backToPacksList{
+  display: flex;
+  justify-content: left;
+  margin: 10px;
+  cursor: pointer;
+}
+.backToPacksList:hover{
+  color: #366EFF;
+}
