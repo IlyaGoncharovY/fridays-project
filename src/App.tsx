@@ -13,8 +13,8 @@ import {useAppDispatch, useAppSelector} from "./bll/hook/hook";
 import {initializingTC} from "./bll/reducers/authReducer";
 import {Loader} from "./component/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
-import { PackList } from './component/Pack-card_component/Pack/Pack-list';
 import { CardList } from './component/Pack-card_component/Card/Card-list';
+import { PackList } from './component/Pack-card_component/Pack/PackList/PackList';
 
 export const PATH = {
     REGISTRATION: "/registration",

@@ -1,0 +1,17 @@
+.packsContainer {
+  .tableHeader {
+    display: flex;
+    justify-content: space-around;
+
+    .tableHeaderText {
+      font-size: 14pt
+    }
+  }
+
+  .packBody {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+

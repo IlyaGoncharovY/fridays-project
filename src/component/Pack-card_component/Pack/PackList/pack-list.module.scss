@@ -1,0 +1,16 @@
+.PackListContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  .PackListHeader{
+    display: flex;
+    justify-content: space-between;
+    .PackListHeaderTitle{
+      width: 600px;
+      font-size: 22pt
+    }
+    s.PackListHeaderButton{
+
+    }
+  }
+}
