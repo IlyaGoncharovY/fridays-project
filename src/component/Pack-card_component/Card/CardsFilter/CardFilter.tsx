@@ -41,10 +41,11 @@ export const CardFilter = () => {
                 <tbody>
                 {card.map(el => {
                     return (
-                        <Card key={el.id}
+                        <Card
+                            // key={el.id}
                               question={el.question}
                               answer={el.answer}
-                              lastUpdated={el.lastUpdated}
+                              lastUpdated={el.updated}
                               grade={el.grade}
                         />
                     )
