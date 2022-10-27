@@ -16,7 +16,7 @@ export const packsAPI = {
 
 }
 
-type GetPacksParamsType = {
+export type GetPacksParamsType = {
     packName?: string
     min?: number
     max?: number

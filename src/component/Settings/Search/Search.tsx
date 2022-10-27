@@ -4,31 +4,25 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
-import {packsAPI} from "../../../api/packAPI";
+import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
+import {SearchType, setSearchFilter, setSearchMode} from "../../../bll/reducers/searchReducer";
 
-type SearchPropsType = {
-    cardPacksTotalCount: any
-    callback: (value: any) => void
-    cardType : any
-    cardRange : any
 
-}
-
-export const Search = (props: SearchPropsType) => {
-
-    const [value, setValue] = useState<string>('')
+export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName}) => {
+    const dispatch = useAppDispatch()
+    const [value, setValue] = useState<string>(packName)
     const debouncedValue = useDebounce<string>(value, 500)
-
+    const searchMode = useAppSelector(state => state.search.searchMode)
     useEffect(() => {
-        const [min,max] = props.cardRange
-        packsAPI.getPacks({page : 1, pageCount : 8,packName : debouncedValue, user_id : props.cardType, min , max})
-            .then(res=>{
-                console.log(res.data)
-                props.callback(res.data.cardPacks)})
+        if (searchMode) {
+            dispatch(setSearchFilter({page, pageCount, packName: debouncedValue, min, max}))
+        }
 
-    }, [debouncedValue,props.cardType,props.cardRange])
+    }, [debouncedValue])
+
     const getInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-            setValue(e.currentTarget.value)
+        setValue(e.currentTarget.value)
+        dispatch(setSearchMode(true))
     }
     return (
         <div>
@@ -44,6 +38,7 @@ export const Search = (props: SearchPropsType) => {
                     sx={{ml: 1, flex: 1}}
                     placeholder="Provide your text"
                     onChange={getInputValue}
+                    value={value}
                 />
             </Paper>
         </div>

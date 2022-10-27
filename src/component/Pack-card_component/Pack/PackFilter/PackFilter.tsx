@@ -1,22 +1,30 @@
 import {Button, TextField} from "@mui/material"
 import {Packs} from "../Packs/Packs"
 import s from "./packFilter.module.scss"
+import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
+import {useEffect} from "react";
+import {setCards} from "../../../../bll/reducers/cardsUsersReducer";
 
 export const PackFilter = () => {
     //fake state
-    const packs = [
-        {
-            name: "Ivan Packs",
-            cards: 5,
-            lastUpdated: "12.12.2222",
-            userName: "Ivan Ivanov",
-            actions: "hz",
-            id: "232323"
-        }
-    ]
+    const dispatch = useAppDispatch()
+    const cards = useAppSelector(state => state.cards.cardPack)
+    // const packs = [
+    //     {
+    //         name: "Ivan Packs",
+    //         cards: 5,
+    //         lastUpdated: "12.12.2222",
+    //         userName: "Ivan Ivanov",
+    //         actions: "hz",
+    //         id: "232323"
+    //     }
+    // ]
     // const cards = useAppSelector(state => state.cards.cards)
     // const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(setCards())
 
+    }, [])
 
     return (
         <div className={s.filterWindow}>
@@ -28,14 +36,14 @@ export const PackFilter = () => {
                 </div>
             </div>
 
-            {packs.map(el => {
+            {cards.map(el => {
                 return (
-                    <Packs key={el.id}
+                    <Packs key={el._id}
                            name={el.name}
-                           cards={el.cards}
-                           lastUpdated={el.lastUpdated}
-                           userName={el.userName}
-                           actions={el.actions}
+                           cards={el.cardsCount}
+                           lastUpdated={el.updated}
+                           userName={el.user_name}
+                           actions={el.path}  /// это экшен не знал какой взять
                     />
                 )
             })}

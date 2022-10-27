@@ -3,21 +3,26 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import {InputRange} from "./InputRange/InputRange";
 import {useDebounce} from "../hookDebounce/Debounce";
+import {SearchType, setSearchFilter, setSearchMode} from "../../../bll/reducers/searchReducer";
+import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
 
 
-type NumberOfCardsPropsType = {
-    getCardRange: (value: number[]) => void
-}
 
-export const NumberOfCards = (props:NumberOfCardsPropsType) => {
-    const [value, setValue] = useState<number[]>([0, 54]);
+
+export const NumberOfCards:React.FC<SearchType> = ({pageCount,page,packName}) => {
+    const [value, setValue] = useState<number[]>([0, 110]);
     const debouncedValue = useDebounce<number[]>(value, 500)
-    console.log(value)
+    const searchMode = useAppSelector(state => state.search.searchMode)
+    const dispatch = useAppDispatch()
+    const [min,max] = debouncedValue
     useEffect(()=>{
-        props.getCardRange(debouncedValue)
+        if(searchMode){
+            dispatch(setSearchFilter({page,pageCount,min,max,packName}))
+        }
     },[debouncedValue])
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
+        dispatch(setSearchMode(true))
 
     };
     const changeInputRangeValueLeft = (num : any) => {
@@ -38,7 +43,7 @@ export const NumberOfCards = (props:NumberOfCardsPropsType) => {
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     min={0}
-                    max={54}
+                    max={110}
                 />
                 <InputRange value={value[1]} changeInputValue={changeInputRangeValueRight}/>
             </Box>

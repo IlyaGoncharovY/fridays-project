@@ -1,20 +1,20 @@
 import React from 'react';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
-import {useAppSelector} from "../../../bll/hook/hook";
+import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
+import {SearchType, setSearchFilter} from "../../../bll/reducers/searchReducer";
 
-type showCardsPropsType = {
-    showCards : (value : number | string) => void
-}
 
-export const ShowCards = (props:showCardsPropsType) => {
+
+export const ShowCards:React.FC<SearchType> = ({pageCount,page}) => {
     const userId = useAppSelector(state => state.profile._id)
+    const dispatch = useAppDispatch()
     const showMyCards = () => {
-        props.showCards(userId)
+        dispatch(setSearchFilter({page,user_id : userId, pageCount}))
 
     }
     const showAllCards = () => {
-       props.showCards('')
+        dispatch(setSearchFilter({page,user_id : "", pageCount}))
     }
     return (
         <div>
