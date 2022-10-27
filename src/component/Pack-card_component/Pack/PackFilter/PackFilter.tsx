@@ -1,11 +1,8 @@
-import {Button, TextField} from "@mui/material"
 import {Packs} from "../Packs/Packs"
 import s from "./packFilter.module.scss"
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 import {useEffect} from "react";
-import {setCards} from "../../../../bll/reducers/cardsUsersReducer";
 import {Settings} from "../../../Settings/Settings";
-import AutoFixOffIcon from '@mui/icons-material/AutoFixOff';
 import {fetchListsTC} from "../../../../bll/reducers/listsReducer";
 
 export const PackFilter = () => {

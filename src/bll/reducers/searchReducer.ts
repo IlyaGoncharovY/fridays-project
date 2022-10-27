@@ -1,7 +1,7 @@
 import {GetPacksParamsType, packsAPI} from "../../api/packAPI";
 import {AppThunk, RootState} from "../store";
-import {setCardPack, setCards} from "./cardsUsersReducer";
 import {setCardPacksTotalCount, setPage} from "./pageReducer";
+import {fetchListsTC, setLists} from "./listsReducer";
 
 
 const initialState = {
@@ -67,21 +67,16 @@ export const resetFilter = (): AppThunk => async dispatch => {
     }
     debugger
     dispatch(setDefaultFilter(payload))
-    dispatch(setCards())
+    dispatch(fetchListsTC())
     dispatch(setPage(1))
 }
 
 export const setSearchFilter = (payload: GetPacksParamsType): AppThunk => async (dispatch, getState: () => RootState) => {
 
     const state = getState().search
-    // const newPayload = {
-    //     ...state,
-    //     ...payload
-    // }
     const result = await packsAPI.getPacks({...payload})
     dispatch(setAllFilters(state, payload))
-    dispatch(setCardPack(result.data.cardPacks))
-    debugger
+    dispatch(setLists(result.data.cardPacks))
     dispatch(setPage(1))
     dispatch(setCardPacksTotalCount(result.data.cardPacksTotalCount))
     dispatch(setSearchMode(false))

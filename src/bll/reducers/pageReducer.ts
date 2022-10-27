@@ -1,6 +1,6 @@
-import {AppThunk, RootState, store, StoreType} from "../store";
+import {AppThunk, RootState} from "../store";
 import {packsAPI} from "../../api/packAPI";
-import {setCardPack} from "./cardsUsersReducer";
+import {setLists} from "./listsReducer";
 
 const initialState = {
     page : 1,
@@ -39,7 +39,8 @@ export const setPage = (page: number) => ({type: 'page/SET-PAGE', page} as const
 export const changePages = (page : number):AppThunk => async (dispatch,getState: () => RootState) =>{
     const result = await packsAPI.getPacks({page, pageCount : getState().page.countPerPage,packName : getState().search.packName})
     dispatch(setPage(page))
-    dispatch(setCardPack(result.data.cardPacks))
+    dispatch(setLists(result.data.cardPacks))
+    // dispatch(setCardPack(result.data.cardPacks))
 }
 //Type
 type InitialStateType = typeof initialState

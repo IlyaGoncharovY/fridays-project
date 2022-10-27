@@ -3,6 +3,7 @@ import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 import {cardsAPI, CardType} from "../../api/cardsAPI";
+import {setCardsTotalCount} from "./pageCardsReducer";
 //constants
 const SET_CARDS = "CARDS/SET-CARDS"
 const ADD_CARD = "CARDS/ADD-CARD"
@@ -25,7 +26,7 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
     }
 }
 //AC
-const setCards = (cardsPack_id: string, cards: CardType[]) => ({
+export const setCards = (cardsPack_id: string, cards: CardType[]) => ({
     type: SET_CARDS,
     payload: {cardsPack_id, cards}
 } as const)
@@ -44,8 +45,9 @@ const editCard = (idList: string, title: string) => ({
 //TC
 export const fetchCardsTC = (listID: string): AppThunk => async dispatch => {
     try {
-        const res = await cardsAPI.getCards(listID, {})
+        const res = await cardsAPI.getCards(listID, {page:1,pageCount:8})
         dispatch(setCards(listID, res.data.cards))
+        dispatch(setCardsTotalCount(res.data.cardsTotalCount))
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
