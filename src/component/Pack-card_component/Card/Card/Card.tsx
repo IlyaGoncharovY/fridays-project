@@ -26,21 +26,16 @@ export const Card = (props: PacksType) => {
     }
 
     return (
-        <div className={s.CardContainer}>
-
-            <div className={s.CardBody}>
-                <div>{props.question}</div>
-                <div>{props.answer}</div>
-                <div>{props.lastUpdated}</div>
-                <div>{props.grade}</div>
-                <div>
-                    <AddCircleOutlineIcon onClick={addHandler}/>
-                    <EditIcon onClick={editHandler}/>
-                    <DeleteIcon onClick={deleteHandler}/>
-                </div>
-
-            </div>
-        </div>
-
+        <tr>
+            <th style={{padding: "22px"}}>{props.question}</th>
+            <th>{props.answer}</th>
+            <th>{props.lastUpdated}</th>
+            <th>{props.grade}</th>
+            <th>
+                <AddCircleOutlineIcon onClick={addHandler}/>
+                <EditIcon onClick={editHandler}/>
+                <DeleteIcon onClick={deleteHandler}/>
+            </th>
+        </tr>
     )
 }
