@@ -19,7 +19,7 @@ export const searchCardsReducer = (state: InitialStateType = initialState, actio
                 searchMode: action.searchMode
             }
         case "searchCards/SET-ALL-FILTERS":
-            debugger
+
             return {
                 ...state,
                 cardQuestion: action.payload.cardQuestion
@@ -31,7 +31,7 @@ export const searchCardsReducer = (state: InitialStateType = initialState, actio
 
 //Action
 const setCardsFilter = (payload: {cardQuestion : string}) => {
-    debugger
+
     return {
         type: 'searchCards/SET-ALL-FILTERS',
         payload
@@ -44,7 +44,7 @@ export const setCardsSearchMode = (searchMode: boolean) => ({type: 'searchCards/
 
 
 export const setSearchCardsFilter = (payload: {cardQuestion : string}): AppThunk => async (dispatch, getState: () => RootState) => {
-    debugger
+
 
     const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{...payload,pageCount : getState().cardsPages.countPerPage})
 

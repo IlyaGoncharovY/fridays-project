@@ -9,7 +9,7 @@ import {SearchType, setSearchFilter, setSearchMode} from "../../../bll/reducers/
 
 
 export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName}) => {
-    debugger
+
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>(packName)
     const debouncedValue = useDebounce<string>(value, 500)

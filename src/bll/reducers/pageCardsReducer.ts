@@ -39,7 +39,7 @@ export const setCardsPage = (page: number) => ({type: 'page/SET-PAGE', page} as 
 //THUNK
 
 export const changeCardsPages = (page : number):AppThunk => async (dispatch,getState: () => RootState) =>{
-    debugger
+
     const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{page, pageCount : getState().cardsPages.countPerPage})
     dispatch(setCardsPage(page))
     dispatch(setCards(getState().cards.cardsPack_id,result.data.cards))

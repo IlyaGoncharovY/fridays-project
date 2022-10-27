@@ -65,7 +65,7 @@ export const resetFilter = (): AppThunk => async dispatch => {
         block: false,
         searchMode: false
     }
-    debugger
+
     dispatch(setDefaultFilter(payload))
     dispatch(fetchListsTC())
     dispatch(setPage(1))

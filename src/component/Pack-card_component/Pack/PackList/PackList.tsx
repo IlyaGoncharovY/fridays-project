@@ -17,6 +17,7 @@ export const PackList = () => {
     const setPages = (value : number) => {
         dispatch(changePages(value))
     }
+
     if(!isLoggedIn){
         return <Navigate to={'/login'}/>
     }
