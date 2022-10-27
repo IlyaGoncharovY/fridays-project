@@ -34,25 +34,29 @@ export const PackFilter = () => {
                     <AutoFixOffIcon/>
                 </div>
             </div>
-            <div className={s.tableHeader}>
-                <div className={s.tableHeaderText}>Name</div>
-                <div className={s.tableHeaderText}>Cards</div>
-                <div className={s.tableHeaderText}>Last Updated</div>
-                <div className={s.tableHeaderText}>Created by</div>
-                <div className={s.tableHeaderText}>Actions</div>
-            </div>
-
-            {packs.map(el => {
-                return (
-                    <Packs key={el.id}
-                           name={el.name}
-                           cards={el.cards}
-                           lastUpdated={el.lastUpdated}
-                           userName={el.userName}
-                    />
-                )
-            })}
-
+            <table style={{textAlign: "left"}}>
+                <thead>
+                <tr style={{fontSize: "25px"}}>
+                    <th>Name</th>
+                    <th>Cards</th>
+                    <th>Last Updated</th>
+                    <th>Created by</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {packs.map(el => {
+                        return (
+                            <Packs key={el.id}
+                                   name={el.name}
+                                   cards={el.cards}
+                                   lastUpdated={el.lastUpdated}
+                                   userName={el.userName}
+                            />
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
     )
 }
