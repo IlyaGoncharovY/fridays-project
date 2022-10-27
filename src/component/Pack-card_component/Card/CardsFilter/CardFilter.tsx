@@ -1,4 +1,4 @@
-import {Button, TextField} from "@mui/material"
+import {TextField} from "@mui/material"
 import {Card} from "../Card/Card"
 import s from "./cardFilter.module.scss"
 import AutoFixOffIcon from '@mui/icons-material/AutoFixOff';
@@ -26,25 +26,29 @@ export const CardFilter = () => {
                     <AutoFixOffIcon/>
                 </div>
             </div>
-            <div className={s.tableHeader}>
-                <div className={s.tableHeaderText}>Question</div>
-                <div className={s.tableHeaderText}>Answer</div>
-                <div className={s.tableHeaderText}>Last Updated</div>
-                <div className={s.tableHeaderText}>Grade</div>
-                <div className={s.tableHeaderText}>Actions</div>
-            </div>
-
-            {card.map(el => {
-                return (
-                    <Card key={el.id}
-                          question={el.question}
-                          answer={el.answer}
-                          lastUpdated={el.lastUpdated}
-                          grade={el.grade}
-                    />
-                )
-            })}
-
+            <table style={{textAlign: "left"}}>
+                <thead>
+                <tr style={{fontSize: "25px"}}>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Last Updated</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {card.map(el => {
+                    return (
+                        <Card key={el.id}
+                              question={el.question}
+                              answer={el.answer}
+                              lastUpdated={el.lastUpdated}
+                              grade={el.grade}
+                        />
+                    )
+                })}
+                </tbody>
+            </table>
         </div>
     )
 }
