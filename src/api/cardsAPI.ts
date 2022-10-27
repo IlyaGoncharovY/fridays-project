@@ -7,8 +7,8 @@ export const cardsAPI = {
             {params}
         )
     },
-    addCard(card: { cardsPack_id: string; question: string; answer: string }) {
-        return instance.post("cards/card", card)
+    addCard(card: { cardsPack_id: string; question?: string; answer?: string }) {
+        return instance.post("cards/card", {card})
     },
     updateCard(card: { _id: string; question?: string; answer?: string }) {
         return instance.put("cards/card", {card})
@@ -45,7 +45,7 @@ type ResponseCardsType = {
     tokenDeathTime: number
 }
 
-type CardType = {
+export type CardType = {
     _id: string;
     cardsPack_id: string;
     user_id: string;

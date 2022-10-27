@@ -6,8 +6,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Navigate, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 import {deleteListTC, editListTC} from "../../../../bll/reducers/listsReducer";
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {PATH} from "../../../../App";
+import {fetchCardsTC} from "../../../../bll/reducers/cardsReducer";
 
 type PacksType = {
     packID: string
@@ -56,6 +57,7 @@ export const Packs = (props: PacksType) => {
     }
     const navigateToCard = () => {
         navigate(PATH.CARD)
+        dispatch(fetchCardsTC(props.packID))
     }
     if (!isLogin) {
         return <Navigate to={PATH.LOGIN}/>

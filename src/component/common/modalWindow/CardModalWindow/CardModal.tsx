@@ -5,7 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material';
 import s from "./CardModal.module.scss"
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
+import {useAppDispatch} from "../../../../bll/hook/hook";
+import {addCardTC} from "../../../../bll/reducers/cardsReducer";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -27,8 +29,9 @@ type ModalType = {
 const label = {inputProps: {'aria-label': 'Checkbox demo'}}
 
 export const CardModal = (props: ModalType) => {
-
+    const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
+    const [question, setQuestion] = useState("")
 
     const openHandler = () => {
         setOpen(true)
@@ -39,9 +42,14 @@ export const CardModal = (props: ModalType) => {
     }
 
     const addCardHandler = () => {
-
+        if(question.trim()){
+            dispatch(addCardTC(question.trim()))}
+        setQuestion("")
     }
 
+    const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setQuestion(event.currentTarget.value)
+    }
     return (
         <div>
             <Button onClick={openHandler}>{props.title}</Button>
@@ -57,9 +65,14 @@ export const CardModal = (props: ModalType) => {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 2}}>
                         <div className={s.modalBody}>
-                            <TextField id="standard-basic" label="name pack" variant="standard"/>
+                            <TextField id="standard-basic"
+                                       value={question}
+                                       label="enter question"
+                                       variant="standard"
+                                       onChange={onChangeTitleHandler}/>
                             <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
-                            <Button variant="outlined" onClick={addCardHandler}>add</Button>
+                            <Button variant="outlined"
+                                    onClick={addCardHandler}>add</Button>
                         </div>
                     </Typography>
                 </Box>
