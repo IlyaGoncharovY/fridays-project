@@ -43,6 +43,7 @@ export const PackFilter = () => {
                            cards={el.cardsCount}
                            lastUpdated={el.updated}
                            userName={el.user_name}
+                           userID={el.user_id}
                     />
                 )
             })}

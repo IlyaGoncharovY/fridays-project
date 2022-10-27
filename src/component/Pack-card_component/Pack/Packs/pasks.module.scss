@@ -4,6 +4,11 @@
     justify-content: space-around;
   }
 }
+.icon{
+  width: 80px;
+  display: flex;
+  justify-content: start;
+}
 .icon:hover{
   cursor: pointer;
 }

@@ -15,10 +15,12 @@ type PacksType = {
     cards: number,
     lastUpdated: string,
     userName: string,
+    userID: string
 }
 
 export const Packs = (props: PacksType) => {
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
+    const userID = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [isEdit, setIsEdit] = useState(false)
@@ -34,21 +36,20 @@ export const Packs = (props: PacksType) => {
     const addTitleHandler = () => {
         if (title.trim().length === 0 || title.length > 20) {
             return alert('Please enter correct field: Name')
-        }
-        else {
+        } else {
             dispatch(editListTC(props.packID, title))
             setIsEdit(false)
         }
     }
-    const onKeyboardAddTitle = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (title.trim().length === 0 || title.length > 20) {
-            return alert('Please enter correct field: Name')
-        }
-        else if (event.key === "Enter") {
-            dispatch(editListTC(props.packID, title))
-            setIsEdit(false)
-        }
-    }
+    // const onKeyboardAddTitle = (event: KeyboardEvent<HTMLInputElement>) => {
+    //     if (title.trim().length === 0 || title.length > 20) {
+    //         return alert('Please enter correct field: Name')
+    //     }
+    //     if (event.key === "Enter") {
+    //            dispatch(editListTC(props.packID, title))
+    //            setIsEdit(false)
+    //     }
+    // }
 
     const deleteHandler = () => {
         dispatch(deleteListTC(props.packID))
@@ -56,7 +57,7 @@ export const Packs = (props: PacksType) => {
     const navigateToCard = () => {
         navigate(PATH.CARD)
     }
-    if(!isLogin){
+    if (!isLogin) {
         return <Navigate to={PATH.LOGIN}/>
     }
     return (
@@ -70,21 +71,19 @@ export const Packs = (props: PacksType) => {
                             variant={"standard"}
                             onChange={onChangeHandler}
                             onBlur={addTitleHandler}
-                            onKeyDown={onKeyboardAddTitle}
                             autoFocus
                         />
                         : <div onClick={navigateToCard}>{props.name}</div>
                     }
                 </div>
-                    <div>{props.cards}</div>
-                    <div>{props.lastUpdated}</div>
+                <div>{props.cards}</div>
+                <div>{props.lastUpdated}</div>
                 <div>{props.userName}</div>
                 <div className={s.icon}>
                     <AddCircleOutlineIcon/>
-                    <EditIcon onClick={editHandler}/>
-                    <DeleteIcon onClick={deleteHandler}/>
+                    {userID === props.userID && <EditIcon onClick={editHandler}/>}
+                    {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
                 </div>
-
             </div>
         </div>
 
