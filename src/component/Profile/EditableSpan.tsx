@@ -42,7 +42,6 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
                     variant={"standard"}
                     onChange={onChangeHandler}
                     autoFocus
-
                 />
                 <Button style={{position:"absolute"}} variant="outlined" size="small" onClick={addNewName}>
                     Save

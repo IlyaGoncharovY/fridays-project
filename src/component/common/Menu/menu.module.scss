@@ -1,7 +1,31 @@
-.Menu {
+.menu {
   display: flex;
-  justify-content: space-between;
-  font-size: 24px;
-  padding: 20px;
-  background-color: #77f0ff;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: #FCFCFC;
+}
+.logo{
+  width: 200px;
+  height: 50px;
+  margin: 0 0 0 50px;
+  background: url("../assets/images/it-incubator.png") center center/cover no-repeat
+}
+.login{
+  flex: 1 1 50%;
+  text-align: end;
+}
+.profileHeader {
+  display: inline-flex;
+  margin: 0 50px 0 0;
+}
+.profileHeader:hover{
+  cursor: pointer;
+}
+.buttonLogout{
+  margin: 0 50px 0 0;
+  background: #366EFF;
+  border-radius: 30px;
+  height: 30px;
+  width: 100px;
 }

@@ -5,7 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material';
 import s from "./packModal.module.scss"
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
+import {useAppDispatch} from "../../../bll/hook/hook";
+import {addListTC} from "../../../bll/reducers/listsReducer";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -27,8 +29,10 @@ type ModalType = {
 const label = {inputProps: {'aria-label': 'Checkbox demo'}}
 
 export const PacksModal = (props: ModalType) => {
-
+    const dispatch = useAppDispatch()
     const [open, setOpen] = useState(false)
+    const [title, setTitle] = useState("")
+
 
     const openHandler = () => {
         setOpen(true)
@@ -39,7 +43,13 @@ export const PacksModal = (props: ModalType) => {
     }
 
     const addPackHandler = () => {
+        if(title.trim()){
+        dispatch(addListTC(title.trim()))}
+        setTitle("")
+    }
 
+    const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.currentTarget.value)
     }
 
     return (
@@ -57,7 +67,11 @@ export const PacksModal = (props: ModalType) => {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 2}}>
                         <div className={s.modalBody}>
-                            <TextField id="standard-basic" label="name pack" variant="standard"/>
+                            <TextField id="standard-basic"
+                                       value={title}
+                                       label="enter title of list"
+                                       variant="standard"
+                                       onChange={onChangeTitleHandler}/>
                             <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
                             <Button variant="outlined" onClick={addPackHandler}>add</Button>
                         </div>

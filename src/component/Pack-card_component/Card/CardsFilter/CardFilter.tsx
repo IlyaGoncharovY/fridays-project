@@ -19,6 +19,8 @@ export const CardFilter = () => {
     // const packs = useAppSelector(state => state.cards.packs)
     // const dispatch = useAppDispatch()
 
+    //Maxim card
+    // const cards = useAppSelector(state => state.cards.cards)
 
     return (
         <div className={s.filterWindow}>
@@ -42,7 +44,8 @@ export const CardFilter = () => {
                 {card.map(el => {
                     return (
                         <Card
-                            // key={el.id}
+                             key={el._id}
+                             cardID={el._id}
                               question={el.question}
                               answer={el.answer}
                               lastUpdated={el.updated}

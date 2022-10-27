@@ -38,7 +38,6 @@ function App() {
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const dispatch = useAppDispatch()
     useEffect(() => {
-
         dispatch(initializingTC())
     }, [])
     return (

@@ -38,9 +38,8 @@ export const setAuthAC = (isAuth: boolean) => {
 //THUNK
 
 export const initializingTC = (): AppThunk => async dispatch => {
-
     try {
-        const res = await registartionAPI.me()
+      const res =   await registartionAPI.me()
         console.log(res.data)
         dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))

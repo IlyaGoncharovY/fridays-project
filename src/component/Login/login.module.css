@@ -1,12 +1,12 @@
 .signIn{
     text-align: center;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 
 }
 .password{
     text-align: right;
-    margin: 30px;
+    margin: 10px;
 }
 .account , .signUp{
     text-align: center;
@@ -14,7 +14,7 @@
 
 }
 .box{
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .signUp span{

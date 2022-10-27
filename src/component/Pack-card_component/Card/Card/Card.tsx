@@ -1,8 +1,11 @@
+import {Icon, IconButton} from "@mui/material"
+import s from "./card.module.scss"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 type PacksType = {
+    cardID: string
     question: string,
     answer: string,
     lastUpdated: string,
