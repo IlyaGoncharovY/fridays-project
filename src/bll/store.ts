@@ -7,6 +7,9 @@ import {RegistrationActionType, registrationReducer} from "./reducers/registrati
 import {ActionLoginType, loginReducer} from "./reducers/loginReducer";
 import {ActionRecoveryPasswordType, recoveryReducer} from "./reducers/recoveryPasswordReducer";
 import {ListActionType, listsReducer} from "./reducers/listsReducer";
+import {CardsUserActionType, cardsUsersReducer} from "./reducers/cardsUsersReducer";
+import {PageActionType, pageReducer} from "./reducers/pageReducer";
+import {SearchActionType, searchReducer} from "./reducers/searchReducer";
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export type StoreType = typeof store
@@ -22,6 +25,9 @@ export type AppActionType =
     | ActionRecoveryPasswordType
     | ActionErrorType
     | ListActionType
+    | CardsUserActionType
+    | PageActionType
+    | SearchActionType
 export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionType>
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AppActionType>
@@ -33,7 +39,10 @@ const rootReducer = combineReducers({
     login : loginReducer,
     error : ErrorReducer,
     recovery : recoveryReducer,
-    lists: listsReducer
+    lists: listsReducer,
+    cards: cardsUsersReducer,
+    page: pageReducer,
+    search : searchReducer
 
 })
 

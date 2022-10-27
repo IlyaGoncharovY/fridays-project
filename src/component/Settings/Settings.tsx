@@ -1,38 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Search} from "./Search/Search";
 import {ShowCards} from "./ShowCards/ShowCards";
 import {NumberOfCards} from "./NumberOfCards/NumberOfCards";
 import {ResetFilter} from "./ResetFilter/ResetFilter";
-import {PackType, ResponseGetPackType} from "../../api/packAPI";
-import { PaginationButtons } from '../common/Pagination/Pagination';
+import {useAppSelector} from '../../bll/hook/hook';
 
 
 export const Settings = () => {
-    const [value, setValue] = useState<null | ResponseGetPackType>(null)
-    const [cardPack, setCardPack] = useState<PackType[]>([])
-    const [cardRange, setCardRange] = useState<number[]>([])
-    const [cardType, setCardType] = useState<number | string>("")
-    const setItems = (item: any) => {
-        setCardPack(item)
-    }
-    const showCards = (value: number | string) => {
-        setCardType(value)
-    }
-    const getCardRange = (value : any) =>{
-        setCardRange(value)
-    }
+
+    const pageCount = useAppSelector(state => state.page.countPerPage)
+    const page = useAppSelector(state => state.page.page)
+    const name = useAppSelector(state => state.search.packName)
+    const min = useAppSelector(state => state.search.min)
+    const max = useAppSelector(state => state.search.max)
 
     return (
         <div style={{display: "flex"}}>
-            <Search cardPacksTotalCount={value?.cardPacksTotalCount} callback={setItems}
-                    cardType={cardType}
-                    cardRange={cardRange}
-            />
-            <ShowCards showCards={showCards}/>
-            <NumberOfCards getCardRange={getCardRange}/>
+            <Search page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
+            <ShowCards page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
+            <NumberOfCards  page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
             <ResetFilter/>
-            <div>{cardPack.map(u => <div key={u._id}>{u.name} <span>-----{u.cardsCount}</span></div>)}</div>
-            <PaginationButtons/>
         </div>
     );
 };

@@ -3,6 +3,8 @@ import {useState} from "react"
 import {PacksModal} from "../../../common/modalWindow/PackModal"
 import {PackFilter} from "../PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
+import {Settings} from "../../../Settings/Settings";
+import { PaginationButtons } from "../../../common/Pagination/Pagination";
 
 
 export const PackList = () => {
@@ -11,14 +13,14 @@ export const PackList = () => {
         <div className={s.PackListContainer}>
             <div className={s.PackListHeader}>
                 <div className={s.PackListHeaderTitle}>
-                    Pack list
+                    <Settings/>
                 </div>
                 <div className={s.PackListHeaderButton}>
                     <PacksModal title={"Add new pack"} nameModal={"Add new pack"}/>
                 </div>
             </div>
             <PackFilter/>
-            <div>Pagination</div>
+            <PaginationButtons/>
         </div>
     )
 }
