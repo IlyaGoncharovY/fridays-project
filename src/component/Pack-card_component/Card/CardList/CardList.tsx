@@ -8,11 +8,11 @@ import {changeCardsPages} from "../../../../bll/reducers/pageCardsReducer";
 
 
 export const CardList = () => {
-    debugger
+
     const page = useAppSelector(state => state.cardsPages.countPerPage)
     const totalCount = useAppSelector(state => state.cardsPages.cardsTotalCount)
-    debugger
-    const id = useAppSelector(state => state.cards.colodID)
+
+    const id = useAppSelector(state => state.cards.cardsPack_id)
     const dispatch = useAppDispatch()
     const setPages = (value : number) => {
         dispatch(changeCardsPages(value))

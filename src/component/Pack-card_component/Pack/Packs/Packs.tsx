@@ -63,11 +63,9 @@ export const Packs = (props: PacksType) => {
         return <Navigate to={PATH.LOGIN}/>
     }
     return (
-        <div className={s.packsContainer}>
-
-            <div className={s.packBody}>
-                <div className={s.title}>
-                    {isEdit
+            <tr>
+            <th style={{padding: "22px"}}>
+                      {isEdit
                         ? <TextField
                             value={title}
                             variant={"standard"}
@@ -77,33 +75,42 @@ export const Packs = (props: PacksType) => {
                         />
                         : <div onClick={navigateToCard}>{props.name}</div>
                     }
-                </div>
-                <div>{props.cards}</div>
-                <div>{props.lastUpdated}</div>
-                <div>{props.userName}</div>
-                <div className={s.icon}>
-                    <AddCircleOutlineIcon/>
+            </th>
+
+            <th>{props.cards}</th>
+            <th>{props.lastUpdated}</th>
+            <th>{props.userName}</th>
+            <th className={s.icon}>
+             <AddCircleOutlineIcon/>
                     {userID === props.userID && <EditIcon onClick={editHandler}/>}
                     {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
-                </div>
-            </div>
-        </div>
+            </th>
+        </tr>
+//         <div className={s.packsContainer}>
+//
+//             <div className={s.packBody}>
+//                 <div className={s.title}>
+//                     {isEdit
+//                         ? <TextField
+//                             value={title}
+//                             variant={"standard"}
+//                             onChange={onChangeHandler}
+//                             onBlur={addTitleHandler}
+//                             autoFocus
+//                         />
+//                         : <div onClick={navigateToCard}>{props.name}</div>
+//                     }
+//                 </div>
+//                 <div>{props.cards}</div>
+//                 <div>{props.lastUpdated}</div>
+//                 <div>{props.userName}</div>
+//                 <div className={s.icon}>
+//                     <AddCircleOutlineIcon/>
+//                     {userID === props.userID && <EditIcon onClick={editHandler}/>}
+//                     {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
+//                 </div>
+//             </div>
+//         </div>
 
     )
 }
-//     <tr>
-//             <th style={{padding: "22px"}}>
-//                 <NavLink to={"/card-list"}>
-//                     <div onClick={(e)=>test(e,props.id)}>{props.name}</div>
-//                 </NavLink>
-//             </th>
-//
-//             <th>{props.cards}</th>
-//             <th>{props.lastUpdated}</th>
-//             <th>{props.userName}</th>
-//             <th>
-//                 <AddCircleOutlineIcon onClick={addHandler}/>
-//                 <EditIcon onClick={editHandler}/>
-//                 <DeleteIcon onClick={deleteHandler}/>
-//             </th>
-//         </tr>

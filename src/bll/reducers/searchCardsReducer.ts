@@ -44,7 +44,8 @@ export const setCardsSearchMode = (searchMode: boolean) => ({type: 'searchCards/
 
 export const setSearchCardsFilter = (payload: {cardQuestion : string}): AppThunk => async (dispatch, getState: () => RootState) => {
     debugger
-    const result = await cardsAPI.getCards(getState().cards.colodID,{...payload,pageCount : getState().cardsPages.countPerPage})
+
+    const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{...payload,pageCount : getState().cardsPages.countPerPage})
 
     dispatch(setCardsFilter(payload))
     dispatch(setColodes(result.data.cards))

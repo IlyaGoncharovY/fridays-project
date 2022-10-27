@@ -1,6 +1,5 @@
-import {AppThunk, RootState, store, StoreType} from "../store";
-import {packsAPI} from "../../api/packAPI";
-import {setCardPack, setColodes} from "./cardsUsersReducer";
+import {AppThunk, RootState} from "../store";
+import {setColodes} from "./cardsUsersReducer";
 import {cardsAPI} from "../../api/cardsAPI";
 
 const initialState = {
@@ -39,7 +38,7 @@ export const setCardsPage = (page: number) => ({type: 'page/SET-PAGE', page} as 
 
 export const changeCardsPages = (page : number):AppThunk => async (dispatch,getState: () => RootState) =>{
     debugger
-    const result = await cardsAPI.getCards(getState().cards.colodID,{page, pageCount : getState().cardsPages.countPerPage})
+    const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{page, pageCount : getState().cardsPages.countPerPage})
     dispatch(setCardsPage(page))
     dispatch(setColodes(result.data.cards))
 }

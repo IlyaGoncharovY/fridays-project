@@ -6,7 +6,7 @@ import {useAppSelector} from "../../../../bll/hook/hook";
 
 export const CardFilter = () => {
     //fake state
-    const card = useAppSelector(state => state.cards.colods)
+    // const card = useAppSelector(state => state.cards.colods)
     // const card = [
     //     {
     //         question: "question1",
@@ -20,7 +20,7 @@ export const CardFilter = () => {
     // const dispatch = useAppDispatch()
 
     //Maxim card
-    // const cards = useAppSelector(state => state.cards.cards)
+    const cards = useAppSelector(state => state.cards.cards)
 
     return (
         <div className={s.filterWindow}>
@@ -41,7 +41,7 @@ export const CardFilter = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {card.map(el => {
+                {cards.map(el => {
                     return (
                         <Card
                              key={el._id}
