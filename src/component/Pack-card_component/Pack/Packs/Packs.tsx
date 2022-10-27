@@ -64,7 +64,7 @@ export const Packs = (props: PacksType) => {
     }
     return (
             <tr>
-            <th style={{padding: "22px"}}>
+            <th className={s.title}>
                       {isEdit
                         ? <TextField
                             value={title}
