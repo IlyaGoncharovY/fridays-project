@@ -1,7 +1,5 @@
-import {Button, TextField} from "@mui/material"
 import {Packs} from "../Packs/Packs"
 import s from "./packFilter.module.scss"
-import AutoFixOffIcon from '@mui/icons-material/AutoFixOff';
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 import {useEffect} from "react";
 import {setCards} from "../../../../bll/reducers/cardsUsersReducer";
@@ -42,40 +40,31 @@ export const PackFilter = () => {
     return (
         <div className={s.filterWindow}>
             <Settings/>
-            {/*<div className={s.navigationWindow}>*/}
-            {/*    <TextField id="outlined-basic" label="Provide your text" variant="outlined"/>*/}
-            {/*    <div className={s.doubleButton}>*/}
-            {/*        <Button variant="contained">My</Button>*/}
-            {/*        <Button variant="contained">All</Button>*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*        Slider*/}
-            {/*    </div>*/}
-            {/*    <div className={s.delFilter}>*/}
-            {/*        <AutoFixOffIcon/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <div className={s.tableHeader}>
-                <div className={s.tableHeaderText}>Name</div>
-                <div className={s.tableHeaderText}>Cards</div>
-                <div className={s.tableHeaderText}>Last Updated</div>
-                <div className={s.tableHeaderText}>Created by</div>
-                <div className={s.tableHeaderText}>Actions</div>
-            </div>
-
-            {cards.map(el => {
-                const transformDate = new Date(el.updated).toLocaleDateString()
-                return (
-                    <Packs key={el._id}
-                           id={el._id}
-                           name={el.name}
-                           cards={el.cardsCount}
-                           lastUpdated={transformDate}
-                           userName={el.user_name}
-                    />
-                )
-            })}
-
+            <table style={{textAlign: "left"}}>
+                <thead>
+                <tr style={{fontSize: "25px"}}>
+                    <th>Name</th>
+                    <th>Cards</th>
+                    <th>Last Updated</th>
+                    <th>Created by</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {cards.map(el => {
+                    const transformDate = new Date(el.updated).toLocaleDateString()
+                    return (
+                        <Packs key={el._id}
+                               id={el._id}
+                               name={el.name}
+                               cards={el.cardsCount}
+                               lastUpdated={transformDate}
+                               userName={el.user_name}
+                        />
+                    )
+                })}
+                </tbody>
+            </table>
         </div>
     )
 }
