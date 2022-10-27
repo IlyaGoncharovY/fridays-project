@@ -52,9 +52,10 @@ export const fetchListsTC = (): AppThunk => async dispatch => {
 }
 export const addListTC = (title: string): AppThunk => async dispatch => {
     try {
-        console.log(title)
         const res = await packsAPI.addPack({name: title})
-        dispatch(addList(res.data.newCardsPack))
+        if(res.status === 201){
+            dispatch(addList(res.data.newCardsPack))
+        }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
@@ -63,7 +64,9 @@ export const addListTC = (title: string): AppThunk => async dispatch => {
 export const deleteListTC = (idList: string): AppThunk => async dispatch => {
     try {
         const res = await packsAPI.deletePack({id: idList})
-        dispatch(deleteList(idList))
+        if(res.status === 200){
+            dispatch(deleteList(idList))
+        }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
@@ -71,8 +74,11 @@ export const deleteListTC = (idList: string): AppThunk => async dispatch => {
 }
 export const editListTC = (idList: string, title: string): AppThunk => async dispatch => {
     try {
-        const res = await packsAPI.updatePack({name: title, _id: idList, private: false})
-        dispatch(editList(idList, title))
+        console.log(idList, title)
+        const res = await packsAPI.updatePack({name: title, _id: idList})
+        if(res.status === 200) {
+            dispatch(editList(idList, title))
+        }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)

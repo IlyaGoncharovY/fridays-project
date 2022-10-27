@@ -1,5 +1,3 @@
-import {Button} from "@mui/material"
-import {useState} from "react"
 import {PacksModal} from "../../../common/modalWindow/PackModal"
 import {PackFilter} from "../PackFilter/PackFilter"
 import s from "./pack-list.module.scss"

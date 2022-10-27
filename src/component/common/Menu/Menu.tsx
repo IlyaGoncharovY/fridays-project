@@ -1,27 +1,48 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import s from "./menu.module.scss"
-import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
-import {logoutTC} from "../../../bll/reducers/loginReducer";
+import {useAppSelector} from "../../../bll/hook/hook";
+import { PATH } from '../../../App';
+import {Avatar, Button} from "@mui/material";
+import avatar from "../assets/images/photoProfile.png"
 
 export const Menu = () => {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-    const dispatch = useAppDispatch()
-    const logout = () => {
-        if (isLoggedIn) {
-            dispatch(logoutTC())
-        }
+    const profile = useAppSelector(state => state.profile)
+    const navigate = useNavigate()
+    const login = () => {
+        navigate(PATH.LOGIN)
+    }
+    const enterProfile = () => {
+        navigate(PATH.PROFILE)
     }
     return (
-        <div className={s.Menu}>
-            <NavLink to={"/registration"}>registration</NavLink>
-            <NavLink to={"/profile"}>profile</NavLink>
-            <NavLink to={"/password_recovery"}>password_recovery</NavLink>
-            <NavLink to={"/entering_new_password"}>entering_new_password</NavLink>
-            <NavLink to={"/test_component"}>test_component</NavLink>
-            <NavLink to={"/component404"}>404</NavLink>
-            <NavLink to={"/login"}>{!!isLoggedIn ? <span onClick={logout}>logout</span> : 'login'}</NavLink>
-            <NavLink to={"/"}/>
+        <div className={s.menu}>
+            <div className={s.logoContainer}>
+                <div className={s.logo}></div>
+            </div>
+            <div className={s.login}>
+                {
+                    isLoggedIn ?
+                        <div className={s.profileHeader}
+                             onClick={enterProfile}
+                        >
+                            <div>{profile.name}
+                                <hr/>
+                            </div>
+                            <Avatar alt={profile.name}
+                                    src={avatar}
+                                    sx={{width: 40, height: 40}}/>
+                        </div>
+                        :
+                        <Button type={'submit'}
+                                variant={'contained'}
+                                color={'primary'}
+                                className={s.buttonLogout}
+                                onClick={login}
+                        >Sign in</Button>
+                }
+            </div>
         </div>
     );
 };

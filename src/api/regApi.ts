@@ -8,7 +8,7 @@ export const registartionAPI = {
         return instance.post<ResponseRegTypeAddedUser>('auth/login', data)
     },
     me() {
-        return instance.post('auth/me', {})
+        return instance.post('auth/me')
     },
     logout() {
         return instance.delete('auth/me')
