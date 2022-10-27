@@ -3,8 +3,8 @@ import {instance} from "./instace"
 export const cardsAPI = {
     getCards(cardsPack_id: string, params: CardsParamsType) {
         return instance.get<ResponseCardsType>(`cards/card?cardsPack_id=${cardsPack_id}`,
-            // {params: {...params}}
-            {params}
+            {params: {...params}}
+            // {params}
         )
     },
     addCard(card: { cardsPack_id: string; question: string; answer: string }) {
@@ -45,7 +45,7 @@ type ResponseCardsType = {
     tokenDeathTime: number
 }
 
-type CardType = {
+export type CardType = {
     _id: string;
     cardsPack_id: string;
     user_id: string;

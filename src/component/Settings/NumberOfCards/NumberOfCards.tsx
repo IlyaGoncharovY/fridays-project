@@ -7,17 +7,22 @@ import {SearchType, setSearchFilter, setSearchMode} from "../../../bll/reducers/
 import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
 
 
-export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, packName}) => {
+export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, packName,min,max}) => {
     const [value, setValue] = useState<number[]>([0, 110]);
     const debouncedValue = useDebounce<number[]>(value, 500)
     const searchMode = useAppSelector(state => state.search.searchMode)
     const dispatch = useAppDispatch()
-    const [min, max] = debouncedValue
+
     useEffect(() => {
         if (searchMode) {
+            const [min, max] = debouncedValue
             dispatch(setSearchFilter({page, pageCount, min, max, packName}))
         }
     }, [debouncedValue])
+
+    useEffect(()=>{
+        setValue([min,max])
+    },[min,max])
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
         dispatch(setSearchMode(true))

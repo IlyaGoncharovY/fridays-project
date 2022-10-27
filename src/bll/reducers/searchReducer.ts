@@ -14,6 +14,7 @@ const initialState = {
     user_id: "",
     block: false,
     searchMode: false
+
 }
 
 

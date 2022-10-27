@@ -5,14 +5,14 @@ import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
 import {changePages} from "../../../bll/reducers/pageReducer";
 
 
-export const PaginationButtons = () => {
+export const PaginationButtons = (props : any) => {
 
-    const dispatch = useAppDispatch()
-    const page = useAppSelector(state => state.page.countPerPage)
-    const totalCount = useAppSelector(state => state.page.cardPacksTotalCount)
-    const pages = Math.ceil(totalCount / page)
+    debugger
+
+    const pages = Math.ceil(props.totalCount / props.page)
     const handleChange = (event: any, value: number) => {
-        dispatch(changePages(value))
+        props.setPages(value)
+
     };
     return (
         <Stack spacing={2}>

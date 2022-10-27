@@ -64,11 +64,13 @@ export const PackFilter = () => {
             </div>
 
             {cards.map(el => {
+                const transformDate = new Date(el.updated).toLocaleDateString()
                 return (
                     <Packs key={el._id}
+                           id={el._id}
                            name={el.name}
                            cards={el.cardsCount}
-                           lastUpdated={el.updated}
+                           lastUpdated={transformDate}
                            userName={el.user_name}
                     />
                 )
