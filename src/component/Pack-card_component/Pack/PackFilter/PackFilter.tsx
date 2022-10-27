@@ -5,22 +5,23 @@ import AutoFixOffIcon from '@mui/icons-material/AutoFixOff';
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 import {useEffect} from "react";
 import {setCards} from "../../../../bll/reducers/cardsUsersReducer";
+import {Settings} from "../../../Settings/Settings";
 
 export const PackFilter = () => {
     //fake state
-    const packs = [
-        {
-            name: "Ivan Packs",
-            cards: 5,
-            lastUpdated: "12.12.2222",
-            userName: "Ivan Ivanov",
-            actions: "hz",
-            id: "232323"
-        }
-    ]
+    // const packs = [
+    //     {
+    //         name: "Ivan Packs",
+    //         cards: 5,
+    //         lastUpdated: "12.12.2222",
+    //         userName: "Ivan Ivanov",
+    //         actions: "hz",
+    //         id: "232323"
+    //     }
+    // ]
     // const packs = useAppSelector(state => state.cards.packs)
     const dispatch = useAppDispatch()
-    // const cards = useAppSelector(state => state.cards.cardPack)
+    const cards = useAppSelector(state => state.cards.cardPack)
     // const packs = [
     //     {
     //         name: "Ivan Packs",
@@ -40,19 +41,20 @@ export const PackFilter = () => {
 
     return (
         <div className={s.filterWindow}>
-            <div className={s.navigationWindow}>
-                <TextField id="outlined-basic" label="Provide your text" variant="outlined"/>
-                <div className={s.doubleButton}>
-                    <Button variant="contained">My</Button>
-                    <Button variant="contained">All</Button>
-                </div>
-                <div>
-                    Slider
-                </div>
-                <div className={s.delFilter}>
-                    <AutoFixOffIcon/>
-                </div>
-            </div>
+            <Settings/>
+            {/*<div className={s.navigationWindow}>*/}
+            {/*    <TextField id="outlined-basic" label="Provide your text" variant="outlined"/>*/}
+            {/*    <div className={s.doubleButton}>*/}
+            {/*        <Button variant="contained">My</Button>*/}
+            {/*        <Button variant="contained">All</Button>*/}
+            {/*    </div>*/}
+            {/*    <div>*/}
+            {/*        Slider*/}
+            {/*    </div>*/}
+            {/*    <div className={s.delFilter}>*/}
+            {/*        <AutoFixOffIcon/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className={s.tableHeader}>
                 <div className={s.tableHeaderText}>Name</div>
                 <div className={s.tableHeaderText}>Cards</div>
@@ -61,13 +63,13 @@ export const PackFilter = () => {
                 <div className={s.tableHeaderText}>Actions</div>
             </div>
 
-            {packs.map(el => {
+            {cards.map(el => {
                 return (
-                    <Packs key={el.id}
+                    <Packs key={el._id}
                            name={el.name}
-                           cards={el.cards}
-                           lastUpdated={el.lastUpdated}
-                           userName={el.userName}
+                           cards={el.cardsCount}
+                           lastUpdated={el.updated}
+                           userName={el.user_name}
                     />
                 )
             })}

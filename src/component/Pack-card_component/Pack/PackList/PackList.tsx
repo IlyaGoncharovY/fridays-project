@@ -13,7 +13,7 @@ export const PackList = () => {
         <div className={s.PackListContainer}>
             <div className={s.PackListHeader}>
                 <div className={s.PackListHeaderTitle}>
-                    <Settings/>
+
                 </div>
                 <div className={s.PackListHeaderButton}>
                     <PacksModal title={"Add new pack"} nameModal={"Add new pack"}/>

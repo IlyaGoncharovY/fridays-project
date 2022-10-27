@@ -11,7 +11,7 @@ export const InputRange = (props : InputRangePropsType) => {
         props.changeInputValue(+e.currentTarget.value)
     }
     return (
-        <TextField style={{width:70}} size='small' value={props.value} onChange={onchangeHandler}/>
+        <TextField style={{width:55}} size='small' value={props.value} onChange={onchangeHandler}/>
     );
 };
 

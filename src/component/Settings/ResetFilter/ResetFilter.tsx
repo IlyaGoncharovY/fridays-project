@@ -6,7 +6,7 @@ import {useAppDispatch} from "../../../bll/hook/hook";
 export const ResetFilter = () => {
     const dispatch = useAppDispatch()
     return (
-        <div style={{alignSelf:'center'}} onClick={()=>{dispatch(resetFilter())}}>
+        <div style={{alignSelf:'end'}} onClick={()=>{dispatch(resetFilter())}}>
            <FilterAltOffIcon/>
         </div>
     );

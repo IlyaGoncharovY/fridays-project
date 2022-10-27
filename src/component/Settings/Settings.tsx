@@ -15,7 +15,7 @@ export const Settings = () => {
     const max = useAppSelector(state => state.search.max)
 
     return (
-        <div style={{display: "flex"}}>
+        <div style={{display: "flex", justifyContent:'space-between' ,flexWrap:'wrap'}}>
             <Search page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
             <ShowCards page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
             <NumberOfCards  page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
