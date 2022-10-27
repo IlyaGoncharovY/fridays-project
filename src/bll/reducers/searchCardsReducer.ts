@@ -1,7 +1,8 @@
 import {AppThunk, RootState} from "../store";
-import {setColodes} from "./cardsUsersReducer";
+
 import {cardsAPI} from "../../api/cardsAPI";
 import {setCardsPage, setCardsTotalCount} from "./pageCardsReducer";
+import {setCards} from "./cardsReducer";
 
 
 const initialState = {
@@ -48,7 +49,7 @@ export const setSearchCardsFilter = (payload: {cardQuestion : string}): AppThunk
     const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{...payload,pageCount : getState().cardsPages.countPerPage})
 
     dispatch(setCardsFilter(payload))
-    dispatch(setColodes(result.data.cards))
+    dispatch(setCards(getState().cards.cardsPack_id,result.data.cards))
     dispatch(setCardsPage(1))
     dispatch(setCardsTotalCount(result.data.cardsTotalCount))
     dispatch(setCardsSearchMode(false))

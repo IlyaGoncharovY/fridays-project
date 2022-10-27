@@ -2,6 +2,7 @@ import {packsAPI, PackType} from "../../api/packAPI";
 import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
+import {setCardPacksTotalCount} from "./pageReducer";
 //constants
 const SET_LISTS = "LISTS/SET-LISTS"
 const ADD_LIST = "LISTS/ADD-LIST"
@@ -24,7 +25,7 @@ export const listsReducer = (state: PackType[] = initialState, action: ListActio
     }
 }
 //AC
-const setLists = (lists: PackType[]) => ({
+export const setLists = (lists: PackType[]) => ({
     type: SET_LISTS,
     payload: {lists}
 } as const)
@@ -43,7 +44,8 @@ const editList = (idList: string, title: string) => ({
 //TC
 export const fetchListsTC = (): AppThunk => async dispatch => {
     try {
-        const res = await packsAPI.getPacks({})
+        const res = await packsAPI.getPacks({page : 1, pageCount : 8 , max:110,min:0})
+        dispatch(setCardPacksTotalCount(res.data.cardPacksTotalCount))
         dispatch(setLists(res.data.cardPacks))
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -55,6 +57,7 @@ export const addListTC = (title: string): AppThunk => async dispatch => {
         const res = await packsAPI.addPack({name: title})
         if(res.status === 201){
             dispatch(addList(res.data.newCardsPack))
+            dispatch(fetchListsTC())
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -66,6 +69,7 @@ export const deleteListTC = (idList: string): AppThunk => async dispatch => {
         const res = await packsAPI.deletePack({id: idList})
         if(res.status === 200){
             dispatch(deleteList(idList))
+            dispatch(fetchListsTC())
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>

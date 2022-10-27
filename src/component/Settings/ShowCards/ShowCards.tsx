@@ -20,8 +20,8 @@ export const ShowCards:React.FC<SearchType> = ({pageCount,page}) => {
         <div>
             <div>Show packs cards</div>
             <ButtonGroup>
-                <Button variant="contained" onClick={showMyCards}>My</Button>
-                <Button variant="outlined" onClick={showAllCards}>All</Button>
+                <Button variant={!userId ? 'contained' : 'outlined'} onClick={showMyCards}>My</Button>
+                <Button variant={!userId ? 'outlined' : 'contained'} onClick={showAllCards}>All</Button>
             </ButtonGroup>
         </div>
     );

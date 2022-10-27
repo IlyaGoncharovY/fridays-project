@@ -8,7 +8,7 @@ import {ActionLoginType, loginReducer} from "./reducers/loginReducer";
 import {ActionRecoveryPasswordType, recoveryReducer} from "./reducers/recoveryPasswordReducer";
 import {ListActionType, listsReducer} from "./reducers/listsReducer";
 import {CardActionType, cardsReducer} from "./reducers/cardsReducer";
-import {CardsUserActionType, cardsUsersReducer} from "./reducers/cardsUsersReducer";
+
 import {PageActionType, pageReducer} from "./reducers/pageReducer";
 import {SearchActionType, searchReducer} from "./reducers/searchReducer";
 import {pageCardsReducer} from "./reducers/pageCardsReducer";
@@ -29,7 +29,6 @@ export type AppActionType =
     | ActionErrorType
     | ListActionType
     | CardActionType
-    | CardsUserActionType
     | PageActionType
     | SearchActionType
     | SearchCardsActionType

@@ -8,28 +8,28 @@ import {changeCardsPages} from "../../../../bll/reducers/pageCardsReducer";
 
 
 export const CardList = () => {
-
+    debugger
     const page = useAppSelector(state => state.cardsPages.countPerPage)
     const totalCount = useAppSelector(state => state.cardsPages.cardsTotalCount)
 
-    const id = useAppSelector(state => state.cards.cardsPack_id)
+    // const id = useAppSelector(state => state.cards.cardsPack_id)
     const dispatch = useAppDispatch()
-    const setPages = (value : number) => {
+    const setPages = (value: number) => {
         dispatch(changeCardsPages(value))
     }
     return (
-            <div className={s.CardListContainer}>
-                <NavLink to={"/pack-list"}>return to PackList</NavLink>
-                <div className={s.CardListHeader}>
-                    <div className={s.CardListHeaderTitle}>
-                        Card list
-                    </div>
-                    <div className={s.CardListHeaderButton}>
-                        <CardModal title={"Add new card"} nameModal={"Add new card"}/>
-                    </div>
+        <div className={s.CardListContainer}>
+            <NavLink to={"/pack-list"}>return to PackList</NavLink>
+            <div className={s.CardListHeader}>
+                <div className={s.CardListHeaderTitle}>
+                    Card list
                 </div>
-                <CardFilter/>
-                <PaginationButtons page={page} totalCount={totalCount} setPages={setPages}/>
+                <div className={s.CardListHeaderButton}>
+                    <CardModal title={"Add new card"} nameModal={"Add new card"}/>
+                </div>
+            </div>
+            <CardFilter/>
+            <PaginationButtons page={page} totalCount={totalCount} setPages={setPages}/>
         </div>
 
     )
