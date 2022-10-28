@@ -15,9 +15,7 @@ export const CardList = () => {
     const page = useAppSelector(state => state.cardsPages.countPerPage)
     const totalCount = useAppSelector(state => state.cardsPages.cardsTotalCount)
     const dispatch = useAppDispatch()
-    if(id){
-        useEffect(() => {dispatch(fetchCardsTC(id))}, [])
-    }
+    useEffect(() => {if(id){dispatch(fetchCardsTC(id))}}, [])
     const setPages = (value: number) => {
         dispatch(changeCardsPages(value))
     }

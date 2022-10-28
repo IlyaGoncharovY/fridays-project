@@ -1,4 +1,4 @@
-import {instance} from "./instace"
+import {instance} from "./instance"
 
 export const packsAPI = {
     getPacks(params: GetPacksParamsType) {
