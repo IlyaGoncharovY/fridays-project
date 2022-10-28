@@ -30,6 +30,7 @@ export const CardFilter = () => {
                               answer={el.answer}
                               lastUpdated={el.updated}
                               grade={el.grade}
+                              userID={el.user_id}
                         />
                     )
                 })}

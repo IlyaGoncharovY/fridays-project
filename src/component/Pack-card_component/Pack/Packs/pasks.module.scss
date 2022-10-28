@@ -1,16 +1,8 @@
-.packsContainer {
-  .packBody {
-    display: flex;
-    justify-content: space-around;
-  }
-}
 .icon{
-  width: 80px;
-  display: flex;
-  justify-content: start;
+  cursor: pointer;
 }
 .icon:hover{
-  cursor: pointer;
+  color: #366EFF;
 }
 .title{
   cursor: pointer;

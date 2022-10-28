@@ -1,6 +1,5 @@
 import {TextField} from "@mui/material"
 import s from "./pasks.module.scss"
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Navigate, useNavigate} from "react-router-dom";
@@ -9,6 +8,7 @@ import {deleteListTC, editListTC} from "../../../../bll/reducers/listsReducer";
 import React, {ChangeEvent, useState} from "react";
 import {PATH} from "../../../../App";
 import {fetchCardsTC} from "../../../../bll/reducers/cardsReducer";
+import SchoolIcon from "@mui/icons-material/School";
 
 type PacksType = {
     packID: string
@@ -63,54 +63,28 @@ export const Packs = (props: PacksType) => {
         return <Navigate to={PATH.LOGIN}/>
     }
     return (
-            <tr>
+        <tr>
             <th className={s.title}>
-                      {isEdit
-                        ? <TextField
-                            value={title}
-                            variant={"standard"}
-                            onChange={onChangeHandler}
-                            onBlur={addTitleHandler}
-                            autoFocus
-                        />
-                        : <div onClick={navigateToCard}>{props.name}</div>
-                    }
+                {isEdit
+                    ? <TextField
+                        value={title}
+                        variant={"standard"}
+                        onChange={onChangeHandler}
+                        onBlur={addTitleHandler}
+                        autoFocus
+                    />
+                    : <div onClick={navigateToCard}>{props.name}</div>
+                }
             </th>
 
             <th>{props.cards}</th>
             <th>{props.lastUpdated}</th>
             <th>{props.userName}</th>
             <th className={s.icon}>
-             <AddCircleOutlineIcon/>
-                    {userID === props.userID && <EditIcon onClick={editHandler}/>}
-                    {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
+                <SchoolIcon/>
+                {userID === props.userID && <EditIcon onClick={editHandler}/>}
+                {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
             </th>
         </tr>
-//         <div className={s.packsContainer}>
-//
-//             <div className={s.packBody}>
-//                 <div className={s.title}>
-//                     {isEdit
-//                         ? <TextField
-//                             value={title}
-//                             variant={"standard"}
-//                             onChange={onChangeHandler}
-//                             onBlur={addTitleHandler}
-//                             autoFocus
-//                         />
-//                         : <div onClick={navigateToCard}>{props.name}</div>
-//                     }
-//                 </div>
-//                 <div>{props.cards}</div>
-//                 <div>{props.lastUpdated}</div>
-//                 <div>{props.userName}</div>
-//                 <div className={s.icon}>
-//                     <AddCircleOutlineIcon/>
-//                     {userID === props.userID && <EditIcon onClick={editHandler}/>}
-//                     {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
-//                 </div>
-//             </div>
-//         </div>
-
     )
 }

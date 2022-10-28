@@ -1,4 +1,3 @@
-import {packsAPI} from "../../api/packAPI";
 import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
@@ -21,6 +20,13 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
             return {...state, cardsPack_id: action.payload.cardsPack_id, cards: action.payload.cards}
         case ADD_CARD:
             return {...state, cards: [action.payload.card, ...state.cards]}
+        case DELETE_CARD:
+            return {...state, cards: state.cards.filter(card => card._id !== action.payload.cardID)}
+        case EDIT_CARD:
+            return {... state,
+                cards: state.cards.map(card => card._id === action.payload.cardID
+                    ? {...card, question: action.payload.question, answer: action.payload.answer}
+                    : card)}
         default:
             return state
     }
@@ -34,13 +40,13 @@ const addCard = (card: CardType) => ({
     type: ADD_CARD,
     payload: {card}
 }as const)
-const deleteCard = (idList: string) => ({
+const deleteCard = (cardID: string) => ({
     type: DELETE_CARD,
-    payload: {idList}
+    payload: {cardID}
 } as const)
-const editCard = (idList: string, title: string) => ({
+const editCard = (cardID: string, question: string, answer: string) => ({
     type: EDIT_CARD,
-    payload: {idList, title}
+    payload: {cardID, question, answer}
 } as const)
 //TC
 export const fetchCardsTC = (listID: string): AppThunk => async dispatch => {
@@ -66,23 +72,22 @@ export const addCardTC = (question: string): AppThunk => async (dispatch, getSta
         errorUtil(error,dispatch)
     }
 }
-export const deleteListTC = (idList: string): AppThunk => async dispatch => {
+export const deleteCardTC = (cardID: string): AppThunk => async dispatch => {
     try {
-        const res = await packsAPI.deletePack({id: idList})
+        const res = await cardsAPI.deleteCard({id: cardID})
         if(res.status === 200){
-            dispatch(deleteCard(idList))
+            dispatch(deleteCard(cardID))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
     }
 }
-export const editListTC = (idList: string, title: string): AppThunk => async dispatch => {
+export const editCardTC = (cardID: string, question: string, answer: string): AppThunk => async dispatch => {
     try {
-        console.log(idList, title)
-        const res = await packsAPI.updatePack({name: title, _id: idList})
+        const res = await cardsAPI.updateCard({_id: cardID, question, answer})
         if(res.status === 200) {
-            dispatch(editCard(idList, title))
+            dispatch(editCard(cardID, question, answer))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
