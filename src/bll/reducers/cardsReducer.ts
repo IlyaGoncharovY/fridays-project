@@ -19,7 +19,7 @@ const initialState: CardStateType= {
 export const cardsReducer = (state: CardStateType = initialState, action: CardActionType): CardStateType => {
     switch (action.type){
         case SET_CARDS:
-            return {...state, cards: action.payload.cards}
+            return {...state, cards: action.payload.cards, cardsPack_id: action.payload.cardsPack_id}
         case SET_CARDS_PACK_ID:
             return {...state, cardsPack_id: action.payload.cardsPack_id}
         case ADD_CARD:
@@ -36,9 +36,9 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
     }
 }
 //AC
-export const setCards = (cards: CardType[]) => ({
+export const setCards = (cardsPack_id: string, cards: CardType[]) => ({
     type: SET_CARDS,
-    payload: {cards}
+    payload: {cardsPack_id, cards}
 } as const)
 export const setCardsPackID= (cardsPack_id: string) => ({
     type: SET_CARDS_PACK_ID,
@@ -57,12 +57,11 @@ const editCard = (cardID: string, question: string, answer: string) => ({
     payload: {cardID, question, answer}
 } as const)
 //TC
-export const fetchCardsTC = (): AppThunk => async (dispatch, getState) => {
+export const fetchCardsTC = (cardsPack_id: string): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
-        const cardsPack_id = getState().cards.cardsPack_id
         const res = await cardsAPI.getCards(cardsPack_id, {page:1,pageCount:8})
-        dispatch(setCards(res.data.cards))
+        dispatch(setCards(cardsPack_id, res.data.cards))
         dispatch(setCardsTotalCount(res.data.cardsTotalCount))
         dispatch(setStatusAC("succeeded"))
     }catch (e) {

@@ -39,7 +39,7 @@ export const changeCardsPages = (page : number):AppThunk => async (dispatch,getS
 
     const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{page, pageCount : getState().cardsPages.countPerPage})
     dispatch(setCardsPage(page))
-    dispatch(setCards(result.data.cards))
+    dispatch(setCards(getState().cards.cardsPack_id, result.data.cards))
 }
 //Type
 type InitialStateType = typeof initialState

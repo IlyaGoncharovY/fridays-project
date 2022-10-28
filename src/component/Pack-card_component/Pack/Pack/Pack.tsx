@@ -57,7 +57,7 @@ export const Pack = (props: PackType) => {
         dispatch(deleteListTC(props.packID))
     }
     const navigateToCard = () => {
-        navigate(PATH.CARD)
+        navigate(`${PATH.CARD}/` + props.packID)
         dispatch(setCardsPackID(props.packID))
     }
     if (!isLogin) {

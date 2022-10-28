@@ -60,7 +60,7 @@ function App() {
                     <Route path={PATH.TEST_SET} element={<Settings/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={PATH.PACK} element={<PackList/>}/>
-                    <Route path={PATH.CARD} element={<CardList/>}/>
+                    <Route path={`${PATH.CARD}/:cardID`} element={<CardList/>}/>
                     <Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>
                 </Routes>
             </div>
