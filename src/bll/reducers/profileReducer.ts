@@ -50,16 +50,6 @@ export const setProfileAC = (profileData: profileStateType) => {
     } as const
 }
 //TC
-export const fetchProfileTC = (): AppThunk => async dispatch =>{
-    try {
-        const res = await profileAPI.setProfile()
-        dispatch(setProfileAC(res.data))
-        console.log(res.data)
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
-    }
-}
 export const updateProfileTC = (name: string): AppThunk => async dispatch =>{
     try {
         const res = await profileAPI.updateProfile({name, avatar: ''})
