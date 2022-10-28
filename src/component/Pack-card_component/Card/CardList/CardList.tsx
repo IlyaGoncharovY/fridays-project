@@ -1,19 +1,19 @@
 import {NavLink} from "react-router-dom"
 import {CardModal} from "../../../common/modalWindow/CardModalWindow/CardModal"
 import {CardFilter} from "../CardsFilter/CardFilter"
-import s from "./card-list.module.scss"
+import s from "./Card-list.module.scss"
 import {PaginationButtons} from "../../../common/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 import {changeCardsPages} from "../../../../bll/reducers/pageCardsReducer";
+import {useEffect} from "react";
+import {fetchCardsTC} from "../../../../bll/reducers/cardsReducer";
 
 
 export const CardList = () => {
-    debugger
     const page = useAppSelector(state => state.cardsPages.countPerPage)
     const totalCount = useAppSelector(state => state.cardsPages.cardsTotalCount)
-
-    // const id = useAppSelector(state => state.cards.cardsPack_id)
     const dispatch = useAppDispatch()
+    useEffect(() => {dispatch(fetchCardsTC())}, [])
     const setPages = (value: number) => {
         dispatch(changeCardsPages(value))
     }

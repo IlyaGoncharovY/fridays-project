@@ -1,19 +1,10 @@
-import {Packs} from "../Packs/Packs"
+import {Pack} from "../Pack/Pack"
 import s from "./packFilter.module.scss"
-import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
-import {useEffect} from "react";
+import {useAppSelector} from "../../../../bll/hook/hook";
 import {Settings} from "../../../Settings/Settings";
-import {fetchListsTC} from "../../../../bll/reducers/listsReducer";
 
 export const PackFilter = () => {
-
-    // useEffect(() => {
-    //     dispatch(setCards())
-    //
-    // }, [])
     const lists = useAppSelector(state => state.lists)
-    const dispatch = useAppDispatch()
-    useEffect(() => {dispatch(fetchListsTC())},[])
 
     return (
         <div className={s.filterWindow}>
@@ -32,13 +23,13 @@ export const PackFilter = () => {
                 {lists.map(el => {
                     const transformDate = new Date(el.updated).toLocaleDateString()
                     return (
-                        <Packs key={el._id}
-                               packID={el._id}
-                               name={el.name}
-                               cards={el.cardsCount}
-                               lastUpdated={transformDate}
-                               userName={el.user_name}
-                               userID={el.user_id}
+                        <Pack key={el._id}
+                              packID={el._id}
+                              name={el.name}
+                              cards={el.cardsCount}
+                              lastUpdated={transformDate}
+                              userName={el.user_name}
+                              userID={el.user_id}
                         />
                     )
                 })}

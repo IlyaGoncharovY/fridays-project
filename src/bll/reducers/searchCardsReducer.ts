@@ -49,7 +49,7 @@ export const setSearchCardsFilter = (payload: {cardQuestion : string}): AppThunk
     const result = await cardsAPI.getCards(getState().cards.cardsPack_id,{...payload,pageCount : getState().cardsPages.countPerPage})
 
     dispatch(setCardsFilter(payload))
-    dispatch(setCards(getState().cards.cardsPack_id,result.data.cards))
+    dispatch(setCards(result.data.cards))
     dispatch(setCardsPage(1))
     dispatch(setCardsTotalCount(result.data.cardsTotalCount))
     dispatch(setCardsSearchMode(false))

@@ -3,21 +3,25 @@ import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 import {cardsAPI, CardType} from "../../api/cardsAPI";
 import {setCardsTotalCount} from "./pageCardsReducer";
+import {setStatusAC} from "./authReducer";
 //constants
 const SET_CARDS = "CARDS/SET-CARDS"
+const SET_CARDS_PACK_ID = "CARDS/SET-CARDS-PACK-ID"
 const ADD_CARD = "CARDS/ADD-CARD"
 const DELETE_CARD = "CARDS/DELETE-CARD"
 const EDIT_CARD = "CARDS/EDIT-CARD"
-//reducer
 
 const initialState: CardStateType= {
     cardsPack_id: "",
     cards:[]
 }
+//reducer
 export const cardsReducer = (state: CardStateType = initialState, action: CardActionType): CardStateType => {
     switch (action.type){
         case SET_CARDS:
-            return {...state, cardsPack_id: action.payload.cardsPack_id, cards: action.payload.cards}
+            return {...state, cards: action.payload.cards}
+        case SET_CARDS_PACK_ID:
+            return {...state, cardsPack_id: action.payload.cardsPack_id}
         case ADD_CARD:
             return {...state, cards: [action.payload.card, ...state.cards]}
         case DELETE_CARD:
@@ -32,10 +36,14 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
     }
 }
 //AC
-export const setCards = (cardsPack_id: string, cards: CardType[]) => ({
+export const setCards = (cards: CardType[]) => ({
     type: SET_CARDS,
-    payload: {cardsPack_id, cards}
+    payload: {cards}
 } as const)
+export const setCardsPackID= (cardsPack_id: string) => ({
+    type: SET_CARDS_PACK_ID,
+    payload: {cardsPack_id}
+}as const)
 const addCard = (card: CardType) => ({
     type: ADD_CARD,
     payload: {card}
@@ -49,23 +57,28 @@ const editCard = (cardID: string, question: string, answer: string) => ({
     payload: {cardID, question, answer}
 } as const)
 //TC
-export const fetchCardsTC = (listID: string): AppThunk => async dispatch => {
+export const fetchCardsTC = (): AppThunk => async (dispatch, getState) => {
     try {
-        const res = await cardsAPI.getCards(listID, {page:1,pageCount:8})
-        dispatch(setCards(listID, res.data.cards))
+        dispatch(setStatusAC("loading"))
+        const cardsPack_id = getState().cards.cardsPack_id
+        const res = await cardsAPI.getCards(cardsPack_id, {page:1,pageCount:8})
+        dispatch(setCards(res.data.cards))
         dispatch(setCardsTotalCount(res.data.cardsTotalCount))
+        dispatch(setStatusAC("succeeded"))
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
     }
 }
+
 export const addCardTC = (question: string): AppThunk => async (dispatch, getState) => {
     try {
-        console.log(question)
+        dispatch(setStatusAC("loading"))
         const cardsPack_id = getState().cards.cardsPack_id
         const res = await cardsAPI.addCard({cardsPack_id, question})
         if(res.status === 201){
             dispatch(addCard(res.data.newCard))
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -74,9 +87,11 @@ export const addCardTC = (question: string): AppThunk => async (dispatch, getSta
 }
 export const deleteCardTC = (cardID: string): AppThunk => async dispatch => {
     try {
+        dispatch(setStatusAC("loading"))
         const res = await cardsAPI.deleteCard({id: cardID})
         if(res.status === 200){
             dispatch(deleteCard(cardID))
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -85,20 +100,25 @@ export const deleteCardTC = (cardID: string): AppThunk => async dispatch => {
 }
 export const editCardTC = (cardID: string, question: string, answer: string): AppThunk => async dispatch => {
     try {
+        dispatch(setStatusAC("loading"))
         const res = await cardsAPI.updateCard({_id: cardID, question, answer})
         if(res.status === 200) {
             dispatch(editCard(cardID, question, answer))
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
     }
 }
+//type
 export type CardActionType =
     | ReturnType<typeof setCards>
+    | ReturnType<typeof setCardsPackID>
     | ReturnType<typeof addCard>
     | ReturnType<typeof deleteCard>
     | ReturnType<typeof editCard>
+
 export type CardStateType = {
     cardsPack_id: string
     cards:CardType[]

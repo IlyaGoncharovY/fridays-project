@@ -1,12 +1,13 @@
 import {PacksModal} from "../../../common/modalWindow/PackModal"
 import {PackFilter} from "../PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
-import {Settings} from "../../../Settings/Settings";
 import { PaginationButtons } from "../../../common/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 
 import { Navigate } from "react-router-dom"
 import {changePages} from "../../../../bll/reducers/pageReducer";
+import {useEffect} from "react";
+import {fetchListsTC} from "../../../../bll/reducers/listsReducer";
 
 
 export const PackList = () => {
@@ -17,6 +18,7 @@ export const PackList = () => {
     const setPages = (value : number) => {
         dispatch(changePages(value))
     }
+    useEffect(() => {dispatch(fetchListsTC())},[])
 
     if(!isLoggedIn){
         return <Navigate to={'/login'}/>

@@ -15,7 +15,6 @@ export const SearchCards = () => {
     const searchMode = useAppSelector(state => state.searchCards.searchMode)
     useEffect(() => {
         if (searchMode) {
-            debugger
             dispatch(setSearchCardsFilter({cardQuestion : debouncedValue}))
             // dispatch(setSearchFilter({page, pageCount, packName: debouncedValue, min, max}))
         }

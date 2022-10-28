@@ -3,6 +3,7 @@ import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 import {setCardPacksTotalCount} from "./pageReducer";
+import {setStatusAC} from "./authReducer";
 //constants
 const SET_LISTS = "LISTS/SET-LISTS"
 const ADD_LIST = "LISTS/ADD-LIST"
@@ -44,20 +45,25 @@ const editList = (idList: string, title: string) => ({
 //TC
 export const fetchListsTC = (): AppThunk => async dispatch => {
     try {
+        dispatch(setStatusAC("loading"))
         const res = await packsAPI.getPacks({page : 1, pageCount : 8 , max:110,min:0})
         dispatch(setCardPacksTotalCount(res.data.cardPacksTotalCount))
         dispatch(setLists(res.data.cardPacks))
+        dispatch(setStatusAC("succeeded"))
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
     }
+
 }
 export const addListTC = (title: string): AppThunk => async dispatch => {
     try {
+        dispatch(setStatusAC("loading"))
         const res = await packsAPI.addPack({name: title})
         if(res.status === 201){
             dispatch(addList(res.data.newCardsPack))
             dispatch(fetchListsTC())
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -66,10 +72,12 @@ export const addListTC = (title: string): AppThunk => async dispatch => {
 }
 export const deleteListTC = (idList: string): AppThunk => async dispatch => {
     try {
+        dispatch(setStatusAC("loading"))
         const res = await packsAPI.deletePack({id: idList})
         if(res.status === 200){
             dispatch(deleteList(idList))
             dispatch(fetchListsTC())
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
@@ -78,10 +86,11 @@ export const deleteListTC = (idList: string): AppThunk => async dispatch => {
 }
 export const editListTC = (idList: string, title: string): AppThunk => async dispatch => {
     try {
-        console.log(idList, title)
+        dispatch(setStatusAC("loading"))
         const res = await packsAPI.updatePack({name: title, _id: idList})
         if(res.status === 200) {
             dispatch(editList(idList, title))
+            dispatch(setStatusAC("succeeded"))
         }
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
