@@ -8,6 +8,7 @@ import {SearchType, setSearchFilter} from "../../../bll/reducers/searchReducer";
 
 export const ShowCards:React.FC<SearchType> = ({pageCount,page}) => {
     const userId = useAppSelector(state => state.profile._id)
+    const allCards = useAppSelector(state => state.search.user_id)
     const dispatch = useAppDispatch()
     const showMyCards = () => {
         dispatch(setSearchFilter({page,user_id : userId, pageCount}))
@@ -20,8 +21,8 @@ export const ShowCards:React.FC<SearchType> = ({pageCount,page}) => {
         <div>
             <div>Show packs cards</div>
             <ButtonGroup>
-                <Button variant={!userId ? 'contained' : 'outlined'} onClick={showMyCards}>My</Button>
-                <Button variant={!userId ? 'outlined' : 'contained'} onClick={showAllCards}>All</Button>
+                <Button variant={!!allCards ? 'contained' : 'outlined'} onClick={showMyCards}>My</Button>
+                <Button variant={!!allCards ? 'outlined' : 'contained'} onClick={showAllCards}>All</Button>
             </ButtonGroup>
         </div>
     );
