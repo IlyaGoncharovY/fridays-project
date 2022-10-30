@@ -1,7 +1,7 @@
-import {Pack} from "../Pack/Pack"
+import {Pack} from "./Pack/Pack"
 import s from "./packFilter.module.scss"
-import {useAppSelector} from "../../../../bll/hook/hook";
-import {Settings} from "../../../Settings/Settings";
+import {useAppSelector} from "../../../../../bll/hook/hook";
+import {Settings} from "../../../../Settings/Settings";
 
 export const PackFilter = () => {
     const lists = useAppSelector(state => state.lists)

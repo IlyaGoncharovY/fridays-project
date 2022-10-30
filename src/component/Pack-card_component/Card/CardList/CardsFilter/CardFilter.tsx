@@ -1,7 +1,7 @@
-import {Card} from "../Card/Card"
+import {Card} from "./Card/Card"
 import s from "./cardFilter.module.scss"
-import {useAppSelector} from "../../../../bll/hook/hook";
-import {SearchCards} from "../../../Settings/SearchCards/SearchCards";
+import {useAppSelector} from "../../../../../bll/hook/hook";
+import {SearchCards} from "../../../../Settings/SearchCards/SearchCards";
 
 export const CardFilter = () => {
 

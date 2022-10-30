@@ -3,8 +3,8 @@ import s from "./Card.module.scss"
 import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {deleteCardTC, editCardTC} from "../../../../bll/reducers/cardsReducer";
-import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
+import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
+import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type CardType = {
@@ -75,9 +75,9 @@ export const Card = (props: CardType) => {
                     <th>{props.lastUpdated}</th>
                     <th>{props.grade}</th>
                     <th className={s.icons}>
-                        <SchoolIcon/>
-                        {userID === props.userID && <EditIcon onClick={editHandler}/>}
-                        {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
+                        <SchoolIcon className={s.schoolIcon}/>
+                        {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}
+                        {userID === props.userID && <DeleteIcon onClick={deleteHandler} className={s.deleteIcon}/>}
                     </th>
                 </tr>}
         </>

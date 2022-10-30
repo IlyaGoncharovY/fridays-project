@@ -3,11 +3,11 @@ import s from "./Pack.module.scss"
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Navigate, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
-import {deleteListTC, editListTC} from "../../../../bll/reducers/listsReducer";
+import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
+import {deleteListTC, editListTC} from "../../../../../../bll/reducers/listsReducer";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {PATH} from "../../../../App";
-import {setCardsPackID} from "../../../../bll/reducers/cardsReducer";
+import {PATH} from "../../../../../../App";
+import {setCardsPackID} from "../../../../../../bll/reducers/cardsReducer";
 import SchoolIcon from "@mui/icons-material/School";
 
 type PackType = {
@@ -84,9 +84,9 @@ export const Pack = (props: PackType) => {
                     <th>{props.lastUpdated}</th>
                     <th>{props.userName}</th>
                     <th className={s.icon}>
-                        <SchoolIcon/>
-                        {userID === props.userID && <EditIcon onClick={editHandler}/>}
-                        {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
+                        <SchoolIcon className={s.schoolIcon}/>
+                        {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}
+                        {userID === props.userID && <DeleteIcon onClick={deleteHandler} className={s.deleteIcon}/>}
                     </th>
                 </tr>}
         </>
