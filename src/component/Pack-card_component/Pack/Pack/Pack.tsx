@@ -23,8 +23,10 @@ export const Pack = (props: PackType) => {
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
     const userID = useAppSelector(state => state.profile._id)
     const status = useAppSelector(state => state.auth.status)
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
     const [isEdit, setIsEdit] = useState(false)
     const [title, setTitle] = useState("")
     useEffect(() => {dispatch(setCardsPackID(props.packID))},[])
@@ -42,6 +44,9 @@ export const Pack = (props: PackType) => {
             dispatch(editListTC(props.packID, title))
             setIsEdit(false)
         }
+    }
+    const redirectHandler = () => {
+        navigate(`${PATH.LEARN}/${props.packID}/${props.name}`)
     }
     // const onKeyboardAddTitle = (event: KeyboardEvent<HTMLInputElement>) => {
     //     if (title.trim().length === 0 || title.length > 20) {
@@ -84,7 +89,7 @@ export const Pack = (props: PackType) => {
                     <th>{props.lastUpdated}</th>
                     <th>{props.userName}</th>
                     <th className={s.icon}>
-                        <SchoolIcon/>
+                        <SchoolIcon onClick={redirectHandler}/>
                         {userID === props.userID && <EditIcon onClick={editHandler}/>}
                         {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
                     </th>
