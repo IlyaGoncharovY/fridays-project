@@ -13,9 +13,9 @@ import {useAppDispatch, useAppSelector} from "./bll/hook/hook";
 import {initializingTC} from "./bll/reducers/authReducer";
 import {Loader} from "./component/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
-import {Settings} from "./component/Settings/Settings";
-import { PackList } from './component/Pack-card_component/Pack/PackList/PackList';
-import { CardList } from './component/Pack-card_component/Card/CardList/CardList';
+import {PackList} from './component/Pack-card_component/Pack/PackList/PackList';
+import {CardList} from './component/Pack-card_component/Card/CardList/CardList';
+import {Learn} from "./component/Learn/Learn";
 
 export const PATH = {
     REGISTRATION: "/registration",
@@ -30,7 +30,7 @@ export const PATH = {
     CHECK_EMAIL: 'check-email',
     PACK: "/pack-list",
     CARD: "/card-list",
-    TEST_SET : "/ts"
+    LEARN : "/learn"
 }
 
 
@@ -57,7 +57,7 @@ function App() {
                     <Route path={PATH.ERROR} element={<Component404/>}/>
                     <Route path={PATH.MAIN} element={<TestComponent/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
-                    <Route path={PATH.TEST_SET} element={<Settings/>}/>
+                    <Route path={`${PATH.LEARN}/:cardID/:name`} element={<Learn/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={PATH.PACK} element={<PackList/>}/>
                     <Route path={`${PATH.CARD}/:cardID`} element={<CardList/>}/>
