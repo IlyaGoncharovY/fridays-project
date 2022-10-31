@@ -12,6 +12,7 @@ import {PageActionType, pageReducer} from "./reducers/pageReducer";
 import {SearchActionType, searchReducer} from "./reducers/searchReducer";
 import {pageCardsReducer} from "./reducers/pageCardsReducer";
 import {SearchCardsActionType, searchCardsReducer} from "./reducers/searchCardsReducer";
+import {LearnActionsType, learnReducer} from "./reducers/learnReducer";
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
@@ -29,6 +30,7 @@ export type AppActionType =
     | PageActionType
     | SearchActionType
     | SearchCardsActionType
+    | LearnActionsType
 export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionType>
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AppActionType>
@@ -44,7 +46,8 @@ const rootReducer = combineReducers({
     page: pageReducer,
     search: searchReducer,
     cardsPages: pageCardsReducer,
-    searchCards : searchCardsReducer
+    searchCards : searchCardsReducer,
+    learn : learnReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
