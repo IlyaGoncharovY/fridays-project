@@ -1,38 +1,24 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import {ChangeEvent, useState} from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material';
 import s from "./packModal.module.scss"
-import {ChangeEvent, useState} from 'react';
-import {useAppDispatch} from "../../../bll/hook/hook";
-import {addListTC} from "../../../bll/reducers/listsReducer";
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import {useAppDispatch} from "../../../../bll/hook/hook";
+import {addListTC} from "../../../../bll/reducers/listsReducer";
+import {BasicModal} from "../BasicModal";
 
 type ModalType = {
     title: string
     nameModal: string
 }
 
-const label = {inputProps: {'aria-label': 'Checkbox demo'}}
-
 export const PacksModal = (props: ModalType) => {
+
     const dispatch = useAppDispatch()
+
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
-
 
     const openHandler = () => {
         setOpen(true)
@@ -55,13 +41,7 @@ export const PacksModal = (props: ModalType) => {
     return (
         <div>
             <Button onClick={openHandler}>{props.title}</Button>
-            <Modal
-                open={open}
-                onClose={closeHandler}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
+                <BasicModal open={open} closeHandler={closeHandler}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {props.nameModal}
                     </Typography>
@@ -73,11 +53,13 @@ export const PacksModal = (props: ModalType) => {
                                        variant="standard"
                                        onChange={onChangeTitleHandler}/>
                             <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
-                            <Button variant="outlined" onClick={addPackHandler}>add</Button>
+                            <Button variant="outlined"
+                                    onClick={closeHandler}>cansel</Button>
+                            <Button variant="outlined"
+                                    onClick={addPackHandler}>add</Button>
                         </div>
                     </Typography>
-                </Box>
-            </Modal>
+                </BasicModal>
         </div>
     );
 }

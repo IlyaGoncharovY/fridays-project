@@ -20,21 +20,28 @@ type PackType = {
 }
 
 export const Pack = (props: PackType) => {
+
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
     const userID = useAppSelector(state => state.profile._id)
     const status = useAppSelector(state => state.auth.status)
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
     const [isEdit, setIsEdit] = useState(false)
     const [title, setTitle] = useState("")
+
     useEffect(() => {dispatch(setCardsPackID(props.packID))},[])
+
     const editHandler = () => {
         setIsEdit(true)
         setTitle(props.name)
     }
+
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.currentTarget.value)
     }
+
     const addTitleHandler = () => {
         if (title.trim().length === 0 || title.length > 20) {
             return alert('Please enter correct field: Name')
@@ -56,13 +63,16 @@ export const Pack = (props: PackType) => {
     const deleteHandler = () => {
         dispatch(deleteListTC(props.packID))
     }
+
     const navigateToCard = () => {
         navigate(`${PATH.CARD}/` + props.packID)
         dispatch(setCardsPackID(props.packID))
     }
+
     if (!isLogin) {
         return <Navigate to={PATH.LOGIN}/>
     }
+
     return (
         <>
             {status === 'loading'
@@ -90,6 +100,5 @@ export const Pack = (props: PackType) => {
                     </th>
                 </tr>}
         </>
-
     )
 }

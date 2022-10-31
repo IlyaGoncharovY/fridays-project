@@ -1,4 +1,4 @@
-import {PacksModal} from "../../../common/modalWindow/PackModal"
+import {PacksModal} from "../../../common/modalWindow/addPackModal/PackModal"
 import {PackFilter} from "./PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
 import { PaginationButtons } from "../../../common/Pagination/Pagination";
