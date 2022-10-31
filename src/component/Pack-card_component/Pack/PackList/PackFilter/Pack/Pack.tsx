@@ -30,8 +30,11 @@ export const Pack = (props: PackType) => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [title, setTitle] = useState("")
+    const [isDelete, setIsDelete] = useState(false)
 
-    useEffect(() => {dispatch(setCardsPackID(props.packID))},[])
+    useEffect(() => {
+        dispatch(setCardsPackID(props.packID))
+    }, [])
 
     const editHandler = () => {
         setIsEdit(true)
