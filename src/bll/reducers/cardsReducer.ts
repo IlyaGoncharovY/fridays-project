@@ -31,6 +31,12 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
                 cards: state.cards.map(card => card._id === action.payload.cardID
                     ? {...card, question: action.payload.question, answer: action.payload.answer}
                     : card)}
+        case "cards/EDIT-CARD-GRADE":
+            return {
+                ...state,
+                cards : state.cards.map(card => card._id === action.payload.card_id
+                    ? {...card,grade : action.payload.grade, shots : action.payload.shots } : card )
+            }
         default:
             return state
     }
@@ -56,11 +62,17 @@ const editCard = (cardID: string, question: string, answer: string) => ({
     type: EDIT_CARD,
     payload: {cardID, question, answer}
 } as const)
+export const editCardGrade = (payload : {grade : number, shots : number,card_id : string}) =>
+    ({type : "cards/EDIT-CARD-GRADE",payload}as const)
 //TC
-export const fetchCardsTC = (cardsPack_id: string): AppThunk => async dispatch => {
+export const fetchCardsTC = (cardsPack_id: string, params?: {pageCount: number}): AppThunk => async dispatch => {
+    const model = {
+        page : 1,
+        pageCount : params?.pageCount || 8
+    }
     try {
         dispatch(setStatusAC("loading"))
-        const res = await cardsAPI.getCards(cardsPack_id, {page:1,pageCount:8})
+        const res = await cardsAPI.getCards(cardsPack_id, model)
         dispatch(setCards(cardsPack_id, res.data.cards))
         dispatch(setCardsTotalCount(res.data.cardsTotalCount))
         dispatch(setStatusAC("succeeded"))
@@ -117,6 +129,7 @@ export type CardActionType =
     | ReturnType<typeof addCard>
     | ReturnType<typeof deleteCard>
     | ReturnType<typeof editCard>
+    | ReturnType<typeof editCardGrade>
 
 export type CardStateType = {
     cardsPack_id: string
