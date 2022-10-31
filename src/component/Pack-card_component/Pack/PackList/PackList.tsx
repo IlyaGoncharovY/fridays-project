@@ -1,4 +1,4 @@
-import {PacksModal} from "../../../common/modalWindow/addPackModal/PackModal"
+import {PacksModal} from "../../../common/modalWindow/addPackModal/PacksModal"
 import {PackFilter} from "./PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
 import {PaginationButtons} from "../../../common/Pagination/Pagination";
@@ -6,8 +6,10 @@ import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 
 import {Navigate} from "react-router-dom"
 import {changePages} from "../../../../bll/reducers/pageReducer";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {fetchListsTC} from "../../../../bll/reducers/listsReducer";
+import Button from "@mui/material/Button";
+import * as React from "react";
 
 
 export const PackList = () => {
@@ -17,6 +19,17 @@ export const PackList = () => {
     const totalCount = useAppSelector(state => state.page.cardPacksTotalCount)
 
     const dispatch = useAppDispatch()
+
+    const [open, setOpen] = useState(false)
+
+    const openHandler = () => {
+        setOpen(true)
+    }
+
+    const closeHandler = () => {
+        setOpen(false)
+    }
+
     const setPages = (value : number) => {
         dispatch(changePages(value))
     }
@@ -33,7 +46,11 @@ export const PackList = () => {
 
                 </div>
                 <div className={s.PackListHeaderButton}>
-                    <PacksModal title={"Add new pack"} nameModal={"Add new pack"}/>
+                    <Button onClick={openHandler}>{"Add new pack"}</Button>
+                    <PacksModal
+                        open={open}
+                        closeHandler={closeHandler}
+                        nameModal={"Add new pack"}/>
                 </div>
             </div>
             <PackFilter/>

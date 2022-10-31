@@ -9,6 +9,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import {PATH} from "../../../../../../App";
 import {setCardsPackID} from "../../../../../../bll/reducers/cardsReducer";
 import SchoolIcon from "@mui/icons-material/School";
+import {PacksModal} from "../../../../../common/modalWindow/addPackModal/PacksModal";
 
 type PackType = {
     packID: string
@@ -35,6 +36,14 @@ export const Pack = (props: PackType) => {
     useEffect(() => {
         dispatch(setCardsPackID(props.packID))
     }, [])
+
+    const openEditHandler = () => {
+        setIsEdit(true)
+    }
+
+    const closeEditHandler = () => {
+        setIsEdit(false)
+    }
 
     const editHandler = () => {
         setIsEdit(true)
@@ -98,10 +107,24 @@ export const Pack = (props: PackType) => {
                     <th>{props.userName}</th>
                     <th className={s.icon}>
                         <SchoolIcon className={s.schoolIcon}/>
-                        {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}
-                        {userID === props.userID && <DeleteIcon onClick={deleteHandler} className={s.deleteIcon}/>}
+                        {
+                            userID === props.userID &&
+                            <EditIcon onClick={openEditHandler} className={s.editIcon}/>
+                        }
+                        {
+                            userID === props.userID &&
+                            <DeleteIcon onClick={deleteHandler}
+                                        className={s.deleteIcon}/>
+                        }
                     </th>
                 </tr>}
+            <PacksModal
+                nameModal={"edit pack"}
+                open={isEdit}
+                closeHandler={closeEditHandler}
+                packID={props.packID}
+                name={props.name}
+            />
         </>
     )
 }

@@ -9,24 +9,28 @@ import {addListTC} from "../../../../bll/reducers/listsReducer";
 import {BasicModal} from "../BasicModal";
 
 type ModalType = {
-    title: string
+    // title: string
     nameModal: string
+    open: boolean
+    closeHandler: ()=> void
+    packID?: string
+    name?: string
 }
 
 export const PacksModal = (props: ModalType) => {
 
     const dispatch = useAppDispatch()
 
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
 
-    const openHandler = () => {
-        setOpen(true)
-    }
-
-    const closeHandler = () => {
-        setOpen(false)
-    }
+    // const openHandler = () => {
+    //     setOpen(true)
+    // }
+    //
+    // const closeHandler = () => {
+    //     setOpen(false)
+    // }
 
     const addPackHandler = () => {
         if(title.trim()){
@@ -40,8 +44,8 @@ export const PacksModal = (props: ModalType) => {
 
     return (
         <div>
-            <Button onClick={openHandler}>{props.title}</Button>
-                <BasicModal open={open} closeHandler={closeHandler}>
+            {/*<Button onClick={openHandler}>{props.title}</Button>*/}
+                <BasicModal open={props.open} closeHandler={props.closeHandler}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         {props.nameModal}
                     </Typography>
@@ -54,7 +58,7 @@ export const PacksModal = (props: ModalType) => {
                                        onChange={onChangeTitleHandler}/>
                             <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
                             <Button variant="outlined"
-                                    onClick={closeHandler}>cansel</Button>
+                                    onClick={props.closeHandler}>exit</Button>
                             <Button variant="outlined"
                                     onClick={addPackHandler}>add</Button>
                         </div>
