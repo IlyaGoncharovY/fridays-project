@@ -1,6 +1,6 @@
 import {NavLink, useParams} from "react-router-dom"
-import {CardModal} from "../../../common/modalWindow/CardModalWindow/CardModal"
-import {CardFilter} from "../CardsFilter/CardFilter"
+import {CardModal} from "../../../common/modalWindow/cardModalWindow/CardModal"
+import {CardFilter} from "./CardsFilter/CardFilter"
 import s from "./Card-list.module.scss"
 import {PaginationButtons} from "../../../common/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";

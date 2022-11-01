@@ -3,8 +3,8 @@ import s from "./Card.module.scss"
 import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {deleteCardTC, editCardTC} from "../../../../bll/reducers/cardsReducer";
-import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
+import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
+import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../../../App";

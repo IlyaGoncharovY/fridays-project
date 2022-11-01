@@ -10,9 +10,9 @@ const ADD_LIST = "LISTS/ADD-LIST"
 const DELETE_LIST = "LISTS/DELETE-LIST"
 const EDIT_LIST = "LISTS/EDIT-LIST"
 //reducer
-const initialState: PackType[]= []
+const initialState: PackType[] = []
 export const listsReducer = (state: PackType[] = initialState, action: ListActionType): PackType[] => {
-    switch (action.type){
+    switch (action.type) {
         case SET_LISTS:
             return action.payload.lists
         case ADD_LIST:
@@ -20,7 +20,7 @@ export const listsReducer = (state: PackType[] = initialState, action: ListActio
         case DELETE_LIST:
             return state.filter(list => list._id !== action.payload.idList)
         case EDIT_LIST:
-            return state.map(list => list._id === action.payload.idList ? {...list, name: action.payload.title}: list)
+            return state.map(list => list._id === action.payload.idList ? {...list, name: action.payload.title} : list)
         default:
             return state
     }
@@ -33,7 +33,7 @@ export const setLists = (lists: PackType[]) => ({
 const addList = (list: PackType) => ({
     type: ADD_LIST,
     payload: {list}
-}as const)
+} as const)
 const deleteList = (idList: string) => ({
     type: DELETE_LIST,
     payload: {idList}
@@ -43,16 +43,17 @@ const editList = (idList: string, title: string) => ({
     payload: {idList, title}
 } as const)
 //TC
-export const fetchListsTC = (): AppThunk => async dispatch => {
+export const fetchListsTC = (): AppThunk => async (dispatch, getState) => {
     try {
+        const user_id = getState().search.user_id
         dispatch(setStatusAC("loading"))
-        const res = await packsAPI.getPacks({page : 1, pageCount : 8 , max:110,min:0})
+        const res = await packsAPI.getPacks({page: 1, pageCount: 8, max: 110, min: 0, user_id})
         dispatch(setCardPacksTotalCount(res.data.cardPacksTotalCount))
         dispatch(setLists(res.data.cardPacks))
         dispatch(setStatusAC("succeeded"))
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
+    } catch (e) {
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 
 }
@@ -60,41 +61,41 @@ export const addListTC = (title: string): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
         const res = await packsAPI.addPack({name: title})
-        if(res.status === 201){
+        if (res.status === 201) {
             dispatch(addList(res.data.newCardsPack))
             dispatch(fetchListsTC())
             dispatch(setStatusAC("succeeded"))
         }
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
+    } catch (e) {
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 }
 export const deleteListTC = (idList: string): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
         const res = await packsAPI.deletePack({id: idList})
-        if(res.status === 200){
+        if (res.status === 200) {
             dispatch(deleteList(idList))
             dispatch(fetchListsTC())
             dispatch(setStatusAC("succeeded"))
         }
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
+    } catch (e) {
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 }
 export const editListTC = (idList: string, title: string): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
         const res = await packsAPI.updatePack({name: title, _id: idList})
-        if(res.status === 200) {
+        if (res.status === 200) {
             dispatch(editList(idList, title))
             dispatch(setStatusAC("succeeded"))
         }
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
+    } catch (e) {
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 }
 export type ListActionType =

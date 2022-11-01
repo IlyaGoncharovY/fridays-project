@@ -35,6 +35,7 @@ export const PATH = {
 
 
 function App() {
+
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const dispatch = useAppDispatch()
 
@@ -48,6 +49,7 @@ function App() {
         <div className="App">
             <div>
                 <Menu/>
+
                 <Routes>
                     <Route path={PATH.NEW_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.MAIN} element={<Navigate to={PATH.PROFILE}/>}/>
