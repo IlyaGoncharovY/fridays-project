@@ -26,7 +26,7 @@ export const DeleteModal = (props: ModalType) => {
                         <Button variant="outlined"
                                 onClick={props.closeHandler}>cancel</Button>
                         <Button variant="outlined"
-                                onClick={props.thunkCallBack} style={{backgroundColor:"coral"}}>delete</Button>
+                                onClick={props.thunkCallBack}>delete</Button>
                     </div>
                 </Typography>
             </BasicModal>
