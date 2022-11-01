@@ -6,6 +6,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {PATH} from "../../../../../../App";
+import {HalfRating} from "../../../../../common/Rating/Rating";
+
 
 type CardType = {
     cardID: string
@@ -19,6 +23,7 @@ type CardType = {
 export const Card = (props: CardType) => {
     const userID = useAppSelector(state => state.profile._id)
     const status = useAppSelector(state => state.auth.status)
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [isEdit, setIsEdit] = useState(false)
     const [question, setQuestion] = useState("")
@@ -44,6 +49,9 @@ export const Card = (props: CardType) => {
     }
     const deleteHandler = () => {
         dispatch(deleteCardTC(props.cardID))
+    }
+    const redirectHandler = () => {
+        navigate(PATH.LEARN)
     }
     return (
         <>
@@ -73,9 +81,9 @@ export const Card = (props: CardType) => {
                             : <div>{props.answer}</div>
                         }</th>
                     <th>{props.lastUpdated}</th>
-                    <th>{props.grade}</th>
+                    <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
-                        <SchoolIcon className={s.schoolIcon}/>
+                        <SchoolIcon onClick={redirectHandler} className={s.schoolIcon}/>
                         {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}
                         {userID === props.userID && <DeleteIcon onClick={deleteHandler} className={s.deleteIcon}/>}
                     </th>
