@@ -1,4 +1,4 @@
-import {PacksModal} from "../../../common/modalWindow/addPackModal/PacksModal"
+import {PacksModal} from "../../../common/modalWindow/packModalWindow/PacksModal"
 import {PackFilter} from "./PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
 import {PaginationButtons} from "../../../common/Pagination/Pagination";
@@ -6,10 +6,10 @@ import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
 
 import {Navigate} from "react-router-dom"
 import {changePages} from "../../../../bll/reducers/pageReducer";
-import {useEffect, useState} from "react";
-import {fetchListsTC} from "../../../../bll/reducers/listsReducer";
-import Button from "@mui/material/Button";
 import * as React from "react";
+import {ChangeEvent, useEffect, useState} from "react";
+import {addListTC, fetchListsTC} from "../../../../bll/reducers/listsReducer";
+import Button from "@mui/material/Button";
 
 
 export const PackList = () => {
@@ -21,6 +21,7 @@ export const PackList = () => {
     const dispatch = useAppDispatch()
 
     const [open, setOpen] = useState(false)
+    const [title, setTitle] = useState("")
 
     const openHandler = () => {
         setOpen(true)
@@ -30,13 +31,27 @@ export const PackList = () => {
         setOpen(false)
     }
 
-    const setPages = (value : number) => {
+    const setPages = (value: number) => {
         dispatch(changePages(value))
     }
 
-    useEffect(() => {dispatch(fetchListsTC())},[])
+    const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.currentTarget.value)
+    }
 
-    if(!isLoggedIn){
+    const addPackHandler = () => {
+        if (title.trim()) {
+            dispatch(addListTC(title.trim()))
+        }
+        setTitle("")
+    }
+
+
+    useEffect(() => {
+        dispatch(fetchListsTC())
+    }, [])
+
+    if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
     }
     return (
@@ -50,7 +65,10 @@ export const PackList = () => {
                     <PacksModal
                         open={open}
                         closeHandler={closeHandler}
-                        nameModal={"Add new pack"}/>
+                        thunkCallBack={addPackHandler}
+                        onChange={onChangeTitleHandler}
+                        nameModal={"Add new pack"}
+                    />
                 </div>
             </div>
             <PackFilter/>

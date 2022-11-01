@@ -19,6 +19,7 @@ type BasicModalType = {
     children: ReactNode
     open: boolean
     closeHandler: () => void
+
 }
 
 
