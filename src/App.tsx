@@ -35,16 +35,23 @@ export const PATH = {
 
 
 function App() {
+
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const dispatch = useAppDispatch()
+
     useEffect(() => {
         dispatch(initializingTC())
     }, [])
+
+    if(!isAuth) {
+        return <Loader/>
+    }
+
     return (
         <div className="App">
             <div>
                 <Menu/>
-                {!isAuth && <Loader/>}
+
                 <Routes>
                     <Route path={PATH.NEW_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.MAIN} element={<Navigate to={PATH.PROFILE}/>}/>
