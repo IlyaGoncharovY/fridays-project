@@ -7,8 +7,9 @@ import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsRedu
 import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {PATH} from "../../../../App";
-import {HalfRating} from "../../../common/Rating/Rating";
+import {PATH} from "../../../../../../App";
+import {HalfRating} from "../../../../../common/Rating/Rating";
+
 
 type CardType = {
     cardID: string
@@ -82,9 +83,9 @@ export const Card = (props: CardType) => {
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
-                        <SchoolIcon onClick={redirectHandler}/>
-                        {userID === props.userID && <EditIcon onClick={editHandler}/>}
-                        {userID === props.userID && <DeleteIcon onClick={deleteHandler}/>}
+                        <SchoolIcon onClick={redirectHandler} className={s.schoolIcon}/>
+                        {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}
+                        {userID === props.userID && <DeleteIcon onClick={deleteHandler} className={s.deleteIcon}/>}
                     </th>
                 </tr>}
         </>
