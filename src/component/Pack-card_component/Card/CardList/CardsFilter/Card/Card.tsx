@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {HalfRating} from "../../../../../common/Rating/Rating";
 
 type CardType = {
     cardID: string
@@ -73,7 +74,7 @@ export const Card = (props: CardType) => {
                             : <div>{props.answer}</div>
                         }</th>
                     <th>{props.lastUpdated}</th>
-                    <th>{props.grade}</th>
+                    <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
                         <SchoolIcon className={s.schoolIcon}/>
                         {userID === props.userID && <EditIcon onClick={editHandler} className={s.editIcon}/>}

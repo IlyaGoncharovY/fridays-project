@@ -14,6 +14,7 @@ type ModalType = {
     onChange?:(event: ChangeEvent<HTMLInputElement>) => void
     packID?: string
     name?: string
+    title?:string
 }
 
 export const PacksModal = (props: ModalType) => {
@@ -27,7 +28,7 @@ export const PacksModal = (props: ModalType) => {
                     <Typography id="modal-modal-description" sx={{mt: 2}}>
                         <div className={s.modalBody}>
                             <TextField id="standard-basic"
-                                       // value={title}
+                                       value={props.title}
                                        label="enter title of list"
                                        variant="standard"
                                        onChange={props.onChange}/>

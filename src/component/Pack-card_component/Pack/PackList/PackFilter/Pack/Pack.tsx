@@ -22,8 +22,7 @@ type PackType = {
 }
 
 export const Pack = (props: PackType) => {
-
-    const isLogin = useAppSelector(state => state.login.isLoggedIn)
+    
     const userID = useAppSelector(state => state.profile._id)
     const status = useAppSelector(state => state.auth.status)
 
@@ -32,7 +31,7 @@ export const Pack = (props: PackType) => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState(props.name)
 
 
     useEffect(() => {
@@ -54,7 +53,7 @@ export const Pack = (props: PackType) => {
     }
 
     const schoolHandler = () => {
-
+        navigate(`${PATH.LEARN}/${props.packID}/${props.name}`)
     }
     const deleteHandler = () => {
         dispatch(deleteListTC(props.packID))
@@ -108,7 +107,8 @@ export const Pack = (props: PackType) => {
                 thunkCallBack={changeNamePack}
                 onChange={onChangeTitleHandler}
                 packID={props.packID}
-                name={props.name}
+                title={title}
+
             />
             <DeleteModal
                 nameModal={"delete pack"}

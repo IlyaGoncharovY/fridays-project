@@ -20,8 +20,6 @@ export const PackList = () => {
 
     const dispatch = useAppDispatch()
 
-    const setPages = (value : number) => {
-
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
 
