@@ -11,10 +11,12 @@ type ModalType = {
     open: boolean
     closeHandler: ()=> void
     thunkCallBack:()=>void
+    label?:string
     onChange?:(event: ChangeEvent<HTMLInputElement>) => void
     packID?: string
     name?: string
     title?:string
+
 }
 
 export const PacksModal = (props: ModalType) => {
@@ -29,7 +31,7 @@ export const PacksModal = (props: ModalType) => {
                         <div className={s.modalBody}>
                             <TextField id="standard-basic"
                                        value={props.title}
-                                       label="enter title of list"
+                                       label={props.label}
                                        variant="standard"
                                        onChange={props.onChange}/>
                             <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
