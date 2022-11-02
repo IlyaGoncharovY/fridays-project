@@ -64,13 +64,14 @@ export const PackList = () => {
 
                 </div>
                 <div className={s.PackListHeaderButton}>
-                    <Button onClick={openHandler}>{"Add new pack"}</Button>
+                    <Button onClick={openHandler} variant="contained">{"Add new pack"}</Button>
                     <PacksModal
                         open={open}
                         closeHandler={closeHandler}
                         thunkCallBack={addPackHandler}
                         onChange={onChangeTitleHandler}
                         nameModal={"Add new pack"}
+                        label={"enter title of list"}
                     />
                 </div>
             </div>
