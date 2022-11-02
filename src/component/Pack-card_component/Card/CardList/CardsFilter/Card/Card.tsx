@@ -40,12 +40,19 @@ export const Card = (props: CardType) => {
     const onChangeQuestionHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setQuestion(event.currentTarget.value)
     }
+
     const onChangeAnswerHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setAnswer(event.currentTarget.value)
     }
+
+    const schoolHandler = () => {
+
+    }
+
     const addTitleHandler = () => {
             dispatch(editCardTC(props.cardID, question, answer))
     }
+
     const deleteHandler = () => {
         dispatch(deleteCardTC(props.cardID))
     }
@@ -77,7 +84,7 @@ export const Card = (props: CardType) => {
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
-                        <SchoolIcon className={s.schoolIcon}/>
+                        <SchoolIcon className={s.schoolIcon} onClick={schoolHandler}/>
                         {userID === props.userID && <EditIcon onClick={openEdit} className={s.editIcon}/>}
                         {userID === props.userID && <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>}
                     </th>
