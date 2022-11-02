@@ -10,6 +10,7 @@ type ModalType = {
     thunkCallBack: ()=>void
     packID?: string
     name?: string
+    question?: string
 }
 
 export const DeleteModal = (props: ModalType) => {
@@ -21,7 +22,7 @@ export const DeleteModal = (props: ModalType) => {
                     {props.nameModal}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{mt: 2}}>
-                    Are you sure you want to delete the deck: {props.name}?
+                    Are you sure you want to delete it: {props.name || props.question} ?
                     <div>
                         <Button variant="outlined"
                                 onClick={props.closeHandler}>cancel</Button>
