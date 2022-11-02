@@ -94,7 +94,7 @@ export const Card = (props: CardType) => {
 
             />
             <DeleteModal
-                nameModal={"delete pack"}
+                nameModal={"delete card"}
                 open={isDelete}
                 closeHandler={closeDelete}
                 thunkCallBack={deleteHandler}
