@@ -1,14 +1,12 @@
 import {AppThunk} from "../store";
-import {registartionAPI} from "../../api/regApi";
 import {loginAC} from "./loginReducer";
-import {errorUtil} from "../../utils/error-util";
-import {AxiosError} from "axios";
 import {setProfileAC} from "./profileReducer";
+import {regAPI} from "../../api/regApi";
 
 //constants
 const SET_IS_AUTH = "AUTH/SET-IS-AUTH"
-const SET_STATUS = "SET-STATUS"
-const SET_ERROR = "SET-ERROR"
+const SET_STATUS = "AUTH/SET-STATUS"
+const SET_ERROR = "AUTH/SET-ERROR"
 
 const initialState: AuthStateType = {
     isAuth: false,
@@ -50,17 +48,16 @@ export const setErrorAC = (error: null | string) => {
 //TC
 export const initializingTC = (): AppThunk => async dispatch => {
     try {
-      const res = await registartionAPI.me()
+      const res = await regAPI.me()
         dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
 
-    } catch (e) {
-        const error = e as Error | AxiosError<{ error: string }>
-        errorUtil(error, dispatch)
-    } finally {
+    }
+    finally {
         dispatch(setAuthAC(true))
     }
 }
+//types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type AuthStateType = {
     isAuth: boolean

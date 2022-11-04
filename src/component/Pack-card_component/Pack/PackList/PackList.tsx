@@ -1,24 +1,29 @@
-import {PacksModal} from "../../../common/modalWindow/packModalWindow/PacksModal"
+import {PacksModal} from "../../../../common/ModalWindow/PackModalWindow/PacksModal"
 import {PackFilter} from "./PackFilter/PackFilter"
 import s from "./pack-list.module.scss"
-import {PaginationButtons} from "../../../common/Pagination/Pagination";
-import {useAppDispatch, useAppSelector} from "../../../../bll/hook/hook";
-
+import {useAppDispatch, useAppSelector} from "../../../../common/hook/hook";
 import {Navigate} from "react-router-dom"
-import {changePages} from "../../../../bll/reducers/pageReducer";
 import * as React from "react";
 import {ChangeEvent, useEffect, useState} from "react";
-import {addListTC, fetchListsTC} from "../../../../bll/reducers/listsReducer";
 import Button from "@mui/material/Button";
+import {addPackTC, fetchPacksTC} from "../../../../bll/reducers/packsReducer";
+import {PaginationButton} from "../../../../common/Pagination/Pagination";
+import {PATH} from "../../../../utils/path";
 
 
 export const PackList = () => {
 
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-    const page = useAppSelector(state => state.page.countPerPage)
-    const totalCount = useAppSelector(state => state.page.cardPacksTotalCount)
-
+    const pageCount = useAppSelector(state => state.packs.pageCount)
+    const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
+    const max = useAppSelector(state => state.packs.maxCardsCount)
+    const min = useAppSelector(state => state.packs.minCardsCount)
+    const packName = useAppSelector(state => state.packs.packName)
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchPacksTC({pageCount}))
+    },[])
 
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
@@ -26,36 +31,25 @@ export const PackList = () => {
     const openHandler = () => {
         setOpen(true)
     }
-
     const closeHandler = () => {
         setOpen(false)
     }
-
-    const setPages = (value: number) => {
-        dispatch(changePages(value))
+    const setPages = (page: number) => {
+        dispatch(fetchPacksTC({page, pageCount, max, min, packName}))
     }
-
-    useEffect(() => {dispatch(fetchListsTC())},[])
-
     const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.currentTarget.value)
     }
 
     const addPackHandler = () => {
         if (title.trim()) {
-            dispatch(addListTC(title.trim()))
+            dispatch(addPackTC(title.trim()))
         }
         setTitle("")
     }
 
-
-    useEffect(() => {
-        dispatch(fetchListsTC())
-    }, [])
-
-
     if (!isLoggedIn) {
-        return <Navigate to={'/login'}/>
+        return <Navigate to={PATH.LOGIN}/>
     }
     return (
         <div className={s.PackListContainer}>
@@ -70,13 +64,13 @@ export const PackList = () => {
                         closeHandler={closeHandler}
                         thunkCallBack={addPackHandler}
                         onChange={onChangeTitleHandler}
-                        nameModal={"Add new pack"}
+                        nameModal={"ADD NEW PACK"}
                         label={"enter title of list"}
                     />
                 </div>
             </div>
             <PackFilter/>
-            <PaginationButtons page={page} totalCount={totalCount} setPages={setPages}/>
+            <PaginationButton pageCount={pageCount} totalCount={totalCount} setPages={setPages}/>
         </div>
     )
 }

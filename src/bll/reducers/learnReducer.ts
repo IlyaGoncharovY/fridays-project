@@ -5,8 +5,6 @@ import {editCardGrade} from "./cardsReducer";
 const initialState = {
     packID: "",
     packName: "",
-
-
 }
 
 export const learnReducer = (state: InitialStateType = initialState, action: LearnActionsType): InitialStateType => {
@@ -22,26 +20,21 @@ export const learnReducer = (state: InitialStateType = initialState, action: Lea
     }
 }
 
-//Actions
+//AC
 export const setUserPack = (payload: { packID: string, packName: string }) => ({
     type: "learn/SET-PACK",
     payload
 } as const)
 
-
-//Thunks
-
+//TC
 export const setCardsGrade = (id: string, rate: number): AppThunk => async dispatch => {
-    const result = await cardsAPI.updateCardGrate({card_id: id, grade: rate})
+    const result = await cardsAPI.updateCardGrade({card_id: id, grade: rate})
     const {grade, card_id, shots} = result.data.updatedGrade
-
     dispatch(editCardGrade({grade, card_id, shots}))
 
 }
 
-
 //Type
-
 type InitialStateType = typeof initialState
 export type LearnActionsType =
     | ReturnType<typeof setUserPack>

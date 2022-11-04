@@ -1,14 +1,13 @@
 import {AppBar, LinearProgress, TextField} from "@mui/material"
 import s from "./Card.module.scss"
-import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
-import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
+import {useAppDispatch, useAppSelector} from "../../../../../../common/hook/hook";
 import React, {ChangeEvent, useState} from "react";
-import {HalfRating} from "../../../../../common/Rating/Rating";
-import {DeleteModal} from "../../../../../common/modalWindow/deleteModal/DeleteModal";
-import {CardModal} from "../../../../../common/modalWindow/cardModalWindow/CardModal";
+import {HalfRating} from "../../../../../../common/Rating/Rating";
+import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/DeleteModal";
+import {CardModal} from "../../../../../../common/ModalWindow/cardModalWindow/CardModal";
 
 type CardType = {
     cardID: string
@@ -43,10 +42,6 @@ export const Card = (props: CardType) => {
 
     const onChangeAnswerHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setAnswer(event.currentTarget.value)
-    }
-
-    const schoolHandler = () => {
-
     }
 
     const addTitleHandler = () => {
@@ -84,7 +79,6 @@ export const Card = (props: CardType) => {
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
-                        <SchoolIcon className={s.schoolIcon} onClick={schoolHandler}/>
                         {userID === props.userID && <EditIcon onClick={openEdit} className={s.editIcon}/>}
                         {userID === props.userID && <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>}
                     </th>

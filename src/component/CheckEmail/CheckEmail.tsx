@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import {Box, Button, Paper} from "@mui/material";
-import style from "../Login/login.module.css";
+import style from "../authComponent/Login/Login.module.css";
 import styleEmail from "./CheckEmail.module.css";
 import FormGroup from "@mui/material/FormGroup";
 import {useNavigate} from "react-router-dom";
 import {correctEmail} from "../../bll/reducers/recoveryPasswordReducer";
-import {useAppDispatch} from "../../bll/hook/hook";
-import icon from '../common/assets/images/email-message-svgrepo-com.svg'
+import {useAppDispatch} from "../../common/hook/hook";
+import icon from '../../common/assets/images/email-message-svgrepo-com.svg'
 export const CheckEmail = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()

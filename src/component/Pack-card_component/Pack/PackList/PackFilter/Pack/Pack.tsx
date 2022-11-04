@@ -3,14 +3,14 @@ import s from "./Pack.module.scss"
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../../../../bll/hook/hook";
-import {deleteListTC, editListTC} from "../../../../../../bll/reducers/listsReducer";
+import {useAppDispatch, useAppSelector} from "../../../../../../common/hook/hook";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {PATH} from "../../../../../../App";
 import {setCardsPackID} from "../../../../../../bll/reducers/cardsReducer";
 import SchoolIcon from "@mui/icons-material/School";
-import {PacksModal} from "../../../../../common/modalWindow/packModalWindow/PacksModal";
-import {DeleteModal} from "../../../../../common/modalWindow/deleteModal/DeleteModal";
+import {PacksModal} from "../../../../../../common/ModalWindow/PackModalWindow/PacksModal";
+import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/DeleteModal";
+import {deletePackTC, editPackTC} from "../../../../../../bll/reducers/packsReducer";
+import {PATH} from "../../../../../../utils/path";
 
 type PackType = {
     packID: string
@@ -22,7 +22,6 @@ type PackType = {
 }
 
 export const Pack = (props: PackType) => {
-    
     const userID = useAppSelector(state => state.profile._id)
     const status = useAppSelector(state => state.auth.status)
 
@@ -49,14 +48,14 @@ export const Pack = (props: PackType) => {
     }
 
     const changeNamePack = () => {
-        dispatch(editListTC(props.packID, title))
+        dispatch(editPackTC(props.packID, title))
     }
 
     const schoolHandler = () => {
-        navigate(`${PATH.LEARN}/${props.packID}/${props.name}`)
+        navigate(`${PATH.LEARN}/${props.packID}/${props.userID}/${props.name}`)
     }
     const deleteHandler = () => {
-        dispatch(deleteListTC(props.packID))
+        dispatch(deletePackTC(props.packID))
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +63,7 @@ export const Pack = (props: PackType) => {
     }
 
     const navigateToCard = () => {
-        navigate(`${PATH.CARD}/` + props.packID)
+        navigate(`${PATH.CARD}/${props.packID}/${props.userID}/${props.name}`)
         dispatch(setCardsPackID(props.packID))
     }
 
@@ -101,7 +100,7 @@ export const Pack = (props: PackType) => {
                     </th>
                 </tr>}
             <PacksModal
-                nameModal={"edit pack"}
+                nameModal={"EDIT PACK"}
                 open={isEdit}
                 closeHandler={closeEdit}
                 thunkCallBack={changeNamePack}
@@ -111,7 +110,7 @@ export const Pack = (props: PackType) => {
 
             />
             <DeleteModal
-                nameModal={"delete pack"}
+                nameModal={"DELETE PACK"}
                 open={isDelete}
                 closeHandler={closeDelete}
                 thunkCallBack={deleteHandler}

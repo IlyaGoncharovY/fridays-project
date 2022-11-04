@@ -1,12 +1,12 @@
 import {Card} from "./Card/Card"
 import s from "./cardFilter.module.scss"
-import {useAppSelector} from "../../../../../bll/hook/hook";
+import {useAppSelector} from "../../../../../common/hook/hook";
 import {SearchCards} from "../../../../Settings/SearchCards/SearchCards";
+
 
 export const CardFilter = () => {
 
     const cards = useAppSelector(state => state.cards.cards)
-
     return (
         <div className={s.filterWindow}>
             <SearchCards/>

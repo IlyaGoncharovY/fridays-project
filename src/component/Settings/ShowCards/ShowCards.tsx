@@ -1,21 +1,20 @@
 import React from 'react';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
-import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
-import {SearchType, setSearchFilter} from "../../../bll/reducers/searchReducer";
+import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
+import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
 
 
 
 export const ShowCards:React.FC<SearchType> = ({pageCount,page}) => {
-    const userId = useAppSelector(state => state.profile._id)
-    const allCards = useAppSelector(state => state.search.user_id)
+    const user_id = useAppSelector(state => state.profile._id)
+    const allCards = useAppSelector(state => state.packs.user_id)
     const dispatch = useAppDispatch()
     const showMyCards = () => {
-        dispatch(setSearchFilter({page,user_id : userId, pageCount}))
-
+        dispatch(fetchPacksTC({page, user_id, pageCount}))
     }
     const showAllCards = () => {
-        dispatch(setSearchFilter({page,user_id : "", pageCount}))
+        dispatch(fetchPacksTC({page,user_id : "", pageCount}))
     }
     return (
         <div>

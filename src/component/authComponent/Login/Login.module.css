@@ -1,0 +1,42 @@
+.signIn{
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 auto;
+
+}
+.wrapper {
+    position: relative;
+}
+.eye {
+    position: absolute;
+    top: 35px;
+    cursor: pointer;
+}
+.password{
+    width: 300px;
+}
+.forgotPassword{
+    text-align: right;
+    margin: 10px;
+}
+.forgotPassword:hover{
+    color: #366EFF;
+    cursor: pointer;
+}
+.account , .signUp{
+    text-align: center;
+    margin: 10px;
+
+}
+.box{
+    margin-top: 100px;
+    width: 300px
+}
+
+.signUp span{
+    color: #366EFF;
+    text-decoration: underline;
+    cursor: pointer;
+
+}

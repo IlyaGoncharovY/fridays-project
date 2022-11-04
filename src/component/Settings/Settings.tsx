@@ -3,16 +3,16 @@ import {Search} from "./Search/Search";
 import {ShowCards} from "./ShowCards/ShowCards";
 import {NumberOfCards} from "./NumberOfCards/NumberOfCards";
 import {ResetFilter} from "./ResetFilter/ResetFilter";
-import {useAppSelector} from '../../bll/hook/hook';
+import {useAppSelector} from '../../common/hook/hook';
 
 
 export const Settings = () => {
 
-    const pageCount = useAppSelector(state => state.page.countPerPage)
-    const page = useAppSelector(state => state.page.page)
-    const name = useAppSelector(state => state.search.packName)
-    const min = useAppSelector(state => state.search.min)
-    const max = useAppSelector(state => state.search.max)
+    const pageCount = useAppSelector(state => state.packs.pageCount)
+    const page = useAppSelector(state => state.packs.page)
+    const name = useAppSelector(state => state.packs.packName)
+    const min = useAppSelector(state => state.packs.minCardsCount)
+    const max = useAppSelector(state => state.packs.maxCardsCount)
 
     return (
         <div style={{display: "flex", justifyContent:'space-between' ,flexWrap:'wrap'}}>

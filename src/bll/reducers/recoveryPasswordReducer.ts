@@ -1,18 +1,16 @@
 import {AppThunk} from "../store";
-import {ForgotPasswordType, NewPasswordType, registartionAPI} from "../../api/regApi";
+import {ForgotPasswordType, NewPasswordType, regAPI} from "../../api/regApi";
 import {errorUtil} from "../../utils/error-util";
 import {AxiosError} from "axios";
 
 const initialState = {
     isPasswordInstalled: false,
     correctEmail : false
-
 }
 
 type initialStateType = typeof initialState
-
-
-export const recoveryReducer = (state: initialStateType = initialState, action: ActionRecoveryPasswordType): initialStateType => {
+//reducer
+export const recoveryReducer = (state: initialStateType = initialState, action: RecoveryPasswordActionType): initialStateType => {
     switch (action.type) {
         case "recoveryPassword/SET-NEW-PASSWORD": {
             return {
@@ -31,15 +29,9 @@ export const recoveryReducer = (state: initialStateType = initialState, action: 
 }
 
 //AC
-export type ActionRecoveryPasswordType =
-    | ReturnType<typeof setNewPassword>
-    | ReturnType<typeof correctEmail>
 export const setNewPassword = (value: boolean) => ({type: "recoveryPassword/SET-NEW-PASSWORD", value} as const)
 export const correctEmail = (value: boolean) => ({type: "recoveryPassword/EMAIL-IS-CORRECT", value} as const)
-
-
-//THUNK
-
+//TC
 export const recoveryTC = (email: string): AppThunk => async dispatch => {
     const data: ForgotPasswordType = {
         email,
@@ -53,25 +45,23 @@ link</a>
         //<a href='http://localhost:3000/set-new-password/$token$'>
     }
     try {
-        await registartionAPI.forgotPassword(data)
+        await regAPI.forgotPassword(data)
         dispatch(correctEmail(true))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
         errorUtil(error, dispatch)
     }
-
-
 }
 export const setNewPasswordTC = (data: NewPasswordType): AppThunk => async dispatch => {
-
-
     try {
-        await registartionAPI.setNewPassword(data)
+        await regAPI.setNewPassword(data)
         dispatch(setNewPassword(true))
-
-
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
         errorUtil(error, dispatch)
     }
 }
+//types
+export type RecoveryPasswordActionType =
+    | ReturnType<typeof setNewPassword>
+    | ReturnType<typeof correctEmail>

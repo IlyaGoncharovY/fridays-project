@@ -1,39 +1,56 @@
 import {instance} from "./instance"
 
 export const cardsAPI = {
-    getCards(cardsPack_id: string, params: CardsParamsType) {
-        return instance.get<ResponseCardsType>(`cards/card?cardsPack_id=${cardsPack_id}`,
-            {params: {...params}}
-            // {params}
-        )
+    getCards(params: CardsParamsType) {
+        return instance.get<ResponseCardsType>("cards/card", {params})
     },
-    addCard(card: { cardsPack_id: string; question?: string; answer?: string }) {
-        return instance.post("cards/card", {card})
+    addCard(card: AddCardType) {
+        return instance.post<ResponseAddCardType>("cards/card", {card})
     },
-    updateCard(card: { _id: string; question?: string; answer?: string }) {
-        return instance.put("cards/card", {card})
+    updateCard(card: UpdateCardType) {
+        return instance.put<ResponseUpdateCardType>("cards/card", {card})
     },
-    updateCardGrate(card: { card_id: string, grade: number }) {
-
-        return instance.put<UpdatedGradeType>("cards/grade", {...card})
+    updateCardGrade(card: SendGradeCardType) {
+        return instance.put<UpdatedGradeType>("cards/grade", card)
     },
-    deleteCard(params: { id: string }) {
-        return instance.delete("cards/card", {params})
+    deleteCard(id: string) {
+        return instance.delete<ResponseDeletedCardType>(`cards/card?id=${id}`)
     }
 }
-
-type CardsParamsType = {
-    cardAnswer?: string // не обязательно
-    cardQuestion?: string // не обязательно
-    cardsPack_id?: string
-    min?: number // не обязательно
-    max?: number // не обязательно
-    sortCards?: string // не обязательно
-    page?: number // не обязательно
-    pageCount?: number // не обязательно
+//Types - payload
+export type CardsParamsType = {
+    cardAnswer?: string
+    cardQuestion?: string
+    cardsPack_id: string
+    min?: number
+    max?: number
+    sortCards?: string
+    page?: number
+    pageCount?: number
 }
-
-type ResponseCardsType = {
+export type AddCardType = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+}
+export type UpdateCardType = {
+    _id: string
+    question?: string
+    answer?: string
+    comments?: string
+}
+export type SendGradeCardType = {
+    card_id: string
+    grade: number
+}
+//Types - response
+export type ResponseCardsType = {
     cards: CardType[],
     packUserI: string,
     packName: string,
@@ -47,8 +64,24 @@ type ResponseCardsType = {
     maxGrade: number,
     token: string,
     tokenDeathTime: number
-}
 
+}
+export type ResponseAddCardType = {
+    newCard: CardType
+    token: string,
+    tokenDeathTime: number
+}
+export type ResponseUpdateCardType = {
+    updatedCard: CardType
+    token: string,
+    tokenDeathTime: number
+}
+export type ResponseDeletedCardType = {
+    deletedCard: CardType
+    token: string,
+    tokenDeathTime: number
+}
+//Common type
 export type CardType = {
     _id: string;
     cardsPack_id: string;
@@ -78,5 +111,4 @@ export type UpdatedGradeType = {
     }
     token: string
     tokenDeathTime: number
-
 }
