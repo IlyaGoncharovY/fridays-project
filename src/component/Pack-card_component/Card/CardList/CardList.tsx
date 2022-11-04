@@ -12,7 +12,7 @@ import {PATH} from "../../../../utils/path";
 
 export const CardList = () => {
     const params = useParams()
-    const {cardsPack_id, userID, name} = params
+    const {cardsPack_id, userID, packName} = params
     const pageCount = useAppSelector(state => state.cards.pageCount)
     const totalCount = useAppSelector(state => state.cards.cardsTotalCount)
     const cardAnswer = useAppSelector(state => state.cards.cardAnswer)
@@ -33,6 +33,7 @@ export const CardList = () => {
     }, [])
 
     const setPages = (page: number) => {
+        console.log(cardsPack_id)
         if (cardsPack_id) {
             dispatch(fetchCardsTC({cardsPack_id, page, pageCount, cardAnswer, cardQuestion}))
         }
@@ -60,7 +61,7 @@ export const CardList = () => {
         setAnswer(event.currentTarget.value)
     }
     const navigateToLearn = () => {
-        navigate(`${PATH.LEARN}/${cardsPack_id}/${userID}/${name}`)
+        navigate(`${PATH.LEARN}/${cardsPack_id}/${userID}/${packName}`)
     }
 
     return (

@@ -28,7 +28,7 @@ const rate = [
 export const Learn = () => {
 
     const params = useParams()
-    const {cardsPack_id, packName, userID}  = params
+    const {cardsPack_id, userID, packName}  = params
 
 
     const name = useAppSelector(state => state.learn.packName)

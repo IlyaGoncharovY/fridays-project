@@ -8,7 +8,5 @@ export const setRandomCard = (cards: CardType[]) => {
             return {sum: newSum, id: newSum < rand ? i : acc.id}
         }
         , {sum: 0, id: -1});
-    console.log('test: ', sum, rand, res)
-
     return cards[res.id + 1];
 }
