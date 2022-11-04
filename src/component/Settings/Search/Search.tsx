@@ -4,27 +4,29 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
-import {useAppDispatch} from "../../../common/hook/hook";
+import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
 import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
+import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName}) => {
-
+export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id}) => {
+    const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
-    const [value, setValue] = useState<string | undefined>(packName)
-    const debouncedValue = useDebounce<string | undefined>(value, 500)
+    const [value, setValue] = useState<string>(packName)
+    const debouncedValue = useDebounce<string>(value, 1000)
     useEffect(() => {
-        dispatch(fetchPacksTC({page, pageCount, packName: debouncedValue, min, max}))
+        if(isSearchMode) {
+            dispatch(fetchPacksTC({page, pageCount, packName: debouncedValue, min, max, user_id}))
+        }
     }, [debouncedValue])
 
     useEffect(() => {
-        if (packName) {
-            setValue(packName)
-        }
+        setValue(packName)
     }, [packName])
 
     const getInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
+        dispatch(setSearchMode(true))
     }
     return (
         <div>

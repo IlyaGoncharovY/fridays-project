@@ -6,21 +6,26 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
 import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
 import {fetchCardsTC} from "../../../bll/reducers/cardsReducer";
+import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
 export const SearchCards = () => {
+    const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>("")
-    const debouncedValue = useDebounce<string>(value, 500)
+    const debouncedValue = useDebounce<string>(value, 1000)
     const cardsPack_id = useAppSelector(state => state.cards.cardsPack_id)
     const pageCount = useAppSelector(state => state.cards.pageCount)
     useEffect(() => {
+        if(isSearchMode) {
             dispatch(fetchCardsTC({cardsPack_id, cardQuestion: debouncedValue, pageCount}))
+        }
     }, [debouncedValue])
 
 
     const getInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
+        dispatch(setSearchMode(true))
     }
     return (
         <div>

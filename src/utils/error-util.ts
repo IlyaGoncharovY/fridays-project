@@ -1,5 +1,5 @@
 import axios, {AxiosError} from "axios";
-import {setErrorAC, setStatusAC} from "../bll/reducers/authReducer";
+import {setErrorAC, setStatusAC} from "../bll/reducers/appReducer";
 import {AppDispatch} from "../bll/store";
 
 export const errorUtil = (e: Error | AxiosError<{error : string}>, dispatch : AppDispatch) => {

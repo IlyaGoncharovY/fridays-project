@@ -6,7 +6,7 @@ import {Button} from "@mui/material";
 import EditableSpan from "./EditableSpan/EditableSpan";
 import {updateProfileTC} from "../../../bll/reducers/profileReducer";
 import {Navigate, useNavigate} from "react-router-dom";
-import {logoutTC} from '../../../bll/reducers/loginReducer';
+import {logoutTC} from '../../../bll/reducers/authReducer';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import {PATH} from "../../../utils/path";
 

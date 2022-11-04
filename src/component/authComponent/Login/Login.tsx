@@ -7,7 +7,7 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css'
 import {Navigate, useNavigate} from 'react-router-dom';
-import {loginTC} from "../../../bll/reducers/loginReducer";
+import {loginTC} from "../../../bll/reducers/authReducer";
 import {ErrorMessage} from "../../../common/SnackBar/Snackbar";
 import {useAppDispatch, useAppSelector} from '../../../common/hook/hook';
 import {PATH} from "../../../utils/path";

@@ -16,13 +16,13 @@ export const packsAPI = {
 }
 //Types = payload
 export type PacksParamsType = {
-    packName?: string
-    min?: number
-    max?: number
+    packName: string
+    min: number
+    max: number
     sortPacks?: string
     page?: number
     pageCount?: number
-    user_id?: string
+    user_id: string
     block?: boolean
 }
 type AddPackType = {

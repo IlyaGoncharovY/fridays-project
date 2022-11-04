@@ -10,15 +10,16 @@ export const Settings = () => {
 
     const pageCount = useAppSelector(state => state.packs.pageCount)
     const page = useAppSelector(state => state.packs.page)
-    const name = useAppSelector(state => state.packs.packName)
+    const packName = useAppSelector(state => state.packs.packName)
     const min = useAppSelector(state => state.packs.minCardsCount)
     const max = useAppSelector(state => state.packs.maxCardsCount)
+    const user_id = useAppSelector(state => state.packs.user_id)
 
     return (
         <div style={{display: "flex", justifyContent:'space-between' ,flexWrap:'wrap'}}>
-            <Search page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
-            <ShowCards page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
-            <NumberOfCards  page={page} pageCount={pageCount} packName={name} min={min} max={max}/>
+            <Search page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
+            <ShowCards page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
+            <NumberOfCards  page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
             <ResetFilter/>
         </div>
     );

@@ -3,33 +3,40 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import {InputRange} from "./InputRange/InputRange";
 import {useDebounce} from "../hookDebounce/Debounce";
-import {useAppDispatch} from "../../../common/hook/hook";
+import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
 import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
+import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const NumberOfCards: React.FC<SearchType> = ({pageCount, page,min,max}) => {
+export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id}) => {
+
+    const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
+    const dispatch = useAppDispatch()
     const [value, setValue] = useState<number[]>([0, 110]);
     const debouncedValue = useDebounce<number[]>(value, 500)
-    const dispatch = useAppDispatch()
 
     useEffect(() => {
+        if (isSearchMode) {
             const [min, max] = debouncedValue
-            dispatch(fetchPacksTC({page, pageCount, min, max}))
+            dispatch(fetchPacksTC({page, pageCount, min, max, packName, user_id}))
+        }
     }, [debouncedValue])
 
-    useEffect(()=>{
-        if(min && max) {
-            setValue([min, max])
-        }
-    },[min,max])
+    useEffect(() => {
+        setValue([min, max])
+    }, [min, max])
+
     const handleChange = (event: Event, newValue: number | number[]) => {
-        setValue(newValue as number[]);
+        setValue(newValue as number[])
+        dispatch(setSearchMode(true))
     };
     const changeInputRangeValueLeft = (num: any) => {
         setValue([num, value[1]])
+        dispatch(setSearchMode(true))
     }
     const changeInputRangeValueRight = (num: any) => {
         setValue([value[0], num])
+        dispatch(setSearchMode(true))
     }
 
     return (
@@ -38,7 +45,7 @@ export const NumberOfCards: React.FC<SearchType> = ({pageCount, page,min,max}) =
             <div style={{display: 'flex'}}>
                 <InputRange value={value[0]} changeInputValue={changeInputRangeValueLeft}/>
 
-                <Box sx={{width: 200, display: 'flex', margin : '3px 20px 0'}}>
+                <Box sx={{width: 200, display: 'flex', margin: '3px 20px 0'}}>
 
                     <Slider
                         getAriaLabel={() => 'Temperature range'}

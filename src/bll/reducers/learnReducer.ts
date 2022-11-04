@@ -1,7 +1,7 @@
 import {cardsAPI} from "../../api/cardsAPI";
 import {AppThunk} from "../store";
 import {editCardGrade} from "./cardsReducer";
-import {setStatusAC} from "./authReducer";
+import {setStatusAC} from "./appReducer";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 

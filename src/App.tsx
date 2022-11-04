@@ -9,7 +9,7 @@ import {EnteringNewPassword} from "./component/authComponent/EnteringNewPassword
 import {NotFound} from "./component/NotFound/NotFound";
 import {Login} from "./component/authComponent/Login/Login";
 import {useAppDispatch, useAppSelector} from "./common/hook/hook";
-import {initializingTC} from "./bll/reducers/authReducer";
+import {initializingTC} from "./bll/reducers/appReducer";
 import {Loader} from "./common/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
 import {PackList} from './component/Pack-card_component/Pack/PackList/PackList';

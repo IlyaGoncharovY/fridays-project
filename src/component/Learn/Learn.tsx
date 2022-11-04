@@ -29,8 +29,7 @@ export const Learn = () => {
 
     const params = useParams()
     const {cardsPack_id, userID, packName}  = params
-
-
+    
     const name = useAppSelector(state => state.learn.packName)
     const cards = useAppSelector(state => state.cards.cards)
     const pageCount = useAppSelector(state => state.cards.cardsTotalCount)

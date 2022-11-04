@@ -19,10 +19,11 @@ export const PackList = () => {
     const max = useAppSelector(state => state.packs.maxCardsCount)
     const min = useAppSelector(state => state.packs.minCardsCount)
     const packName = useAppSelector(state => state.packs.packName)
+    const user_id = useAppSelector(state => state.packs.user_id)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchPacksTC({pageCount}))
+        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName}))
     },[])
 
     const [open, setOpen] = useState(false)
@@ -35,7 +36,7 @@ export const PackList = () => {
         setOpen(false)
     }
     const setPages = (page: number) => {
-        dispatch(fetchPacksTC({page, pageCount, max, min, packName}))
+        dispatch(fetchPacksTC({page, pageCount, max, min, packName, user_id}))
     }
     const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.currentTarget.value)
@@ -54,9 +55,6 @@ export const PackList = () => {
     return (
         <div className={s.PackListContainer}>
             <div className={s.PackListHeader}>
-                <div className={s.PackListHeaderTitle}>
-
-                </div>
                 <div className={s.PackListHeaderButton}>
                     <Button onClick={openHandler} variant="contained">{"Add new pack"}</Button>
                     <PacksModal

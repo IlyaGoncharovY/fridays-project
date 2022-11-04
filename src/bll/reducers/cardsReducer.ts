@@ -2,7 +2,7 @@ import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 import {cardsAPI, CardsParamsType, CardType} from "../../api/cardsAPI";
-import {setStatusAC} from "./authReducer";
+import {setStatusAC} from "./appReducer";
 //constants
 const SET_CARDS = "CARDS/SET-CARDS"
 const SET_CARDS_PACK_ID = "CARDS/SET-CARDS-PACK-ID"
