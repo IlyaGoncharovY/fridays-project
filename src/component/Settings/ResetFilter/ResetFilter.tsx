@@ -12,9 +12,10 @@ export const ResetFilter = () => {
         const pageCount = 8
         const page = 1
         const user_id = ""
+        const sortPacks = "0updated"
     const dispatch = useAppDispatch()
     return (
-        <div className={s.resetIcon} onClick={()=>{dispatch(fetchPacksTC({min, max, packName, pageCount, page, user_id}))}}>
+        <div className={s.resetIcon} onClick={()=>{dispatch(fetchPacksTC({min, max, packName, pageCount, page, user_id, sortPacks}))}}>
            <FilterAltOffIcon/>
         </div>
     );

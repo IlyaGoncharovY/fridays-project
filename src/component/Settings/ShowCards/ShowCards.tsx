@@ -6,15 +6,15 @@ import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
 
 
 
-export const ShowCards:React.FC<SearchType> = ({pageCount,page,user_id,packName, max, min}) => {
+export const ShowCards:React.FC<SearchType> = ({pageCount,page,user_id,packName, max, min, sortPacks}) => {
     const id = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const showMyCards = () => {
         console.log()
-        dispatch(fetchPacksTC({page, user_id: id, pageCount, max, min, packName}))
+        dispatch(fetchPacksTC({page, user_id: id, pageCount, max, min, packName, sortPacks}))
     }
     const showAllCards = () => {
-        dispatch(fetchPacksTC({page, user_id: "", pageCount, max, min, packName}))
+        dispatch(fetchPacksTC({page, user_id: "", pageCount, max, min, packName, sortPacks}))
     }
     return (
         <div>

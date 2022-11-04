@@ -14,12 +14,13 @@ export const Settings = () => {
     const min = useAppSelector(state => state.packs.minCardsCount)
     const max = useAppSelector(state => state.packs.maxCardsCount)
     const user_id = useAppSelector(state => state.packs.user_id)
+    const sortPacks = useAppSelector(state => state.packs.sortPacks)
 
     return (
         <div style={{display: "flex", justifyContent:'space-between' ,flexWrap:'wrap'}}>
-            <Search page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
-            <ShowCards page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
-            <NumberOfCards  page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id}/>
+            <Search page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id} sortPacks={sortPacks}/>
+            <ShowCards page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id} sortPacks={sortPacks}/>
+            <NumberOfCards  page={page} pageCount={pageCount} packName={packName} min={min} max={max} user_id={user_id} sortPacks={sortPacks}/>
             <ResetFilter/>
         </div>
     );

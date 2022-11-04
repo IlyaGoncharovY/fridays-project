@@ -9,14 +9,14 @@ import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
 import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id}) => {
+export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id, sortPacks}) => {
     const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>(packName)
     const debouncedValue = useDebounce<string>(value, 1000)
     useEffect(() => {
         if(isSearchMode) {
-            dispatch(fetchPacksTC({page, pageCount, packName: debouncedValue, min, max, user_id}))
+            dispatch(fetchPacksTC({page, pageCount, packName: debouncedValue, min, max, user_id, sortPacks}))
         }
     }, [debouncedValue])
 

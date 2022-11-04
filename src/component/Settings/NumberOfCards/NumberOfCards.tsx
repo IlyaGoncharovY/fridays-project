@@ -8,7 +8,7 @@ import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
 import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id}) => {
+export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id, sortPacks}) => {
 
     const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
@@ -18,7 +18,7 @@ export const NumberOfCards: React.FC<SearchType> = ({pageCount, page, min, max, 
     useEffect(() => {
         if (isSearchMode) {
             const [min, max] = debouncedValue
-            dispatch(fetchPacksTC({page, pageCount, min, max, packName, user_id}))
+            dispatch(fetchPacksTC({page, pageCount, min, max, packName, user_id, sortPacks}))
         }
     }, [debouncedValue])
 

@@ -13,11 +13,12 @@ const SET_PACKS_TOTAL_COUNT = "PACKS/SET-PACKS-TOTAL-COUNT"
 const SET_MAX_MIN_FILTER = "PACKS/SET-MAX-MIN-FILTER"
 const SET_PACK_NAME = "PACKS/SET-PACK-NAME"
 const SET_USER_ID = "PACKS/SET-USER-ID"
+const SET_SORT_PACKS = "PACKS/SET-SORT-PACKS"
 //reducer
 const initialState: PacksStateType = {
     cardPacks: [],
     user_id: "",
-    sortPacks: "",
+    sortPacks: "0updated",
     packName: "",
     page: 1,
     pageCount: 8,
@@ -63,6 +64,10 @@ export const packsReducer = (state: PacksStateType = initialState, action: Packs
             return {
                 ...state, user_id: action.payload.userID
             }
+        case SET_SORT_PACKS:
+            return {
+                ...state, sortPacks: action.payload.sortPacks
+            }
         default:
             return state
     }
@@ -92,7 +97,7 @@ const setPage = (page: number) => ({
     type: SET_PAGE,
     payload: {page}
 } as const)
-const setMaxMinFilter = (max: number , min: number) => ({
+const setMaxMinFilter = (max: number, min: number) => ({
     type: SET_MAX_MIN_FILTER,
     payload: {max, min}
 } as const)
@@ -103,6 +108,10 @@ const setPackName = (packName: string) => ({
 const setUserID = (userID: string) => ({
     type: SET_USER_ID,
     payload: {userID}
+} as const)
+const setSortPacks = (sortPacks: string) => ({
+    type: SET_SORT_PACKS,
+    payload: {sortPacks}
 } as const)
 //TC
 export const fetchPacksTC = (params: PacksParamsType): AppThunk => async dispatch => {
@@ -115,6 +124,7 @@ export const fetchPacksTC = (params: PacksParamsType): AppThunk => async dispatc
         dispatch(setPage(res.data.page))
         dispatch(setPackName(params.packName))
         dispatch(setUserID(params.user_id))
+        dispatch(setSortPacks(params.sortPacks))
         dispatch(setSearchMode(false))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
@@ -129,12 +139,13 @@ export const addPackTC = (name: string): AppThunk => async (dispatch, getState) 
     const min = getState().packs.minCardsCount
     const user_id = getState().packs.user_id
     const packName = getState().packs.packName
+    const sortPacks = getState().packs.sortPacks
     try {
         dispatch(setStatusAC("loading"))
 
         const res = await packsAPI.addPack({name})
         dispatch(addPack(res.data.newCardsPack))
-        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName}))
+        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
@@ -147,11 +158,12 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
     const min = getState().packs.minCardsCount
     const user_id = getState().packs.user_id
     const packName = getState().packs.packName
+    const sortPacks = getState().packs.sortPacks
     try {
         dispatch(setStatusAC("loading"))
         await packsAPI.deletePack(id)
         dispatch(deletePack(id))
-        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName}))
+        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
         dispatch(setStatusAC("succeeded"))
 
     } catch (e) {
@@ -181,6 +193,7 @@ export type PacksActionType =
     | ReturnType<typeof setMaxMinFilter>
     | ReturnType<typeof setPackName>
     | ReturnType<typeof setUserID>
+    | ReturnType<typeof setSortPacks>
 
 export type PacksStateType = {
     cardPacks: PackType[]
@@ -197,6 +210,7 @@ export type SearchType = {
     packName: string
     page: number
     pageCount: number
+    sortPacks: string
     min: number
     max: number
     user_id: string

@@ -20,10 +20,11 @@ export const PackList = () => {
     const min = useAppSelector(state => state.packs.minCardsCount)
     const packName = useAppSelector(state => state.packs.packName)
     const user_id = useAppSelector(state => state.packs.user_id)
+    const sortPacks = useAppSelector(state => state.packs.sortPacks)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName}))
+        dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
     },[])
 
     const [open, setOpen] = useState(false)
@@ -36,7 +37,7 @@ export const PackList = () => {
         setOpen(false)
     }
     const setPages = (page: number) => {
-        dispatch(fetchPacksTC({page, pageCount, max, min, packName, user_id}))
+        dispatch(fetchPacksTC({page, pageCount, max, min, packName, user_id, sortPacks}))
     }
     const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.currentTarget.value)
