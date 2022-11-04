@@ -29,7 +29,7 @@ const initialState: CardStateType = {
 export const cardsReducer = (state: CardStateType = initialState, action: CardActionType): CardStateType => {
     switch (action.type) {
         case SET_CARDS:
-            return {...state, cards: action.payload.cards, pageCount: 8}
+            return {...state, cards: action.payload.cards}
         case SET_CARDS_PACK_ID:
             return {...state, cardsPack_id: action.payload.cardsPack_id}
         case ADD_CARD:

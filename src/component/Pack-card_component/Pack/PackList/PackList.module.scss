@@ -4,15 +4,19 @@
   background-color: white;
   margin: 20px 3% 20px 3%;
   padding: 20px 3% 20px 3%;
-  .PackListHeader{
+
+  .PackListHeader {
     display: flex;
     justify-content: space-between;
-    .PackListHeaderTitle{
+
+    .PackListHeaderTitle {
       width: 600px;
       font-size: 22pt
     }
-    s.PackListHeaderButton{
-
+    .PackListHeaderButton {
+      display: flex;
+      justify-content: end;
+      width: 100%;
     }
   }
 }

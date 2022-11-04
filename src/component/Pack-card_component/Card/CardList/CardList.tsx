@@ -5,7 +5,7 @@ import s from "./Card-list.module.scss"
 import {PaginationButton} from "../../../../common/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../../../../common/hook/hook";
 import {ChangeEvent, useEffect, useState} from "react";
-import {addCardTC, fetchCardsTC} from "../../../../bll/reducers/cardsReducer";
+import {addCardTC, fetchCardsTC, setCards} from "../../../../bll/reducers/cardsReducer";
 import Button from "@mui/material/Button/Button";
 import {PATH} from "../../../../utils/path";
 
@@ -61,6 +61,7 @@ export const CardList = () => {
         setAnswer(event.currentTarget.value)
     }
     const navigateToLearn = () => {
+        dispatch(setCards([]))
         navigate(`${PATH.LEARN}/${cardsPack_id}/${userID}/${packName}`)
     }
 

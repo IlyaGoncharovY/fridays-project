@@ -16,6 +16,7 @@ import s from "../authComponent/Profile/Profile.module.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import {setRandomCard} from "../../utils/setRandomCard";
 import {PATH} from "../../utils/path";
+import {Loader} from "../../common/Loader/Loader";
 
 const rate = [
     "Did not know",
@@ -28,8 +29,8 @@ const rate = [
 export const Learn = () => {
 
     const params = useParams()
-    const {cardsPack_id, userID, packName}  = params
-    
+    const {cardsPack_id, userID, packName} = params
+
     const name = useAppSelector(state => state.learn.packName)
     const cards = useAppSelector(state => state.cards.cards)
     const pageCount = useAppSelector(state => state.cards.cardsTotalCount)
@@ -66,59 +67,58 @@ export const Learn = () => {
     const redirectHandler = () => {
         navigate(`${PATH.CARD}/${cardsPack_id}/${userID}/${packName}`)
     }
-    return (
-        <div>
-            <div className={s.backToPacksList} onClick={redirectHandler}> <ArrowCircleLeftIcon/> Back to Cards</div>
-            <h2 className={style.title}>Learn “{name}”</h2>
-            <Grid container justifyContent={'center'}>
-                <Grid item justifyContent={"center"}>
-                    <Paper elevation={3} style={{width: "350px", padding: "30px"}}>
-                        <div><span className={style.text}>Question: </span> {randomQuestion?.question}</div>
-                        <span
-                            className={style.trained}>Количество попыток ответов на вопрос:
+    return <>{cards.length
+        ? <div>
+        <div className={s.backToPacksList} onClick={redirectHandler}><ArrowCircleLeftIcon/> Back to Cards</div>
+        <h2 className={style.title}>Learn “{name}”</h2>
+        <Grid container justifyContent={'center'}>
+            <Grid item justifyContent={"center"}>
+                <Paper elevation={3} style={{width: "350px", padding: "30px"}}>
+                    <div><span className={style.text}>Question: </span> {randomQuestion?.question}</div>
+                    <span
+                        className={style.trained}>Количество попыток ответов на вопрос:
                             <span> {randomQuestion?.shots}</span>
                         </span>
-                        {showAnswer &&
-                            <div>
-                                <div><span className={style.text}>Answer: </span> {randomQuestion?.answer}</div>
-                                <FormControl>
-                                    <FormLabel>Rate yourself:</FormLabel>
-                                    <RadioGroup
-                                        value={value}
-                                        onChange={handleChange}
-                                    >
-                                        {rate.map((rate, index) =>
-                                            <FormControlLabel
-                                                key={index}
-                                                value={rate}
-                                                control={<Radio/>}
-                                                label={rate}/>
-                                        )}
-                                    </RadioGroup>
-                                </FormControl>
-                            </div>}
+                    {showAnswer &&
                         <div>
-                            {!showAnswer
-                                ? <Button
-                                    id={style.btn}
-                                    variant='contained'
-                                    style={{width: "100%", borderRadius: "20px"}}
-                                    onClick={showAnswerHandler}>
-                                    Show answer
-                                </Button>
-                                : <Button
-                                    onClick={nextQuestion}
-                                    variant='contained'
-                                    style={{width: "100%", borderRadius: "20px"}}>
-                                    Next
-                                </Button>
-                            }
-                        </div>
-                    </Paper>
-                </Grid>
+                            <div><span className={style.text}>Answer: </span> {randomQuestion?.answer}</div>
+                            <FormControl>
+                                <FormLabel>Rate yourself:</FormLabel>
+                                <RadioGroup
+                                    value={value}
+                                    onChange={handleChange}
+                                >
+                                    {rate.map((rate, index) =>
+                                        <FormControlLabel
+                                            key={index}
+                                            value={rate}
+                                            control={<Radio/>}
+                                            label={rate}/>
+                                    )}
+                                </RadioGroup>
+                            </FormControl>
+                        </div>}
+                    <div>
+                        {!showAnswer
+                            ? <Button
+                                id={style.btn}
+                                variant='contained'
+                                style={{width: "100%", borderRadius: "20px"}}
+                                onClick={showAnswerHandler}>
+                                Show answer
+                            </Button>
+                            : <Button
+                                onClick={nextQuestion}
+                                variant='contained'
+                                style={{width: "100%", borderRadius: "20px"}}>
+                                Next
+                            </Button>
+                        }
+                    </div>
+                </Paper>
             </Grid>
-        </div>
-
-    )
-        ;
+        </Grid>
+    </div>
+        : <Loader/>}
+    </>
 };

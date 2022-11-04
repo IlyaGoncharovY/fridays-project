@@ -1,6 +1,6 @@
 import {PacksModal} from "../../../../common/ModalWindow/PackModalWindow/PacksModal"
 import {PackFilter} from "./PackFilter/PackFilter"
-import s from "./pack-list.module.scss"
+import s from "./PackList.module.scss"
 import {useAppDispatch, useAppSelector} from "../../../../common/hook/hook";
 import {Navigate} from "react-router-dom"
 import * as React from "react";

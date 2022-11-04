@@ -38,7 +38,7 @@ function App() {
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
                     <Route path={PATH.PACK} element={<PackList/>}/>
-                    <Route path={`${PATH.CARD}/:cardsPack_id/:userID/:name`} element={<CardList/>}/>
+                    <Route path={`${PATH.CARD}/:cardsPack_id/:userID/:packName`} element={<CardList/>}/>
                     <Route path={`${PATH.LEARN}/:cardsPack_id/:userID/:packName`} element={<Learn/>}/>
                     <Route path={PATH.NEW_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
