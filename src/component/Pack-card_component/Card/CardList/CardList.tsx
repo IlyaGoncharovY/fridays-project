@@ -4,20 +4,25 @@ import {CardFilter} from "./CardsFilter/CardFilter"
 import s from "./Card-list.module.scss"
 import {PaginationButton} from "../../../../common/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../../../../common/hook/hook";
-import {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {addCardTC, fetchCardsTC, setCards} from "../../../../bll/reducers/cardsReducer";
 import Button from "@mui/material/Button/Button";
 import {PATH} from "../../../../utils/path";
+import {CardSettingsForPacks} from "./OptionCard/CardSettingsForPacks";
 
 
 export const CardList = () => {
+
     const params = useParams()
+
     const {cardsPack_id, userID, packName} = params
+
     const pageCount = useAppSelector(state => state.cards.pageCount)
     const totalCount = useAppSelector(state => state.cards.cardsTotalCount)
     const cardAnswer = useAppSelector(state => state.cards.cardAnswer)
     const cardQuestion = useAppSelector(state => state.cards.cardQuestion)
     const id = useAppSelector(state => state.profile._id)
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -71,7 +76,8 @@ export const CardList = () => {
             <div className={s.CardListHeader}>
                 {id === userID
                     ? <div className={s.CardListHeaderTitle}>
-                        My Pack
+                        {packName}
+                        <CardSettingsForPacks packID={cardsPack_id!} userID={userID} name={packName!}/>
                     </div>
                     : <div className={s.CardListHeaderTitle}>
                         Friend's Pack
