@@ -107,7 +107,6 @@ export const Pack = (props: PackType) => {
                 onChange={onChangeTitleHandler}
                 packID={props.packID}
                 title={title}
-
             />
             <DeleteModal
                 nameModal={"DELETE PACK"}

@@ -92,7 +92,6 @@ export const Card = (props: CardType) => {
                 onChangeAnswer={onChangeAnswerHandler}
                 question={question}
                 answer={answer}
-
             />
             <DeleteModal
                 nameModal={"delete card"}
