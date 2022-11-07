@@ -1,13 +1,12 @@
 import {AppBar, LinearProgress, TextField} from "@mui/material"
 import s from "./Card.module.scss"
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../../../../common/hook/hook";
 import React, {ChangeEvent, useState} from "react";
 import {HalfRating} from "../../../../../../common/Rating/Rating";
 import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/DeleteModal";
 import {CardModal} from "../../../../../../common/ModalWindow/cardModalWindow/CardModal";
+import {EditAndDeleteIcon} from "../../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
 
 type CardType = {
     cardID: string
@@ -79,8 +78,10 @@ export const Card = (props: CardType) => {
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
-                        {userID === props.userID && <EditIcon onClick={openEdit} className={s.editIcon}/>}
-                        {userID === props.userID && <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>}
+                        {/*{userID === props.userID && <EditIcon onClick={openEdit} className={s.editIcon}/>}*/}
+                        {/*{userID === props.userID && <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>}*/}
+                        {userID === props.userID &&
+                        <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>}
                     </th>
                 </tr>}
             <CardModal

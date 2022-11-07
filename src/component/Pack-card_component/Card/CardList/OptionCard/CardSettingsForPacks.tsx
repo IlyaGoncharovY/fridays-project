@@ -3,8 +3,6 @@ import {ChangeEvent, useState} from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import SchoolIcon from "@mui/icons-material/School";
 import {PATH} from "../../../../../utils/path";
 import {useNavigate} from "react-router-dom";
@@ -13,6 +11,7 @@ import {DeleteModal} from "../../../../../common/ModalWindow/DeleteModal/DeleteM
 import {deletePackTC, editPackTC} from "../../../../../bll/reducers/packsReducer";
 import {useAppDispatch} from "../../../../../common/hook/hook";
 import s from "./cardsSettings.module.scss"
+import {EditAndDeleteIcon} from "../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
 
 
 const ITEM_HEIGHT = 48;
@@ -96,8 +95,7 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
             >
                 <div className={s.icons}>
                     <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
-                    <EditIcon onClick={openEdit} className={s.editIcon}/>
-                    <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>
+                    <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>
                 </div>
 
 

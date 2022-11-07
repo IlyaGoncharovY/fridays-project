@@ -1,7 +1,5 @@
 import {AppBar, LinearProgress, TextField} from "@mui/material"
 import s from "./Pack.module.scss"
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../../../../common/hook/hook";
 import React, {ChangeEvent, useEffect, useState} from "react";
@@ -11,6 +9,7 @@ import {PacksModal} from "../../../../../../common/ModalWindow/PackModalWindow/P
 import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/DeleteModal";
 import {deletePackTC, editPackTC} from "../../../../../../bll/reducers/packsReducer";
 import {PATH} from "../../../../../../utils/path";
+import {EditAndDeleteIcon} from "../../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
 
 type PackType = {
     packID: string
@@ -88,15 +87,17 @@ export const Pack = (props: PackType) => {
                     <th>{props.userName}</th>
                     <th className={s.icon}>
                         <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
-                        {
-                            userID === props.userID &&
-                            <EditIcon onClick={openEdit} className={s.editIcon}/>
-                        }
-                        {
-                            userID === props.userID &&
-                            <DeleteIcon onClick={openDelete}
-                                        className={s.deleteIcon}/>
-                        }
+                        {/*{*/}
+                        {/*    userID === props.userID &&*/}
+                        {/*    <EditIcon onClick={openEdit} className={s.editIcon}/>*/}
+                        {/*}*/}
+                        {/*{*/}
+                        {/*    userID === props.userID &&*/}
+                        {/*    <DeleteIcon onClick={openDelete}*/}
+                        {/*                className={s.deleteIcon}/>*/}
+                        {/*}*/}
+                        {userID === props.userID &&
+                            <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>}
                     </th>
                 </tr>}
             <PacksModal
