@@ -1,8 +1,19 @@
-.modalBody{
+.modalBody {
   display: flex;
   flex-direction: column;
 }
-.buttons{
+
+.questionImg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .img {
+    padding-left: 35%;
+  }
+}
+
+.buttons {
   display: flex;
   justify-content: space-between;
   padding: 20px;
