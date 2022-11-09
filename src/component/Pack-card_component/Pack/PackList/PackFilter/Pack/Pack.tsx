@@ -7,9 +7,11 @@ import {setCards, setCardsPackID} from "../../../../../../bll/reducers/cardsRedu
 import SchoolIcon from "@mui/icons-material/School";
 import {PacksModal} from "../../../../../../common/ModalWindow/PackModalWindow/PacksModal";
 import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/DeleteModal";
-import {deletePackTC, editPackTC, setPacks} from "../../../../../../bll/reducers/packsReducer";
+import {deletePackTC, editPackTC} from "../../../../../../bll/reducers/packsReducer";
 import {PATH} from "../../../../../../utils/path";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import img from "../../../../../../common/assets/images/react.png"
 import {transformImageInBase64} from "../../../../../../utils/transformImageInBase64";
 import {EditAndDeleteIcon} from "../../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
@@ -22,7 +24,6 @@ type PackType = {
     lastUpdated: string,
     userName: string,
     deckCover: string
-
 }
 
 export const Pack = (props: PackType) => {
@@ -132,15 +133,6 @@ export const Pack = (props: PackType) => {
                             </IconButton>
                         }
                         <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
-                        {/*{*/}
-                        {/*    userID === props.userID &&*/}
-                        {/*    <EditIcon onClick={openEdit} className={s.editIcon}/>*/}
-                        {/*}*/}
-                        {/*{*/}
-                        {/*    userID === props.userID &&*/}
-                        {/*    <DeleteIcon onClick={openDelete}*/}
-                        {/*                className={s.deleteIcon}/>*/}
-                        {/*}*/}
                         {userID === props.userID &&
                             <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>}
                     </th>

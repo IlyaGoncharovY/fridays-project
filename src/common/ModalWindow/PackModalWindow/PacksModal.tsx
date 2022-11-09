@@ -17,8 +17,8 @@ type ModalType = {
     packID?: string
     name?: string
     title?:string
-    getFile:(event: ChangeEvent<HTMLInputElement>) => void
-    PrivatePack:(event: ChangeEvent<HTMLInputElement>) => void
+    getFile?:(event: ChangeEvent<HTMLInputElement>) => void
+    PrivatePack?:(event: ChangeEvent<HTMLInputElement>) => void
 
 }
 
@@ -41,7 +41,10 @@ export const PacksModal = (props: ModalType) => {
                                 <Stack direction="row" alignItems="center" spacing={2}>
                                     <Button style={{width: '100%'}} variant="contained" component="label">
                                         Download the cover for the pack
-                                        <input hidden accept="image/*" multiple type="file" onChange={(e)=>props.getFile(e)} />
+                                        <input hidden accept="image/*" multiple type="file" onChange={
+                                            // (e)=>props.getFile(e)
+                                            props.getFile
+                                        } />
                                     </Button>
                                 </Stack>
                             </div>

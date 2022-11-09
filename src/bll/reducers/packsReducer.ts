@@ -173,11 +173,11 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
         errorUtil(error, dispatch)
     }
 }
-export const editPackTC = (_id: string, name: string ,deckCover: string,isChecked:boolean): AppThunk => async dispatch => {
+export const editPackTC = (_id: string, name: string ,deckCover?: string,isChecked?:boolean): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
         await packsAPI.updatePack({_id, name,deckCover, private : isChecked})
-        dispatch(editPack(_id, name,deckCover,isChecked))
+        dispatch(editPack(_id, name,deckCover!,isChecked!))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
