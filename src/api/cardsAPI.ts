@@ -44,6 +44,7 @@ export type UpdateCardType = {
     question?: string
     answer?: string
     comments?: string
+    questionImg?: string | null
 }
 export type SendGradeCardType = {
     card_id: string
@@ -52,7 +53,7 @@ export type SendGradeCardType = {
 //Types - response
 export type ResponseCardsType = {
     cards: CardType[],
-    packUserI: string,
+    packUserId: string,
     packName: string,
     packPrivate: boolean,
     packCreated: string,
@@ -64,7 +65,6 @@ export type ResponseCardsType = {
     maxGrade: number,
     token: string,
     tokenDeathTime: number
-
 }
 export type ResponseAddCardType = {
     newCard: CardType
@@ -75,6 +75,7 @@ export type ResponseUpdateCardType = {
     updatedCard: CardType
     token: string,
     tokenDeathTime: number
+    packDeckCover?: null | string
 }
 export type ResponseDeletedCardType = {
     deletedCard: CardType
@@ -98,6 +99,7 @@ export type CardType = {
     updated: string;
     __v: number;
     card_id: string;
+    questionImg: string
 }
 
 export type UpdatedGradeType = {

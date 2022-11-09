@@ -3,6 +3,7 @@ import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 import {cardsAPI, CardsParamsType, CardType} from "../../api/cardsAPI";
 import {setStatusAC} from "./appReducer";
+
 //constants
 const SET_CARDS = "CARDS/SET-CARDS"
 const SET_CARDS_PACK_ID = "CARDS/SET-CARDS-PACK-ID"
@@ -22,8 +23,8 @@ const initialState: CardStateType = {
     cardsTotalCount: 1,
     pageCount: 8,
     cardAnswer: "",
-    cardQuestion: ""
-
+    cardQuestion: "",
+    questionImg: ""
 }
 //reducer
 export const cardsReducer = (state: CardStateType = initialState, action: CardActionType): CardStateType => {
@@ -43,7 +44,8 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
                     ? {
                         ...card,
                         question: action.payload.question,
-                        answer: action.payload.answer
+                        answer: action.payload.answer,
+                        questionImg: action.payload.questionImg
                     }
                     : card)
             }
@@ -94,9 +96,9 @@ const deleteCard = (cardID: string) => ({
     type: DELETE_CARD,
     payload: {cardID}
 } as const)
-const editCard = (cardID: string, question: string, answer: string) => ({
+const editCard = (cardID: string, question: string, answer: string, questionImg:string) => ({
     type: EDIT_CARD,
-    payload: {cardID, question, answer}
+    payload: {cardID, question, answer, questionImg}
 } as const)
 export const editCardGrade = (payload: { grade: number, shots: number, card_id: string }) =>
     ({type: EDIT_CARD_GRADE, payload} as const)
@@ -129,11 +131,11 @@ export const fetchCardsTC = (params: CardsParamsType): AppThunk => async dispatc
     }
 }
 
-export const addCardTC = (question: string, answer: string): AppThunk => async (dispatch, getState) => {
+export const addCardTC = (question: string, answer: string, questionImg?: string): AppThunk => async (dispatch, getState) => {
     try {
         dispatch(setStatusAC("loading"))
         const cardsPack_id = getState().cards.cardsPack_id
-        const res = await cardsAPI.addCard({cardsPack_id, question, answer})
+        const res = await cardsAPI.addCard({cardsPack_id, question, answer , questionImg})
         dispatch(addCard(res.data.newCard))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
@@ -152,11 +154,11 @@ export const deleteCardTC = (id: string): AppThunk => async dispatch => {
         errorUtil(error, dispatch)
     }
 }
-export const editCardTC = (_id: string, question: string, answer: string): AppThunk => async dispatch => {
+export const editCardTC = (_id: string, question: string, answer: string, questionImg?: string): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
-        await cardsAPI.updateCard({_id, question, answer})
-        dispatch(editCard(_id, question, answer))
+        await cardsAPI.updateCard({_id, question, answer, questionImg})
+        dispatch(editCard(_id, question, answer, questionImg!))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
@@ -184,4 +186,5 @@ export type CardStateType = {
     pageCount: number
     cardAnswer: string | undefined
     cardQuestion: string | undefined
+    questionImg: null | string
 }
