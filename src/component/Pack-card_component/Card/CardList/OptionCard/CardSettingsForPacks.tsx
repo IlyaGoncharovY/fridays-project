@@ -19,7 +19,7 @@ const ITEM_HEIGHT = 48;
 type CardSettingsForPacksType = {
     packID: string
     userID: string
-    name: string
+    name: string | undefined
 }
 
 export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
@@ -54,12 +54,12 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
     }
 
     const changeNamePack = () => {
-        dispatch(editPackTC(props.packID, title))
+        dispatch(editPackTC(props.packID, title as string))
     }
 
     const deleteHandler = () => {
         dispatch(deletePackTC(props.packID))
-        // navigate(PATH.PACK)
+         navigate(`${PATH.PACK}/${props.userID}`)
     }
 
     const schoolHandler = () => {
@@ -97,8 +97,6 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
                     <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
                     <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>
                 </div>
-
-
             </Menu>
 
             <PacksModal

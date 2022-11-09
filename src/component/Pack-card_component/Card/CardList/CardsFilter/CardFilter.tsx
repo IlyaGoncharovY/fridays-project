@@ -23,11 +23,13 @@ export const CardFilter = () => {
                 <tbody>
                 {cards.map(el => {
                     const transformDate = new Date(el.updated).toLocaleDateString()
+                    console.log('el', el.questionImg)
                     return (
                         <Card
                             key={el._id}
                             cardID={el._id}
                             question={el.question}
+                            questionImg={el.questionImg}
                             answer={el.answer}
                             lastUpdated={transformDate}
                             grade={el.grade}
