@@ -59,7 +59,7 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
 
     const deleteHandler = () => {
         dispatch(deletePackTC(props.packID))
-         navigate(`${PATH.PACK}/${props.userID}`)
+         // navigate(`${PATH.PACK}/${props.userID}`)
     }
 
     const schoolHandler = () => {
