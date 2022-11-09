@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import {addPackTC, fetchPacksTC} from "../../../../bll/reducers/packsReducer";
 import {PaginationButton} from "../../../../common/Pagination/Pagination";
 import {PATH} from "../../../../utils/path";
+import {transformImageInBase64} from "../../../../utils/transformImageInBase64";
 
 
 export const PackList = () => {
@@ -25,10 +26,12 @@ export const PackList = () => {
 
     useEffect(() => {
         dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
-    },[])
+    }, [])
 
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
+    const [file, setFile] = useState("")
+    const [isChecked,setIsChecked] = useState(false)
 
     const openHandler = () => {
         setOpen(true)
@@ -45,14 +48,26 @@ export const PackList = () => {
 
     const addPackHandler = () => {
         if (title.trim()) {
-            dispatch(addPackTC(title.trim()))
+            dispatch(addPackTC(title.trim(), file, isChecked))
         }
         setTitle("")
+        setFile("")
+    }
+    const getFile = (event: ChangeEvent<HTMLInputElement>) => {
+        if(event.currentTarget.files  && event.currentTarget.files.length){
+            transformImageInBase64(event.currentTarget.files[0],  (file: string)=>{
+                setFile(file)
+            })
+        }
+    }
+    const PrivatePack = (event: ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(event.currentTarget.checked)
     }
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
+
     return (
         <div className={s.PackListContainer}>
             <div className={s.PackListHeader}>
@@ -65,6 +80,8 @@ export const PackList = () => {
                         onChange={onChangeTitleHandler}
                         nameModal={"ADD NEW PACK"}
                         label={"enter title of list"}
+                        getFile={getFile}
+                        PrivatePack={PrivatePack}
                     />
                 </div>
             </div>

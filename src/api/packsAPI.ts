@@ -5,9 +5,11 @@ export const packsAPI = {
         return instance.get<ResponsePacksType>("cards/pack", {params})
     },
     addPack(cardsPack: AddPackType) {
+        debugger
         return instance.post<ResponseAddPackType>("cards/pack", {cardsPack})
     },
     updatePack(cardsPack: UpdatePackType) {
+        debugger
         return instance.put<ResponseUpdatePackType>("cards/pack", {cardsPack})
     },
     deletePack(id: string) {
@@ -34,6 +36,7 @@ type AddPackType = {
 type UpdatePackType = {
     _id: string
     name?: string
+    deckCover?: string
     private?: boolean
 }
 export type ResponsePacksType = {

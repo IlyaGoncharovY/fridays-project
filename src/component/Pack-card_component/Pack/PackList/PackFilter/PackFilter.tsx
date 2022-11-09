@@ -7,7 +7,9 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {fetchPacksTC} from "../../../../../bll/reducers/packsReducer";
 
+
 export const PackFilter = () => {
+
     const packs = useAppSelector(state => state.packs.cardPacks)
     const pageCount = useAppSelector(state => state.packs.pageCount)
     const page = useAppSelector(state => state.packs.page)
@@ -51,6 +53,8 @@ export const PackFilter = () => {
                                   lastUpdated={transformDate}
                                   userName={el.user_name}
                                   userID={el.user_id}
+                                  deckCover={el.deckCover}
+
                             />
                         )
                     })}

@@ -39,7 +39,9 @@ export const packsReducer = (state: PacksStateType = initialState, action: Packs
                 ...state,
                 cardPacks: state.cardPacks.map(pack => pack._id === action.payload.idPack ? {
                     ...pack,
-                    name: action.payload.title
+                    name: action.payload.title,
+                    deckCover : action.payload.file,
+                    private : action.payload.isChecked
                 } : pack)
             }
         case SET_PACKS_TOTAL_COUNT:
@@ -85,9 +87,9 @@ const deletePack = (idPack: string) => ({
     type: DELETE_LIST,
     payload: {idPack}
 } as const)
-const editPack = (idPack: string, title: string) => ({
+const editPack = (idPack: string, title: string, file : string ,isChecked : boolean) => ({
     type: EDIT_LIST,
-    payload: {idPack, title}
+    payload: {idPack, title,file,isChecked}
 } as const)
 const setCardPacksTotalCount = (value: number) => ({
     type: SET_PACKS_TOTAL_COUNT,
@@ -133,7 +135,7 @@ export const fetchPacksTC = (params: PacksParamsType): AppThunk => async dispatc
     }
 
 }
-export const addPackTC = (name: string): AppThunk => async (dispatch, getState) => {
+export const addPackTC = (name: string,deckCover?: string, isChecked?: boolean): AppThunk => async (dispatch, getState) => {
     const pageCount = getState().packs.pageCount
     const max = getState().packs.maxCardsCount
     const min = getState().packs.minCardsCount
@@ -143,7 +145,7 @@ export const addPackTC = (name: string): AppThunk => async (dispatch, getState) 
     try {
         dispatch(setStatusAC("loading"))
 
-        const res = await packsAPI.addPack({name})
+        const res = await packsAPI.addPack({name,deckCover,private:isChecked})
         dispatch(addPack(res.data.newCardsPack))
         dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
         dispatch(setStatusAC("succeeded"))
@@ -171,11 +173,11 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
         errorUtil(error, dispatch)
     }
 }
-export const editPackTC = (_id: string, name: string): AppThunk => async dispatch => {
+export const editPackTC = (_id: string, name: string ,deckCover: string,isChecked:boolean): AppThunk => async dispatch => {
     try {
         dispatch(setStatusAC("loading"))
-        await packsAPI.updatePack({_id, name})
-        dispatch(editPack(_id, name))
+        await packsAPI.updatePack({_id, name,deckCover, private : isChecked})
+        dispatch(editPack(_id, name,deckCover,isChecked))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>

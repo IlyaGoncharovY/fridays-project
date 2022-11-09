@@ -22,3 +22,15 @@
 .deleteIcon:hover {
   color:#ff653f
 }
+.img {
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+}
+.imgContainer{
+  display: flex;
+}
+.name {
+  align-self: center;
+  margin-left: 10px;
+}

@@ -2,6 +2,13 @@
     display: inline-block;
     font-weight: bold;
     margin: 10px 0 10px;
+    position: relative;
+
+}
+.text span {
+    position: absolute;
+
+    margin-left: 5px;
 }
 
 .trained {
@@ -9,11 +16,13 @@
     font-size: 14px;
     display: block;
     padding: 20px 0 20px;
-
+    position: relative;
 }
 
 .trained span {
     color: #959595;
+    position: absolute;
+
 }
 .btn{
     width: 100%;

@@ -21,6 +21,7 @@ export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packNam
     }, [debouncedValue])
 
     useEffect(() => {
+
         setValue(packName)
     }, [packName])
 

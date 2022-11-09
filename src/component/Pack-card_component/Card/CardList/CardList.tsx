@@ -13,6 +13,7 @@ import {PATH} from "../../../../utils/path";
 export const CardList = () => {
     const params = useParams()
     const {cardsPack_id, userID, packName} = params
+    const cards = useAppSelector(state => state.cards.cards)
     const pageCount = useAppSelector(state => state.cards.pageCount)
     const totalCount = useAppSelector(state => state.cards.cardsTotalCount)
     const cardAnswer = useAppSelector(state => state.cards.cardAnswer)
@@ -80,7 +81,8 @@ export const CardList = () => {
                 <div className={s.CardListHeaderButton}>
                     {id === userID
                         ? <Button onClick={openHandler} variant="contained">{"Add new card"}</Button>
-                        : <Button onClick={navigateToLearn} variant="contained">{"Learn to pack"}</Button>
+                        : <Button onClick={navigateToLearn} disabled={!cards.length}
+                                  variant="contained">{"Learn to pack"}</Button>
                     }
                     <CardModal
                         open={open}

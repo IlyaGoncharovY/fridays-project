@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import {Checkbox, FormControlLabel, TextField} from '@mui/material';
 import s from "./PackModal.module.scss"
 import {BasicModal} from "../BasicModal";
+import Stack from '@mui/material/Stack';
 
 type ModalType = {
     nameModal: string
@@ -16,6 +17,8 @@ type ModalType = {
     packID?: string
     name?: string
     title?:string
+    getFile:(event: ChangeEvent<HTMLInputElement>) => void
+    PrivatePack:(event: ChangeEvent<HTMLInputElement>) => void
 
 }
 
@@ -34,7 +37,15 @@ export const PacksModal = (props: ModalType) => {
                                        label={props.label}
                                        variant="standard"
                                        onChange={props.onChange}/>
-                            <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
+                            <div className={s.btn}>
+                                <Stack direction="row" alignItems="center" spacing={2}>
+                                    <Button style={{width: '100%'}} variant="contained" component="label">
+                                        Download the cover for the pack
+                                        <input hidden accept="image/*" multiple type="file" onChange={(e)=>props.getFile(e)} />
+                                    </Button>
+                                </Stack>
+                            </div>
+                            <FormControlLabel control={<Checkbox onChange={props.PrivatePack}/>} label="Private pack"/>
                             <div className={s.buttons}>
                                 <Button variant="outlined"
                                         style={{width: "100px"}}

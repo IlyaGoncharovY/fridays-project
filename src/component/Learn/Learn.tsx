@@ -16,7 +16,9 @@ import s from "../authComponent/Profile/Profile.module.scss";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import {setRandomCard} from "../../utils/setRandomCard";
 import {PATH} from "../../utils/path";
-import {Loader} from "../../common/Loader/Loader";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
 
 const rate = [
     "Did not know",
@@ -67,58 +69,81 @@ export const Learn = () => {
     const redirectHandler = () => {
         navigate(`${PATH.CARD}/${cardsPack_id}/${userID}/${packName}`)
     }
-    return <>{cards.length
-        ? <div>
-        <div className={s.backToPacksList} onClick={redirectHandler}><ArrowCircleLeftIcon/> Back to Cards</div>
-        <h2 className={style.title}>Learn “{name}”</h2>
-        <Grid container justifyContent={'center'}>
-            <Grid item justifyContent={"center"}>
-                <Paper elevation={3} style={{width: "350px", padding: "30px"}}>
-                    <div><span className={style.text}>Question: </span> {randomQuestion?.question}</div>
-                    <span
-                        className={style.trained}>Количество попыток ответов на вопрос:
-                            <span> {randomQuestion?.shots}</span>
+    return <>
+        <div>
+            <div className={s.backToPacksList} onClick={redirectHandler}><ArrowCircleLeftIcon/> Back to Cards</div>
+            <h2 className={style.title}>Learn “{name}”</h2>
+            <Grid container justifyContent={'center'}>
+                <Grid item justifyContent={"center"}>
+                    <Paper elevation={3} style={{width: "350px", padding: "30px"}}>
+                        <div><span
+                            className={style.text}>Question :
+                            <span>{cards.length
+                                ? randomQuestion?.question
+                                : <Skeleton variant="text" sx={{fontSize: '1.2rem', width: '250px'}} component='span'/>}
+                            </span>
+                            </span>
+                        </div>
+                        <span
+                            className={style.trained}>Количество попыток ответов на вопрос :
+                            <span> {cards.length ? randomQuestion?.shots :
+                                <Skeleton variant="text" sx={{fontSize: '1rem', width: '20px'}}
+                                          component='span'/>} </span>
                         </span>
-                    {showAnswer &&
+                        {showAnswer &&
+                            <div>
+                                <div><span className={style.text}>Answer : </span> {randomQuestion?.answer}</div>
+                                <FormControl>
+                                    <FormLabel>Rate yourself:</FormLabel>
+                                    <RadioGroup
+                                        value={value}
+                                        onChange={handleChange}
+                                    >
+                                        {rate.map((rate, index) =>
+                                            <FormControlLabel
+                                                key={index}
+                                                value={rate}
+                                                control={<Radio/>}
+                                                label={rate}/>
+                                        )}
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>}
                         <div>
-                            <div><span className={style.text}>Answer: </span> {randomQuestion?.answer}</div>
-                            <FormControl>
-                                <FormLabel>Rate yourself:</FormLabel>
-                                <RadioGroup
-                                    value={value}
-                                    onChange={handleChange}
-                                >
-                                    {rate.map((rate, index) =>
-                                        <FormControlLabel
-                                            key={index}
-                                            value={rate}
-                                            control={<Radio/>}
-                                            label={rate}/>
-                                    )}
-                                </RadioGroup>
-                            </FormControl>
-                        </div>}
-                    <div>
-                        {!showAnswer
-                            ? <Button
-                                id={style.btn}
-                                variant='contained'
-                                style={{width: "100%", borderRadius: "20px"}}
-                                onClick={showAnswerHandler}>
-                                Show answer
-                            </Button>
-                            : <Button
-                                onClick={nextQuestion}
-                                variant='contained'
-                                style={{width: "100%", borderRadius: "20px"}}>
-                                Next
-                            </Button>
-                        }
-                    </div>
-                </Paper>
+                            {!showAnswer
+                                ? <Button
+                                    id={style.btn}
+                                    variant='contained'
+                                    style={{width: "100%", borderRadius: "20px"}}
+                                    onClick={showAnswerHandler}>
+                                    Show answer
+                                </Button>
+                                : <Button
+                                    onClick={nextQuestion}
+                                    variant='contained'
+                                    style={{width: "100%", borderRadius: "20px"}}>
+                                    Next
+                                </Button>
+                            }
+                        </div>
+                    </Paper>
+                </Grid>
             </Grid>
-        </Grid>
-    </div>
-        : <Loader/>}
+        </div>
     </>
 };
+
+
+export default function Variants() {
+    return (
+        <Stack spacing={1}>
+            {/* For variant="text", adjust the height via font-size */}
+
+
+            {/* For other variants, adjust the size with `width` and `height` */}
+            <Skeleton variant="circular" width={40} height={40}/>
+            <Skeleton variant="rectangular" width={210} height={60}/>
+            <Skeleton variant="rounded" width={210} height={60}/>
+        </Stack>
+    );
+}

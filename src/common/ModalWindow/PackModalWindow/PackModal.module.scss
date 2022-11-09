@@ -1,9 +1,14 @@
 .modalBody{
   display: flex;
   flex-direction: column;
+
 }
 .buttons{
   display: flex;
   justify-content: space-between;
   padding: 20px;
+}
+.btn{
+  margin: 10px 0 10px;
+  width: 100%;
 }
