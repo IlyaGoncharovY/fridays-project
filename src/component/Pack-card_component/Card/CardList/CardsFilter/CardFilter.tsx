@@ -28,7 +28,14 @@ export const CardFilter = ({userID, id}: CardFilterType) => {
                 <tr style={{fontSize: "25px"}}>
                     <th>Question</th>
                     <th>Answer</th>
-                    <th className={s.update}>Last updated</th>
+                    <th className={s.update}>
+                        {sortCards[0] === "0"
+                            ?
+                            <span className={s.up} onClick={() => sortUpdate("1updated")}>Last Updated<ExpandLessIcon/></span>
+                            : <span className={s.down}
+                                    onClick={() => sortUpdate("0updated")}>Last Updated<ExpandMoreIcon/></span>
+                        }
+                    </th>
                     <th className={s.grade}>
                         {sortCards[0] === "0"
                             ? <span className={s.up} onClick={() => sortUpdate("1grade")}>Grade<ExpandLessIcon/></span>
