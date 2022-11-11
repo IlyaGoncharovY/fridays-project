@@ -13,8 +13,7 @@ import {PATH} from "../../../../utils/path";
 export const CardList = () => {
     const params = useParams()
     const {cardsPack_id, userID, packName} = params
-    const {pageCount, cardQuestion, sortCards, page} = useAppSelector(state => state.cards)
-    const totalCount = useAppSelector(state => state.cards.cardsTotalCount)
+    const {pageCount, cardQuestion, sortCards, page, cardsTotalCount} = useAppSelector(state => state.cards)
     const id = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -90,7 +89,7 @@ export const CardList = () => {
                 </div>
             </div>
             <CardFilter userID={userID} id={id}/>
-            <PaginationButton pageCount={pageCount} totalCount={totalCount} setPages={setPages}/>
+            <PaginationButton pageCount={pageCount} totalCount={cardsTotalCount} setPages={setPages}/>
         </div>
 
     )
