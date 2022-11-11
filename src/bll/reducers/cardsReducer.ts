@@ -13,10 +13,12 @@ const EDIT_CARD_GRADE = "CARDS/EDIT-CARD-GRADE"
 const SET_CARDS_TOTAL_COUNT = "CARDS/SET-CARDS-TOTAL-COUNT"
 const SET_CARDS_PAGE = "CARDS/SET-CARDS-PAGE"
 const SET_SEARCH_MODE = "CARDS/SET-SEARCH-MODE"
+const SET_SORT_CARD = "CARDS/SET-SORT-CARD"
 
 const initialState: CardStateType = {
     cardsPack_id: "",
     cards: [],
+    sortCards: "1grade",
     cardsSorted: '',
     page: 1,
     cardsTotalCount: 1,
@@ -73,6 +75,11 @@ export const cardsReducer = (state: CardStateType = initialState, action: CardAc
                 cardQuestion: action.payload.cardQuestion,
                 cardAnswer: action.payload.cardAnswer
             }
+        case SET_SORT_CARD:
+            return {
+                ...state,
+                sortCards: action.payload.sortCards
+            }
         default:
             return state
     }
@@ -108,9 +115,13 @@ const setCardsPage = (page: number) => ({
     type: SET_CARDS_PAGE,
     payload: {page}
 } as const)
-const setSearchMode = (cardAnswer: string | undefined, cardQuestion: string | undefined) => ({
+const setSearchMode = (cardAnswer: string | undefined, cardQuestion: string) => ({
     type: SET_SEARCH_MODE,
     payload: {cardAnswer, cardQuestion}
+} as const)
+const setSortCards = (sortCards: string) => ({
+    type: SET_SORT_CARD,
+    payload: {sortCards}
 } as const)
 //TC
 export const fetchCardsTC = (params: CardsParamsType): AppThunk => async dispatch => {
@@ -122,6 +133,7 @@ export const fetchCardsTC = (params: CardsParamsType): AppThunk => async dispatc
         dispatch(setCardsPackID(params.cardsPack_id))
         dispatch(setCardsPage(res.data.page))
         dispatch(setSearchMode(params.cardAnswer, params.cardQuestion))
+        dispatch(setSortCards(params.sortCards))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
@@ -174,14 +186,16 @@ export type CardActionType =
     | ReturnType<typeof setCardsTotalCount>
     | ReturnType<typeof setCardsPage>
     | ReturnType<typeof setSearchMode>
+    | ReturnType<typeof setSortCards>
 
 export type CardStateType = {
     cardsPack_id: string
     cards: CardType[]
+    sortCards: string
     cardsSorted: string
     page: number
     cardsTotalCount: number
     pageCount: number
     cardAnswer: string | undefined
-    cardQuestion: string | undefined
+    cardQuestion: string
 }

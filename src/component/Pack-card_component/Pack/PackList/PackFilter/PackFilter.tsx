@@ -11,8 +11,8 @@ export const PackFilter = () => {
     const {packs, pageCount, page, packName, min, max, user_id, sortPacks} = useAppSelector(state => state.packs)
 
     const dispatch = useAppDispatch()
-    const sortUpdate = (str: string) => {
-        dispatch(fetchPacksTC({page, pageCount, packName, min, max, user_id, sortPacks: str}))
+    const sortUpdate = (sortPacks: string) => {
+        dispatch(fetchPacksTC({page, pageCount, packName, min, max, user_id, sortPacks}))
     }
     return (
         <div className={s.filterWindow}>
@@ -28,7 +28,8 @@ export const PackFilter = () => {
                             <span className={s.up} onClick={() => sortUpdate("1updated")}>Last Updated<ExpandLessIcon/></span>
                             : <span className={s.down}
                                     onClick={() => sortUpdate("0updated")}>Last Updated<ExpandMoreIcon/></span>
-                        }</th>
+                        }
+                    </th>
                     <th>Created by</th>
                     <th>Actions</th>
                 </tr>
@@ -36,20 +37,20 @@ export const PackFilter = () => {
                 <tbody>
                 {packs.length
                     ? packs.map(el => {
-                    const transformDate = new Date(el.updated).toLocaleDateString()
-                    console.log(packs)
-                    return (
-                        <Pack key={el._id}
-                                        packID={el._id}
-                                        name={el.name}
-                                        cards={el.cardsCount}
-                                        lastUpdated={transformDate}
-                                        userName={el.user_name}
-                                        userID={el.user_id}
-                                />
+                        const transformDate = new Date(el.updated).toLocaleDateString()
+                        console.log(packs)
+                        return (
+                            <Pack key={el._id}
+                                  packID={el._id}
+                                  name={el.name}
+                                  cards={el.cardsCount}
+                                  lastUpdated={transformDate}
+                                  userName={el.user_name}
+                                  userID={el.user_id}
+                            />
 
-                    )
-                })
+                        )
+                    })
                     : <th colSpan={5}><NotFound/></th>}
                 </tbody>
             </table>

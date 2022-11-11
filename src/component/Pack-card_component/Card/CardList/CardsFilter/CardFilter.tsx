@@ -1,8 +1,11 @@
 import {Card} from "./Card/Card"
 import s from "./cardFilter.module.scss"
-import {useAppSelector} from "../../../../../common/hook/hook";
+import {useAppDispatch, useAppSelector} from "../../../../../common/hook/hook";
 import {SearchCards} from "../../../../Settings/SearchCards/SearchCards";
 import {NotFound} from "../../../../NotFound/NotFound";
+import {fetchCardsTC} from "../../../../../bll/reducers/cardsReducer";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 
 type CardFilterType = {
@@ -12,7 +15,11 @@ type CardFilterType = {
 
 export const CardFilter = ({userID, id}: CardFilterType) => {
 
-    const cards = useAppSelector(state => state.cards.cards)
+    const {cards, sortCards, cardQuestion, pageCount, cardsPack_id, page} = useAppSelector(state => state.cards)
+    const dispatch = useAppDispatch()
+    const sortUpdate = (sortCards: string) => {
+        dispatch(fetchCardsTC({cardsPack_id, sortCards, cardQuestion, pageCount, page}))
+    }
     return (
         <div className={s.filterWindow}>
             <SearchCards/>
@@ -21,8 +28,14 @@ export const CardFilter = ({userID, id}: CardFilterType) => {
                 <tr style={{fontSize: "25px"}}>
                     <th>Question</th>
                     <th>Answer</th>
-                    <th>Last Updated</th>
-                    <th>Grade</th>
+                    <th className={s.update}>Last updated</th>
+                    <th className={s.grade}>
+                        {sortCards[0] === "0"
+                            ? <span className={s.up} onClick={() => sortUpdate("1grade")}>Grade<ExpandLessIcon/></span>
+                            : <span className={s.down}
+                                    onClick={() => sortUpdate("0grade")}>Grade<ExpandMoreIcon/></span>
+                        }
+                    </th>
                     {id === userID && <th>Actions</th>}
                 </tr>
                 </thead>

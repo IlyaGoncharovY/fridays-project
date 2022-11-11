@@ -14,11 +14,11 @@ export const SearchCards = () => {
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>("")
     const debouncedValue = useDebounce<string>(value, 1000)
-    const cardsPack_id = useAppSelector(state => state.cards.cardsPack_id)
-    const pageCount = useAppSelector(state => state.cards.pageCount)
+    const {cardsPack_id, pageCount, sortCards, page} = useAppSelector(state => state.cards)
+
     useEffect(() => {
         if(isSearchMode) {
-            dispatch(fetchCardsTC({cardsPack_id, cardQuestion: debouncedValue, pageCount}))
+            dispatch(fetchCardsTC({cardsPack_id, cardQuestion: debouncedValue, pageCount, sortCards, page}))
         }
     }, [debouncedValue])
 

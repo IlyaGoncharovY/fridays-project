@@ -206,7 +206,7 @@ export type PacksStateType = {
     min: number
     max: number
 }
-export type SearchType = {
+export type SearchPacksType = {
     packName: string
     page: number
     pageCount: number

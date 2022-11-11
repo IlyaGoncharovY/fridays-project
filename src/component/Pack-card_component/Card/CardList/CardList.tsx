@@ -13,10 +13,8 @@ import {PATH} from "../../../../utils/path";
 export const CardList = () => {
     const params = useParams()
     const {cardsPack_id, userID, packName} = params
-    const pageCount = useAppSelector(state => state.cards.pageCount)
+    const {pageCount, cardQuestion, sortCards, page} = useAppSelector(state => state.cards)
     const totalCount = useAppSelector(state => state.cards.cardsTotalCount)
-    const cardAnswer = useAppSelector(state => state.cards.cardAnswer)
-    const cardQuestion = useAppSelector(state => state.cards.cardQuestion)
     const id = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -28,14 +26,13 @@ export const CardList = () => {
 
     useEffect(() => {
         if (cardsPack_id) {
-            dispatch(fetchCardsTC({cardsPack_id, pageCount}))
+            dispatch(fetchCardsTC({cardsPack_id, sortCards, cardQuestion, pageCount, page}))
         }
     }, [])
 
     const setPages = (page: number) => {
-        console.log(cardsPack_id)
         if (cardsPack_id) {
-            dispatch(fetchCardsTC({cardsPack_id, page, pageCount, cardAnswer, cardQuestion}))
+            dispatch(fetchCardsTC({cardsPack_id, sortCards, page, pageCount, cardQuestion}))
         }
     }
 
