@@ -1,55 +1,50 @@
+import {LoginDataType, regAPI} from "../../api/regApi";
 import {AppThunk} from "../store";
-import {registartionAPI} from "../../api/regApi";
-import {loginAC} from "./loginReducer";
 import {errorUtil} from "../../utils/error-util";
 import {AxiosError} from "axios";
 import {setProfileAC} from "./profileReducer";
 
-const initialState = {
-    isAuth: false,
+const initialState : initialStateType = {
+    isLoggedIn: false
 }
-
-type initialStateType = typeof initialState
-type AuthReducerType = setAuthACType
-
-
-export const authReducer = (state: initialStateType = initialState, action: AuthReducerType): initialStateType => {
+//reducer
+export const authReducer=(state  = initialState, action:LoginActionType) : initialStateType  =>{
     switch (action.type) {
-        case "AUTH": {
+        case "login/SET-LOGIN":
             return {
                 ...state,
-                isAuth: action.isAuth
+                isLoggedIn : action.value
             }
-        }
-        default:
+        default :
             return state
     }
 }
-
 //AC
-export type setAuthACType = ReturnType<typeof setAuthAC>
-export const setAuthAC = (isAuth: boolean) => {
-    return {
-        type: "AUTH",
-        isAuth
-    } as const
-}
-
-//THUNK
-
-export const initializingTC = (): AppThunk => async dispatch => {
+export const loginAC = (value : boolean)=>({type : 'login/SET-LOGIN', value} as const)
+//TC
+export const loginTC = (data : LoginDataType) : AppThunk => async dispatch  => {
     try {
-      const res =   await registartionAPI.me()
-        console.log(res.data)
+       const res =  await regAPI.login(data)
         dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
 
-    } catch (e) {
-        const error = e as Error | AxiosError<{ error: string }>
-        errorUtil(error, dispatch)
-    } finally {
-        dispatch(setAuthAC(true))
+    }catch (e) {
+        const error = e as Error | AxiosError<{error : string}>
+        errorUtil(error,dispatch)
     }
-
-
 }
+export const logoutTC = () : AppThunk => async dispatch  => {
+    try {
+        await regAPI.logout()
+        dispatch(loginAC(false))
+    }catch (e) {
+        const error = e as Error | AxiosError<{error : string}>
+        errorUtil(error,dispatch)
+    }
+}
+//types
+export type LoginActionType = ReturnType<typeof loginAC>
+type initialStateType = {
+    isLoggedIn : boolean
+}
+

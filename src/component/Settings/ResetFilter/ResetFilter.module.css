@@ -1,0 +1,7 @@
+.resetIcon{
+    margin-top: 30px;
+}
+.resetIcon:hover{
+    color: #366EFF;
+    cursor: pointer;
+}

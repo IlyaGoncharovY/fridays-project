@@ -4,32 +4,28 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
-import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
-import {setCardsSearchMode, setSearchCardsFilter} from "../../../bll/reducers/searchCardsReducer";
+import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
+import {fetchCardsTC} from "../../../bll/reducers/cardsReducer";
+import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
 export const SearchCards = () => {
+    const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>("")
-    const debouncedValue = useDebounce<string>(value, 500)
-    const searchMode = useAppSelector(state => state.searchCards.searchMode)
+    const debouncedValue = useDebounce<string>(value, 1000)
+    const cardsPack_id = useAppSelector(state => state.cards.cardsPack_id)
+    const pageCount = useAppSelector(state => state.cards.pageCount)
     useEffect(() => {
-        if (searchMode) {
-            debugger
-            dispatch(setSearchCardsFilter({cardQuestion : debouncedValue}))
-            // dispatch(setSearchFilter({page, pageCount, packName: debouncedValue, min, max}))
+        if(isSearchMode) {
+            dispatch(fetchCardsTC({cardsPack_id, cardQuestion: debouncedValue, pageCount}))
         }
-
     }, [debouncedValue])
 
-    // useEffect(() => {
-    //     setValue(packName)
-    // }, [packName])
 
     const getInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-
         setValue(e.currentTarget.value)
-        dispatch(setCardsSearchMode(true))
+        dispatch(setSearchMode(true))
     }
     return (
         <div>

@@ -1,0 +1,22 @@
+.PackListContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 20px 3% 20px 3%;
+  padding: 20px 3% 20px 3%;
+
+  .PackListHeader {
+    display: flex;
+    justify-content: space-between;
+
+    .PackListHeaderTitle {
+      width: 600px;
+      font-size: 22pt
+    }
+    .PackListHeaderButton {
+      display: flex;
+      justify-content: end;
+      width: 100%;
+    }
+  }
+}

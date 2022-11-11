@@ -4,21 +4,20 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
-import {useAppDispatch, useAppSelector} from "../../../bll/hook/hook";
-import {SearchType, setSearchFilter, setSearchMode} from "../../../bll/reducers/searchReducer";
+import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
+import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
+import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName}) => {
-
+export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id, sortPacks}) => {
+    const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>(packName)
-    const debouncedValue = useDebounce<string>(value, 500)
-    const searchMode = useAppSelector(state => state.search.searchMode)
+    const debouncedValue = useDebounce<string>(value, 1000)
     useEffect(() => {
-        if (searchMode) {
-            dispatch(setSearchFilter({page, pageCount, packName: debouncedValue, min, max}))
+        if(isSearchMode) {
+            dispatch(fetchPacksTC({page, pageCount, packName: debouncedValue, min, max, user_id, sortPacks}))
         }
-
     }, [debouncedValue])
 
     useEffect(() => {
@@ -34,7 +33,7 @@ export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packNam
             <div>Search</div>
             <Paper
                 component="form"
-                sx={{p: '2px 4px', display: 'flex', alignItems: 'center', width: 350,height : '32px'}}
+                sx={{p: '2px 4px', display: 'flex', alignItems: 'center', width: 350, height: '32px'}}
             >
                 <IconButton type="button" sx={{p: '10px'}} aria-label="search">
                     <SearchIcon/>

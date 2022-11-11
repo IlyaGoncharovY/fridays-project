@@ -1,0 +1,32 @@
+.box {
+  margin-top: 100px;
+  width: 300px;
+
+  .signUp {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 auto;
+  }
+  .wrapper {
+    position: relative;
+    .password{
+      width: 300px;
+    }
+    .eye {
+      position: absolute;
+      top: 25px;
+      cursor: pointer;
+    }
+  }
+
+  .footerText {
+    text-align: center;
+  }
+
+  .footerLink {
+    text-align: center;
+  }
+}
+
+

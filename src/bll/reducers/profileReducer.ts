@@ -1,26 +1,24 @@
 import {AppThunk} from "../store";
-import {profileAPI} from "../../api/regApi";
+import {AddedUserType, profileAPI} from "../../api/regApi";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
 //constants
 const CHANGE_NAME = "CHANGE-NAME"
 const SET_PROFILE = "SET-PROFILE"
-const initialState: profileStateType = {
+const initialState: ProfileStateType = {
     _id: "",
     email: "",
     rememberMe: false,
     isAdmin: false,
-    name: "No name",
+    name: "",
     verified: false,
     publicCardPacksCount: 0,
     created: "",
-    updated: "string",
+    updated: "",
     __v: 0,
-    tokenDeathTime : 0,
-    token : ''
 }
-
-export const profileReducer = (state: profileStateType=initialState, action:ProfileActionType):profileStateType => {
+//reducer
+export const profileReducer = (state: ProfileStateType=initialState, action:ProfileActionType):ProfileStateType => {
     switch (action.type) {
         case CHANGE_NAME: {
             return {
@@ -43,7 +41,7 @@ export const changeNameAC = (name: string) => {
         payload: {name}
     } as const
 }
-export const setProfileAC = (profileData: profileStateType) => {
+export const setProfileAC = (profileData: ProfileStateType) => {
     return {
         type: SET_PROFILE,
         payload: {profileData}
@@ -52,9 +50,8 @@ export const setProfileAC = (profileData: profileStateType) => {
 //TC
 export const updateProfileTC = (name: string): AppThunk => async dispatch =>{
     try {
-        const res = await profileAPI.updateProfile({name, avatar: ''})
+        await profileAPI.updateProfile({name, avatar: ''})
         dispatch(changeNameAC(name))
-        console.log(res.data)
     }catch (e) {
         const error = e as Error | AxiosError<{error : string}>
         errorUtil(error,dispatch)
@@ -63,17 +60,4 @@ export const updateProfileTC = (name: string): AppThunk => async dispatch =>{
 
 //type
 export type ProfileActionType = ReturnType<typeof changeNameAC> | ReturnType<typeof setProfileAC>
-type profileStateType = {
-    _id: string;
-    email: string;
-    rememberMe: boolean;
-    isAdmin: boolean;
-    name: string;
-    verified: boolean;
-    publicCardPacksCount: number;
-    created: string;
-    updated: string;
-    __v: number;
-    tokenDeathTime? : null  | number,
-    token? : null | string
-}
+export type ProfileStateType = AddedUserType

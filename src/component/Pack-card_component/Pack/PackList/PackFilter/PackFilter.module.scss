@@ -1,0 +1,21 @@
+.filterWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .navigationWindow {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 3% 20px 3%;
+
+    .doubleButton {
+
+    }
+    .delFilter{
+      //margin-right: 3%;
+    }
+  }
+  .up, .down{
+    cursor: pointer;
+  }
+}
