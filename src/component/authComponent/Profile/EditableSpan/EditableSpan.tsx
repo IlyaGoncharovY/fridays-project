@@ -35,7 +35,7 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
     return (
         editMode
             ?
-            <div className={s.editableForm}>
+            <span className={s.editableForm}>
                 <TextField
                     value={newName}
                     variant={"standard"}
@@ -45,7 +45,7 @@ export const EditableSpan = ({name, onChangeName}: EditableSpanType) => {
                 <Button style={{position: "absolute"}} variant="outlined" size="small" onClick={addNewName}>
                     Save
                 </Button>
-            </div>
+            </span>
 
             : <span>{name}<EditIcon className={s.editIcon}
                                     onClick={editHandler}/>

@@ -11,22 +11,25 @@
   align-items: center;
   color: black;
   height: 420px;
-  width: 420px;
+  width: 400px;
   background-color: white;
 }
 .img{
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 90px;
+  position: relative;
 }
-.name{
-  font-size: 20px;
-  margin: 10px;
+.uploadImg{
+  position: absolute;
+  right: 35px;
+  bottom: 35px;
 }
-.email{
+.name, .email{
   font-size: 15px;
   margin: 10px;
 }
+
 .button{
   margin: 10px;
 }

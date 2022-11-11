@@ -1,13 +1,14 @@
 import {AppThunk} from "../store";
-import {AddedUserType, profileAPI} from "../../api/regApi";
+import {AddedUserType, profileAPI, ProfileDataType} from "../../api/regApi";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../utils/error-util";
+import {setStatusAC} from "./appReducer";
 //constants
-const CHANGE_NAME = "CHANGE-NAME"
-const SET_PROFILE = "SET-PROFILE"
+const SET_PROFILE = "profile/SET-PROFILE"
 const initialState: ProfileStateType = {
     _id: "",
     email: "",
+    avatar: "",
     rememberMe: false,
     isAdmin: false,
     name: "",
@@ -18,15 +19,9 @@ const initialState: ProfileStateType = {
     __v: 0,
 }
 //reducer
-export const profileReducer = (state: ProfileStateType=initialState, action:ProfileActionType):ProfileStateType => {
+export const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionType): ProfileStateType => {
     switch (action.type) {
-        case CHANGE_NAME: {
-            return {
-                ...state,
-                name: action.payload.name
-            }
-        }
-        case SET_PROFILE:{
+        case SET_PROFILE: {
             return action.payload.profileData
         }
         default:
@@ -35,12 +30,6 @@ export const profileReducer = (state: ProfileStateType=initialState, action:Prof
 }
 
 //AC
-export const changeNameAC = (name: string) => {
-    return {
-        type: CHANGE_NAME,
-        payload: {name}
-    } as const
-}
 export const setProfileAC = (profileData: ProfileStateType) => {
     return {
         type: SET_PROFILE,
@@ -48,16 +37,33 @@ export const setProfileAC = (profileData: ProfileStateType) => {
     } as const
 }
 //TC
-export const updateProfileTC = (name: string): AppThunk => async dispatch =>{
+export const updateProfileTC = (model: ModelUpdateProfileType): AppThunk => async (dispatch, getState) => {
+    dispatch(setStatusAC("loading"))
+    const profileDate = getState().profile
+    console.log(model)
+    const apiModel: ProfileDataType = {
+        name: profileDate.name,
+        avatar: profileDate.avatar,
+        ...model
+    }
     try {
-        await profileAPI.updateProfile({name, avatar: ''})
-        dispatch(changeNameAC(name))
-    }catch (e) {
-        const error = e as Error | AxiosError<{error : string}>
-        errorUtil(error,dispatch)
+        const res = await profileAPI.updateProfile(apiModel)
+        dispatch(setProfileAC(res.data.updatedUser))
+        dispatch(setStatusAC("succeeded"))
+    } catch (e) {
+        const error = e as Error | AxiosError<{ error: string }>
+        errorUtil(error, dispatch)
     }
 }
 
 //type
-export type ProfileActionType = ReturnType<typeof changeNameAC> | ReturnType<typeof setProfileAC>
-export type ProfileStateType = AddedUserType
+export type ProfileActionType =
+    | ReturnType<typeof setProfileAC>
+export type ProfileStateType = AddedUserType & {
+    avatar: string
+}
+type ModelUpdateProfileType = {
+    name?: string
+    avatar?: string
+}
+

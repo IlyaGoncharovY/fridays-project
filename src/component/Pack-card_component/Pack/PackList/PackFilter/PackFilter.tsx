@@ -17,39 +17,41 @@ export const PackFilter = () => {
     return (
         <div className={s.filterWindow}>
             <Settings/>
-            {packs.length
-                ?
-                <table style={{textAlign: "left"}}>
-                    <thead>
-                    <tr style={{fontSize: "25px"}}>
-                        <th>Name</th>
-                        <th>Cards</th>
-                        <th className={s.update}>
-                            {sortPacks[0] === "0"
-                                ? <span className={s.up} onClick={() => sortUpdate("1updated")}>Last Updated<ExpandLessIcon /></span>
-                                : <span className={s.down} onClick={() => sortUpdate("0updated")}>Last Updated<ExpandMoreIcon /></span>
-                            }</th>
-                        <th>Created by</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {packs.map(el => {
-                        const transformDate = new Date(el.updated).toLocaleDateString()
-                        return (
-                            <Pack key={el._id}
-                                  packID={el._id}
-                                  name={el.name}
-                                  cards={el.cardsCount}
-                                  lastUpdated={transformDate}
-                                  userName={el.user_name}
-                                  userID={el.user_id}
-                            />
-                        )
-                    })}
-                    </tbody>
-                </table>
-                : <NotFound/>}
+            <table style={{textAlign: "left"}}>
+                <thead>
+                <tr style={{fontSize: "25px"}}>
+                    <th>Name</th>
+                    <th>Cards</th>
+                    <th className={s.update}>
+                        {sortPacks[0] === "0"
+                            ?
+                            <span className={s.up} onClick={() => sortUpdate("1updated")}>Last Updated<ExpandLessIcon/></span>
+                            : <span className={s.down}
+                                    onClick={() => sortUpdate("0updated")}>Last Updated<ExpandMoreIcon/></span>
+                        }</th>
+                    <th>Created by</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {packs.map(el => {
+                    const transformDate = new Date(el.updated).toLocaleDateString()
+                    console.log(packs.length)
+                    return (
+                            packs.length
+                                ? <Pack key={el._id}
+                                        packID={el._id}
+                                        name={el.name}
+                                        cards={el.cardsCount}
+                                        lastUpdated={transformDate}
+                                        userName={el.user_name}
+                                        userID={el.user_id}
+                                />
+                                : <NotFound/>
+                    )
+                })}
+                </tbody>
+            </table>
         </div>
     )
 }

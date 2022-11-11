@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import s from "./menu.module.scss"
 import {useAppSelector} from "../hook/hook";
 import {Avatar, Button} from "@mui/material";
-import avatar from "../assets/images/photoProfile.png"
 import {PATH} from "../../utils/path";
 
 export const Menu = () => {
@@ -27,11 +26,9 @@ export const Menu = () => {
                         <div className={s.profileHeader}
                              onClick={enterProfile}
                         >
-                            <div>{profile.name}
-                                <hr/>
-                            </div>
+                            <div className={s.name}>{profile.name}</div>
                             <Avatar alt={profile.name}
-                                    src={avatar}
+                                    src={profile.avatar}
                                     sx={{width: 40, height: 40}}/>
                         </div>
                         :

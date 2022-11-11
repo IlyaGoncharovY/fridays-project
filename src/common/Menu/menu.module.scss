@@ -18,9 +18,14 @@
 .profileHeader {
   display: inline-flex;
   margin: 0 50px 0 0;
+  cursor: pointer;
 }
 .profileHeader:hover{
-  cursor: pointer;
+  color: #366EFF;
+}
+.name{
+  margin-right: 10px;
+  text-decoration: underline;
 }
 .buttonLogout{
   margin: 0 50px 0 0;

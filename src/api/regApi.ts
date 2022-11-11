@@ -96,6 +96,7 @@ type ResponseUpdateUserType = {
 export type AddedUserType = {
     _id: string;
     email: string;
+    avatar: string
     rememberMe: boolean;
     isAdmin: boolean;
     name: string;
