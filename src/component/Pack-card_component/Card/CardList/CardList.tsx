@@ -92,7 +92,7 @@ export const CardList = () => {
                     />
                 </div>
             </div>
-            <CardFilter/>
+            <CardFilter userID={userID} id={id}/>
             <PaginationButton pageCount={pageCount} totalCount={totalCount} setPages={setPages}/>
         </div>
 

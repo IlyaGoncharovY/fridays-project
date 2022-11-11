@@ -1,4 +1,4 @@
-import {AppBar, LinearProgress, TextField} from "@mui/material"
+import {AppBar, LinearProgress} from "@mui/material"
 import s from "./Card.module.scss"
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -45,7 +45,7 @@ export const Card = (props: CardType) => {
     }
 
     const addTitleHandler = () => {
-            dispatch(editCardTC(props.cardID, question, answer))
+        dispatch(editCardTC(props.cardID, question, answer))
     }
 
     const deleteHandler = () => {
@@ -57,31 +57,18 @@ export const Card = (props: CardType) => {
                 ? <AppBar><LinearProgress/></AppBar>
                 : <tr>
                     <th style={{padding: "22px"}}>
-                        {isEdit
-                            ? <TextField
-                                value={question}
-                                variant={"standard"}
-                                onChange={onChangeQuestionHandler}
-                                autoFocus
-                            />
-                            : <div>{props.question}</div>
-                        }</th>
+                        <div>{props.question}</div>
+                    </th>
                     <th>
-                        {isEdit
-                            ? <TextField
-                                value={answer}
-                                variant={"standard"}
-                                onChange={onChangeAnswerHandler}
-                                autoFocus
-                            />
-                            : <div>{props.answer}</div>
-                        }</th>
+                        <div>{props.answer}</div>
+                    </th>
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
-                    <th className={s.icons}>
-                        {userID === props.userID && <EditIcon onClick={openEdit} className={s.editIcon}/>}
-                        {userID === props.userID && <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>}
-                    </th>
+                    {userID === props.userID &&
+                        <th className={s.icons}>
+                            <EditIcon onClick={openEdit} className={s.editIcon}/>
+                            <DeleteIcon onClick={openDelete} className={s.deleteIcon}/>
+                        </th>}
                 </tr>}
             <CardModal
                 nameInput={"edit card"}
