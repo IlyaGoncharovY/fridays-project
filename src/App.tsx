@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.scss';
 import {Menu} from "./common/Menu/Menu";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -8,9 +8,6 @@ import {PasswordRecovery} from "./component/authComponent/PasswordRecovery/Passw
 import {EnteringNewPassword} from "./component/authComponent/EnteringNewPassword/EnteringNewPassword";
 import {NotFound} from "./component/NotFound/NotFound";
 import {Login} from "./component/authComponent/Login/Login";
-import {useAppDispatch, useAppSelector} from "./common/hook/hook";
-import {initializingTC} from "./bll/reducers/appReducer";
-import {Loader} from "./common/Loader/Loader";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
 import {PackList} from './component/Pack-card_component/Pack/PackList/PackList';
 import {CardList} from './component/Pack-card_component/Card/CardList/CardList';
@@ -19,20 +16,10 @@ import {PATH} from "./utils/path";
 
 function App() {
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(initializingTC())
-    }, [])
-
-    if(!isAuth) return <Loader/>
-
     return (
         <div className="App">
             <div>
                 <Menu/>
-
                 <Routes>
                     <Route path={PATH.MAIN} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
@@ -47,9 +34,6 @@ function App() {
                     <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                     <Route path={PATH.ENTERING_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
-
-
-
                 </Routes>
             </div>
         </div>

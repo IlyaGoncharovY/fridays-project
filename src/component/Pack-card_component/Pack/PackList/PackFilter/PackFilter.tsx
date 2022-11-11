@@ -8,14 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {fetchPacksTC} from "../../../../../bll/reducers/packsReducer";
 
 export const PackFilter = () => {
-    const packs = useAppSelector(state => state.packs.cardPacks)
-    const pageCount = useAppSelector(state => state.packs.pageCount)
-    const page = useAppSelector(state => state.packs.page)
-    const packName = useAppSelector(state => state.packs.packName)
-    const min = useAppSelector(state => state.packs.minCardsCount)
-    const max = useAppSelector(state => state.packs.maxCardsCount)
-    const user_id = useAppSelector(state => state.packs.user_id)
-    const sortPacks = useAppSelector(state => state.packs.sortPacks)
+    const {packs, pageCount, page, packName, min, max, user_id, sortPacks} = useAppSelector(state => state.packs)
 
     const dispatch = useAppDispatch()
     const sortUpdate = (str: string) => {

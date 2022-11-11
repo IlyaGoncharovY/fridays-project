@@ -8,13 +8,7 @@ import {useAppSelector} from '../../common/hook/hook';
 
 export const Settings = () => {
 
-    const pageCount = useAppSelector(state => state.packs.pageCount)
-    const page = useAppSelector(state => state.packs.page)
-    const packName = useAppSelector(state => state.packs.packName)
-    const min = useAppSelector(state => state.packs.minCardsCount)
-    const max = useAppSelector(state => state.packs.maxCardsCount)
-    const user_id = useAppSelector(state => state.packs.user_id)
-    const sortPacks = useAppSelector(state => state.packs.sortPacks)
+    const {pageCount, page, packName, min, max, user_id, sortPacks} = useAppSelector(state => state.packs)
 
     return (
         <div style={{display: "flex", justifyContent:'space-between' ,flexWrap:'wrap'}}>
