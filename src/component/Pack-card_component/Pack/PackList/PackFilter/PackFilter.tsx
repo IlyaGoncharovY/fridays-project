@@ -34,12 +34,12 @@ export const PackFilter = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {packs.map(el => {
+                {packs.length
+                    ? packs.map(el => {
                     const transformDate = new Date(el.updated).toLocaleDateString()
-                    console.log(packs.length)
+                    console.log(packs)
                     return (
-                            packs.length
-                                ? <Pack key={el._id}
+                        <Pack key={el._id}
                                         packID={el._id}
                                         name={el.name}
                                         cards={el.cardsCount}
@@ -47,9 +47,10 @@ export const PackFilter = () => {
                                         userName={el.user_name}
                                         userID={el.user_id}
                                 />
-                                : <NotFound/>
+
                     )
-                })}
+                })
+                    : <th colSpan={5}><NotFound/></th>}
                 </tbody>
             </table>
         </div>
