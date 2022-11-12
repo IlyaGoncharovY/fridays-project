@@ -20,13 +20,13 @@ export const cardsAPI = {
 //Types - payload
 export type CardsParamsType = {
     cardAnswer?: string
-    cardQuestion?: string
+    cardQuestion: string
     cardsPack_id: string
     min?: number
     max?: number
-    sortCards?: string
-    page?: number
-    pageCount?: number
+    sortCards: string
+    page: number
+    pageCount: number
 }
 export type AddCardType = {
     cardsPack_id: string

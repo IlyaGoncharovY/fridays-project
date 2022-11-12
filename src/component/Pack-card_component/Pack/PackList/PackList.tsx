@@ -15,13 +15,7 @@ import {transformImageInBase64} from "../../../../utils/transformImageInBase64";
 export const PackList = () => {
 
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-    const pageCount = useAppSelector(state => state.packs.pageCount)
-    const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
-    const max = useAppSelector(state => state.packs.maxCardsCount)
-    const min = useAppSelector(state => state.packs.minCardsCount)
-    const packName = useAppSelector(state => state.packs.packName)
-    const user_id = useAppSelector(state => state.packs.user_id)
-    const sortPacks = useAppSelector(state => state.packs.sortPacks)
+    const {pageCount, cardPacksTotalCount, max, min, packName, user_id, sortPacks}  = useAppSelector(state => state.packs)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -86,7 +80,7 @@ export const PackList = () => {
                 </div>
             </div>
             <PackFilter/>
-            <PaginationButton pageCount={pageCount} totalCount={totalCount} setPages={setPages}/>
+            <PaginationButton pageCount={pageCount} totalCount={cardPacksTotalCount} setPages={setPages}/>
         </div>
     )
 }

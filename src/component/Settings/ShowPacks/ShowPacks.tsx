@@ -2,11 +2,10 @@ import React from 'react';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
-import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
+import {fetchPacksTC, SearchPacksType} from "../../../bll/reducers/packsReducer";
 
 
-
-export const ShowCards:React.FC<SearchType> = ({pageCount,page,user_id,packName, max, min, sortPacks}) => {
+export const ShowPacks:React.FC<SearchPacksType> = ({pageCount,page,user_id,packName, max, min, sortPacks}) => {
     const id = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const showMyCards = () => {

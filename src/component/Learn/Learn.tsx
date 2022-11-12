@@ -34,8 +34,7 @@ export const Learn = () => {
     const {cardsPack_id, userID, packName} = params
 
     const name = useAppSelector(state => state.learn.packName)
-    const cards = useAppSelector(state => state.cards.cards)
-    const pageCount = useAppSelector(state => state.cards.cardsTotalCount)
+    const {cards, sortCards, cardQuestion, cardsTotalCount, page} = useAppSelector(state => state.cards)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -45,8 +44,8 @@ export const Learn = () => {
 
     useEffect(() => {
         if (cardsPack_id && packName) {
-            dispatch(setUserPack({packID: cardsPack_id, packName: packName}))
-            dispatch(fetchCardsTC({cardsPack_id, pageCount}))
+            dispatch(setUserPack({packID: cardsPack_id, packName}))
+            dispatch(fetchCardsTC({cardsPack_id, pageCount: cardsTotalCount, sortCards, page, cardQuestion}))
         }
     }, [])
     useEffect(() => {

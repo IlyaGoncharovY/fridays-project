@@ -44,23 +44,24 @@ export const setStatusAC = (status: RequestStatusType) => {
     } as const
 }
 export const setErrorAC = (error: null | string) => {
-    return{
+    return {
         type: SET_ERROR,
         payload: {error}
     } as const
 }
 export const setSearchMode = (isSearchMode: boolean) => ({
     type: SET_SEARCH_MODE,
-    payload: {isSearchMode}} as const)
+    payload: {isSearchMode}
+} as const)
 //TC
 export const initializingTC = (): AppThunk => async dispatch => {
     try {
-      const res = await regAPI.me()
+        dispatch(setStatusAC("loading"))
+        const res = await regAPI.me()
         dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
-
-    }
-    finally {
+        dispatch(setStatusAC("succeeded"))
+    } finally {
         dispatch(setAuthAC(true))
     }
 }

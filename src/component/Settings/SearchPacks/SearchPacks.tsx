@@ -5,11 +5,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDebounce} from "../hookDebounce/Debounce";
 import {useAppDispatch, useAppSelector} from "../../../common/hook/hook";
-import {fetchPacksTC, SearchType} from "../../../bll/reducers/packsReducer";
+import {fetchPacksTC, SearchPacksType} from "../../../bll/reducers/packsReducer";
 import {setSearchMode} from "../../../bll/reducers/appReducer";
 
 
-export const Search: React.FC<SearchType> = ({pageCount, page, min, max, packName, user_id, sortPacks}) => {
+export const SearchPacks: React.FC<SearchPacksType> = ({pageCount, page, min, max, packName, user_id, sortPacks}) => {
     const isSearchMode = useAppSelector(state => state.auth.isSearchMode)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>(packName)

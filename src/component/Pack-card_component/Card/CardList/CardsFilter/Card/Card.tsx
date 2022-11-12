@@ -1,4 +1,4 @@
-import {AppBar, LinearProgress, TextField} from "@mui/material"
+import {AppBar, LinearProgress} from "@mui/material"
 import s from "./Card.module.scss"
 import {deleteCardTC, editCardTC} from "../../../../../../bll/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../../../../common/hook/hook";
@@ -80,25 +80,11 @@ export const Card = (props: CardType) => {
                 ? <AppBar><LinearProgress/></AppBar>
                 : <tr>
                     <th style={{padding: "22px"}}>
-                        {isEdit
-                            ? <TextField
-                                value={question}
-                                variant={"standard"}
-                                onChange={onChangeQuestionHandler}
-                                autoFocus
-                            />
-                            : <div>{props.question === 'no question' ? <img style={{width:'50px', height: '50px'}} src={questionImg} alt="question"/> : props.question}</div>
-                        }</th>
+                        <div>{props.question}</div>
+                    </th>
                     <th>
-                        {isEdit
-                            ? <TextField
-                                value={answer}
-                                variant={"standard"}
-                                onChange={onChangeAnswerHandler}
-                                autoFocus
-                            />
-                            : <div>{props.answer}</div>
-                        }</th>
+                        <div>{props.answer}</div>
+                    </th>
                     <th>{props.lastUpdated}</th>
                     <th><HalfRating grade={props.grade}/></th>
                     <th className={s.icons}>
