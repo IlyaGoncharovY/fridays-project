@@ -34,7 +34,7 @@ export const Learn = () => {
     const {cardsPack_id, userID, packName} = params
 
     const name = useAppSelector(state => state.learn.packName)
-    const {cards, sortCards, cardQuestion, cardsTotalCount, page} = useAppSelector(state => state.cards)
+    const {cards, sortCards, cardQuestion, page} = useAppSelector(state => state.cards)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -45,7 +45,7 @@ export const Learn = () => {
     useEffect(() => {
         if (cardsPack_id && packName) {
             dispatch(setUserPack({packID: cardsPack_id, packName}))
-            dispatch(fetchCardsTC({cardsPack_id, pageCount: cardsTotalCount, sortCards, page, cardQuestion}))
+            dispatch(fetchCardsTC({cardsPack_id, pageCount: 108, sortCards, page, cardQuestion}))
         }
     }, [])
     useEffect(() => {
@@ -78,7 +78,7 @@ export const Learn = () => {
                         <div><span
                             className={style.text}>Question :
                             <span>{cards.length
-                                ? randomQuestion?.question
+                                ?  <img src={randomQuestion?.questionImg} style={{width: "50px"}}/>
                                 : <Skeleton variant="text" sx={{fontSize: '1.2rem', width: '250px'}} component='span'/>}
                             </span>
                             </span>

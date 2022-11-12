@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import {Menu} from "./common/Menu/Menu";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -6,15 +6,25 @@ import {Registration} from "./component/authComponent/Registration/Registration"
 import {Profile} from "./component/authComponent/Profile/Profile";
 import {PasswordRecovery} from "./component/authComponent/PasswordRecovery/PasswordRecovery";
 import {EnteringNewPassword} from "./component/authComponent/EnteringNewPassword/EnteringNewPassword";
-import {NotFound} from "./component/NotFound/NotFound";
 import {Login} from "./component/authComponent/Login/Login";
 import {CheckEmail} from "./component/CheckEmail/CheckEmail";
 import {PackList} from './component/Pack-card_component/Pack/PackList/PackList';
 import {CardList} from './component/Pack-card_component/Card/CardList/CardList';
 import {Learn} from "./component/Learn/Learn";
 import {PATH} from "./utils/path";
+import {initializingTC} from "./bll/reducers/appReducer";
+import {Loader} from "./common/Loader/Loader";
+import {useAppDispatch, useAppSelector} from "./common/hook/hook";
 
 function App() {
+    const dispatch = useAppDispatch()
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+
+    useEffect(() => {
+        dispatch(initializingTC())
+    }, [])
+
+    if (!isAuth) return <Loader/>
 
     return (
         <div className="App">
@@ -29,8 +39,8 @@ function App() {
                     <Route path={`${PATH.LEARN}/:cardsPack_id/:userID/:packName`} element={<Learn/>}/>
                     <Route path={PATH.NEW_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.REGISTRATION} element={<Registration/>}/>
-                    <Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>
-                    <Route path={PATH.ERROR} element={<NotFound/>}/>
+                    {/*<Route path={'*'} element={<Navigate to={PATH.ERROR}/>}/>*/}
+                    {/*<Route path={PATH.ERROR} element={<NotFound/>}/>*/}
                     <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                     <Route path={PATH.ENTERING_PASSWORD} element={<EnteringNewPassword/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>

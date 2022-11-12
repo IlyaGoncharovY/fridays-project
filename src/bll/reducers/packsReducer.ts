@@ -14,6 +14,9 @@ const SET_MAX_MIN_FILTER = "PACKS/SET-MAX-MIN-FILTER"
 const SET_PACK_NAME = "PACKS/SET-PACK-NAME"
 const SET_USER_ID = "PACKS/SET-USER-ID"
 const SET_SORT_PACKS = "PACKS/SET-SORT-PACKS"
+const SET_UPDATED_CARDS_PACK = "SET_UPDATED_CARDS_PACK"
+
+
 //reducer
 const initialState: PacksStateType = {
     packs: [{} as PackType],
@@ -25,6 +28,7 @@ const initialState: PacksStateType = {
     cardPacksTotalCount: 1,
     min: 0,
     max: 110,
+    updatedCardsPack : {} as PackType
 }
 export const packsReducer = (state: PacksStateType = initialState, action: PacksActionType): PacksStateType => {
     switch (action.type) {
@@ -67,6 +71,11 @@ export const packsReducer = (state: PacksStateType = initialState, action: Packs
         case SET_SORT_PACKS:
             return {
                 ...state, sortPacks: action.payload.sortPacks
+            }
+        case "SET_UPDATED_CARDS_PACK":
+            return {
+                ...state,
+                updatedCardsPack : action.payload.pack
             }
         default:
             return state
@@ -112,6 +121,10 @@ const setUserID = (userID: string) => ({
 const setSortPacks = (sortPacks: string) => ({
     type: SET_SORT_PACKS,
     payload: {sortPacks}
+} as const)
+const setPack = (pack: PackType) => ({
+    type: SET_UPDATED_CARDS_PACK,
+    payload: {pack}
 } as const)
 //TC
 export const fetchPacksTC = (params: PacksParamsType): AppThunk => async dispatch => {
@@ -178,6 +191,7 @@ export const editPackTC = (_id: string, name: string ,deckCover?: string,isCheck
        const res =  await packsAPI.updatePack({_id, name,deckCover, private : isChecked})
 
         dispatch(editPack(_id,res.data.updatedCardsPack))
+        dispatch(setPack(res.data.updatedCardsPack))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>
@@ -196,6 +210,7 @@ export type PacksActionType =
     | ReturnType<typeof setPackName>
     | ReturnType<typeof setUserID>
     | ReturnType<typeof setSortPacks>
+    | ReturnType<typeof setPack>
 
 export type PacksStateType = {
     packs: PackType[]
@@ -207,6 +222,8 @@ export type PacksStateType = {
     cardPacksTotalCount: number
     min: number
     max: number
+    updatedCardsPack : PackType
+
 }
 export type SearchPacksType = {
     packName: string

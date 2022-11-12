@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Profile.module.scss"
 import {useAppDispatch, useAppSelector} from '../../../common/hook/hook';
 import {AppBar, Button, IconButton, LinearProgress} from "@mui/material";
@@ -8,8 +8,6 @@ import {Navigate, useNavigate} from "react-router-dom";
 import {logoutTC} from '../../../bll/reducers/authReducer';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import {PATH} from "../../../utils/path";
-import {initializingTC} from "../../../bll/reducers/appReducer";
-import {Loader} from "../../../common/Loader/Loader";
 import {PhotoCamera} from "@mui/icons-material";
 import {convertFileToBase64} from "../../../utils/convertFileToBase64-utilit";
 
@@ -18,7 +16,7 @@ export const Profile = () => {
 
     const isLogin = useAppSelector(state => state.login.isLoggedIn)
     const profile = useAppSelector(state => state.profile)
-    const {isAuth, status} = useAppSelector(state => state.auth)
+    const {status} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -46,11 +44,7 @@ export const Profile = () => {
         }
     }
 
-    useEffect(() => {
-        dispatch(initializingTC())
-    }, [])
 
-    if (!isAuth) return <Loader/>
 
     return (
         <>

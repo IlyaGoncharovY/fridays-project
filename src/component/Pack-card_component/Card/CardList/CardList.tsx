@@ -22,6 +22,7 @@ export const CardList = () => {
     const {cardsPack_id, userID, packName} = params
     const {cards, pageCount, cardQuestion, sortCards, page, cardsTotalCount} = useAppSelector(state => state.cards)
     const id = useAppSelector(state => state.profile._id)
+    const pack = useAppSelector(state => state.packs.updatedCardsPack)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -98,8 +99,8 @@ export const CardList = () => {
             <div className={s.CardListHeader}>
                 {id === userID
                     ? <div className={s.CardListHeaderTitle}>
-                        {packName}
-                        <CardSettingsForPacks packID={cardsPack_id!} userID={userID} name={packName}/>
+                        {pack.name || packName}
+                        <CardSettingsForPacks packID={cardsPack_id!} userID={userID} name={ pack.name || packName}/>
                     </div>
                     : <div className={s.CardListHeaderTitle}>
                         Friend's Pack

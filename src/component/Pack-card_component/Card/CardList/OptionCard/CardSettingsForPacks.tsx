@@ -8,8 +8,8 @@ import {PATH} from "../../../../../utils/path";
 import {useNavigate} from "react-router-dom";
 import {PacksModal} from "../../../../../common/ModalWindow/PackModalWindow/PacksModal";
 import {DeleteModal} from "../../../../../common/ModalWindow/DeleteModal/DeleteModal";
-import {deletePackTC, editPackTC, fetchPacksTC} from "../../../../../bll/reducers/packsReducer";
-import {useAppDispatch, useAppSelector} from "../../../../../common/hook/hook";
+import {deletePackTC, editPackTC} from "../../../../../bll/reducers/packsReducer";
+import {useAppDispatch} from "../../../../../common/hook/hook";
 import s from "./cardsSettings.module.scss"
 import {EditAndDeleteIcon} from "../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
 
@@ -24,20 +24,7 @@ type CardSettingsForPacksType = {
 
 export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
 
-    //
-    // const pageCount = useAppSelector(state => state.packs.pageCount)
-    // const max = useAppSelector(state => state.packs.maxCardsCount)
-    // const min = useAppSelector(state => state.packs.minCardsCount)
-    // const packName = useAppSelector(state => state.packs.packName)
-    // const user_id = useAppSelector(state => state.packs.user_id)
-    // const sortPacks = useAppSelector(state => state.packs.sortPacks)
-
     const dispatch = useAppDispatch()
-
-    // useEffect(() => {
-    //     dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
-    // }, [props.name])
-
     const navigate = useNavigate()
 
 
@@ -79,7 +66,11 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
     const schoolHandler = () => {
         navigate(`${PATH.LEARN}/${props.packID}/${props.userID}/${props.name}`)
     }
-
+    useEffect(()=>{
+        debugger
+        setTitle(props.name)
+        window.history.replaceState(null, "New Page Title", `#/card-list/${props.packID}/${props.userID}/${props.name}`)
+    },[props.name])
 
     return (
         <div>
@@ -129,7 +120,7 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
                 open={isDelete}
                 closeHandler={closeDelete}
                 thunkCallBack={deleteHandler}
-                name={props.name}
+                name={title}
             />
         </div>
     );
