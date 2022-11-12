@@ -16,7 +16,7 @@ const SET_USER_ID = "PACKS/SET-USER-ID"
 const SET_SORT_PACKS = "PACKS/SET-SORT-PACKS"
 //reducer
 const initialState: PacksStateType = {
-    packs: [],
+    packs: [{} as PackType],
     user_id: "",
     sortPacks: "0updated",
     packName: "",

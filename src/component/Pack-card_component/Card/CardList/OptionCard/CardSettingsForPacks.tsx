@@ -23,7 +23,7 @@ type CardSettingsForPacksType = {
 }
 
 export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
-        debugger
+
     //
     // const pageCount = useAppSelector(state => state.packs.pageCount)
     // const max = useAppSelector(state => state.packs.maxCardsCount)
@@ -73,7 +73,7 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
 
     const deleteHandler = () => {
         dispatch(deletePackTC(props.packID))
-        // navigate(`${PATH.PACK}/${props.userID}`)
+        navigate(PATH.PACK)
     }
 
     const schoolHandler = () => {

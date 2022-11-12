@@ -1,9 +1,7 @@
 import {Card} from "./Card/Card"
 import s from "./cardFilter.module.scss"
-import {useAppSelector} from "../../../../../common/hook/hook";
 import React from "react";
 import {useAppDispatch, useAppSelector} from "../../../../../common/hook/hook";
-import {SearchCards} from "../../../../Settings/SearchCards/SearchCards";
 import {NotFound} from "../../../../NotFound/NotFound";
 import {fetchCardsTC} from "../../../../../bll/reducers/cardsReducer";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";

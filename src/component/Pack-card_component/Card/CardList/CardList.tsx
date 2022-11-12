@@ -20,7 +20,7 @@ export const CardList = () => {
     const params = useParams()
 
     const {cardsPack_id, userID, packName} = params
-    const {pageCount, cardQuestion, sortCards, page, cardsTotalCount} = useAppSelector(state => state.cards)
+    const {cards, pageCount, cardQuestion, sortCards, page, cardsTotalCount} = useAppSelector(state => state.cards)
     const id = useAppSelector(state => state.profile._id)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()

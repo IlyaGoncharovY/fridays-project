@@ -80,7 +80,7 @@ export const Card = (props: CardType) => {
                 ? <AppBar><LinearProgress/></AppBar>
                 : <tr>
                     <th style={{padding: "22px"}}>
-                        <div>{props.question}</div>
+                        <div>{questionImg ? <img style={{width:'50px', height: '50px'}} src={questionImg} alt="question"/> : props.question}</div>
                     </th>
                     <th>
                         <div>{props.answer}</div>

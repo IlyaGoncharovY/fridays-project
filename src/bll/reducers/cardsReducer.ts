@@ -18,7 +18,7 @@ const SET_SORT_CARD = "CARDS/SET-SORT-CARD"
 
 const initialState: CardStateType = {
     cardsPack_id: "",
-    cards: [],
+    cards: [{} as CardType],
     sortCards: "1grade",
     cardsSorted: '',
     page: 1,
