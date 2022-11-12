@@ -1,18 +1,20 @@
 {
   "files": {
-    "main.css": "/fridays-project/static/css/main.d709d0b7.css",
-    "main.js": "/fridays-project/static/js/main.103cd8ae.js",
+    "main.css": "/fridays-project/static/css/main.bdb54540.css",
+    "main.js": "/fridays-project/static/js/main.e8018e14.js",
     "static/js/787.4321dd1c.chunk.js": "/fridays-project/static/js/787.4321dd1c.chunk.js",
-    "static/media/photoProfile.png": "/fridays-project/static/media/photoProfile.be9163b6d27728c887d4.png",
+    "static/media/react.png": "/fridays-project/static/media/react.d6984decadfca115181b.png",
+    "static/media/404.jpg": "/fridays-project/static/media/404.0635bb4a5990b9c22651.jpg",
+    "static/media/defaultAva.png": "/fridays-project/static/media/defaultAva.095f304ee65b7e4a10b9.png",
     "static/media/it-incubator.png": "/fridays-project/static/media/it-incubator.1b4c94fff68583c25478.png",
     "static/media/email-message-svgrepo-com.svg": "/fridays-project/static/media/email-message-svgrepo-com.a8810e6b451a1985a3efff39c7776bbb.svg",
     "index.html": "/fridays-project/index.html",
-    "main.d709d0b7.css.map": "/fridays-project/static/css/main.d709d0b7.css.map",
-    "main.103cd8ae.js.map": "/fridays-project/static/js/main.103cd8ae.js.map",
+    "main.bdb54540.css.map": "/fridays-project/static/css/main.bdb54540.css.map",
+    "main.e8018e14.js.map": "/fridays-project/static/js/main.e8018e14.js.map",
     "787.4321dd1c.chunk.js.map": "/fridays-project/static/js/787.4321dd1c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d709d0b7.css",
-    "static/js/main.103cd8ae.js"
+    "static/css/main.bdb54540.css",
+    "static/js/main.e8018e14.js"
   ]
 }
