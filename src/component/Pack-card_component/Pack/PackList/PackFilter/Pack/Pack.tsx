@@ -119,20 +119,8 @@ export const Pack = (props: PackType) => {
                         <IconButton disabled={props.cards === 0}>
                             <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
                         </IconButton>
-                        {
-                            userID === props.userID &&
-                            <IconButton color={'inherit'}>
-                                <EditIcon onClick={openEdit} className={s.editIcon}/>
-                            </IconButton>
-                        }
-                        {
-                            userID === props.userID &&
-                            <IconButton color={'inherit'}>
-                                <DeleteIcon onClick={openDelete}
-                                            className={s.deleteIcon}/>
-                            </IconButton>
-                        }
-                        <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
+
+
                         {userID === props.userID &&
                             <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>}
                     </th>

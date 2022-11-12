@@ -39,9 +39,7 @@ export const packsReducer = (state: PacksStateType = initialState, action: Packs
                 ...state,
                 cardPacks: state.cardPacks.map(pack => pack._id === action.payload.idPack ? {
                     ...pack,
-                    name: action.payload.title,
-                    deckCover : action.payload.file,
-                    private : action.payload.isChecked
+                    ...action.payload.updatedCardsPack,
                 } : pack)
             }
         case SET_PACKS_TOTAL_COUNT:
@@ -87,9 +85,9 @@ const deletePack = (idPack: string) => ({
     type: DELETE_LIST,
     payload: {idPack}
 } as const)
-const editPack = (idPack: string, title: string, file : string ,isChecked : boolean) => ({
+const editPack = (idPack: string, updatedCardsPack: PackType) => ({
     type: EDIT_LIST,
-    payload: {idPack, title,file,isChecked}
+    payload: {idPack,updatedCardsPack}
 } as const)
 const setCardPacksTotalCount = (value: number) => ({
     type: SET_PACKS_TOTAL_COUNT,
@@ -174,10 +172,12 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
     }
 }
 export const editPackTC = (_id: string, name: string ,deckCover?: string,isChecked?:boolean): AppThunk => async dispatch => {
+    debugger
     try {
         dispatch(setStatusAC("loading"))
-        await packsAPI.updatePack({_id, name,deckCover, private : isChecked})
-        dispatch(editPack(_id, name,deckCover!,isChecked!))
+       const res =  await packsAPI.updatePack({_id, name,deckCover, private : isChecked})
+
+        dispatch(editPack(_id,res.data.updatedCardsPack))
         dispatch(setStatusAC("succeeded"))
     } catch (e) {
         const error = e as Error | AxiosError<{ error: string }>

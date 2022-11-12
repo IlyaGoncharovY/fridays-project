@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -8,8 +8,8 @@ import {PATH} from "../../../../../utils/path";
 import {useNavigate} from "react-router-dom";
 import {PacksModal} from "../../../../../common/ModalWindow/PackModalWindow/PacksModal";
 import {DeleteModal} from "../../../../../common/ModalWindow/DeleteModal/DeleteModal";
-import {deletePackTC, editPackTC} from "../../../../../bll/reducers/packsReducer";
-import {useAppDispatch} from "../../../../../common/hook/hook";
+import {deletePackTC, editPackTC, fetchPacksTC} from "../../../../../bll/reducers/packsReducer";
+import {useAppDispatch, useAppSelector} from "../../../../../common/hook/hook";
 import s from "./cardsSettings.module.scss"
 import {EditAndDeleteIcon} from "../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
 
@@ -23,9 +23,23 @@ type CardSettingsForPacksType = {
 }
 
 export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
+        debugger
+    //
+    // const pageCount = useAppSelector(state => state.packs.pageCount)
+    // const max = useAppSelector(state => state.packs.maxCardsCount)
+    // const min = useAppSelector(state => state.packs.minCardsCount)
+    // const packName = useAppSelector(state => state.packs.packName)
+    // const user_id = useAppSelector(state => state.packs.user_id)
+    // const sortPacks = useAppSelector(state => state.packs.sortPacks)
+
+    const dispatch = useAppDispatch()
+
+    // useEffect(() => {
+    //     dispatch(fetchPacksTC({pageCount, max, min, user_id, packName, sortPacks}))
+    // }, [props.name])
 
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
+
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -59,12 +73,13 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
 
     const deleteHandler = () => {
         dispatch(deletePackTC(props.packID))
-         // navigate(`${PATH.PACK}/${props.userID}`)
+        // navigate(`${PATH.PACK}/${props.userID}`)
     }
 
     const schoolHandler = () => {
         navigate(`${PATH.LEARN}/${props.packID}/${props.userID}/${props.name}`)
     }
+
 
     return (
         <div>
@@ -89,12 +104,14 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '10ch',
+                        width: '6ch',
                     },
                 }}
             >
                 <div className={s.icons}>
-                    <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
+                    <IconButton>
+                        <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
+                    </IconButton>
                     <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>
                 </div>
             </Menu>

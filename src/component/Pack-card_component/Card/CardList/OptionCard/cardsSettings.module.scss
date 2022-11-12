@@ -1,5 +1,7 @@
 .icons{
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .schoolIcon:hover {
