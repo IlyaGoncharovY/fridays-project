@@ -77,10 +77,13 @@ export const Learn = () => {
                     <Paper elevation={3} style={{width: "350px", padding: "30px"}}>
                         <div><span
                             className={style.text}>Question :
-                            <span>{cards.length
-                                ?  <img src={randomQuestion?.questionImg} style={{width: "50px"}}/>
-                                : <Skeleton variant="text" sx={{fontSize: '1.2rem', width: '250px'}} component='span'/>}
-                            </span>
+                              <span>{!cards.length ?
+                                  <Skeleton variant="text" sx={{fontSize: '1.2rem', width: '250px'}}
+                                            component='span'/> :
+                                  randomQuestion.questionImg ?
+                                      <img src={randomQuestion?.questionImg} style={{width: "50px"}} alt={"questionImg"}/> :
+                                      randomQuestion?.question}
+                              </span>
                             </span>
                         </div>
                         <span
