@@ -1,19 +1,22 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import s from "./menu.module.scss"
-import {useAppSelector} from "../hook/hook";
+import {useAppDispatch, useAppSelector} from "../hook/hook";
 import {Avatar, Button} from "@mui/material";
 import {PATH} from "../../utils/path";
+import {initializingTC} from "../../bll/reducers/appReducer";
 
 export const Menu = () => {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const profile = useAppSelector(state => state.profile)
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
     const login = () => {
         navigate(PATH.LOGIN)
     }
     const enterProfile = () => {
         navigate(PATH.PROFILE)
+        dispatch(initializingTC())
     }
     return (
         <div className={s.menu}>
@@ -22,9 +25,9 @@ export const Menu = () => {
             </div>
             <div className={s.login}>
                 {
-                    isLoggedIn ?
-                        <div className={s.profileHeader}
-                             onClick={enterProfile}
+                    isLoggedIn
+                        ? <div className={s.profileHeader}
+                               onClick={enterProfile}
                         >
                             <div className={s.name}>{profile.name}</div>
                             <Avatar alt={profile.name}

@@ -66,11 +66,10 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
     const schoolHandler = () => {
         navigate(`${PATH.LEARN}/${props.packID}/${props.userID}/${props.name}`)
     }
-    useEffect(()=>{
-        debugger
+    useEffect(() => {
         setTitle(props.name)
-        window.history.replaceState(null, "New Page Title", `#/card-list/${props.packID}/${props.userID}/${props.name}`)
-    },[props.name])
+        window.history.replaceState(null, "New Page Title", `${PATH.CARD}/${props.packID}/${props.userID}/${props.name}`)
+    }, [props.name])
 
     return (
         <div>
@@ -123,5 +122,5 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
                 name={title}
             />
         </div>
-    );
+    )
 }

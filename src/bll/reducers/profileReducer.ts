@@ -40,7 +40,6 @@ export const setProfileAC = (profileData: ProfileStateType) => {
 export const updateProfileTC = (model: ModelUpdateProfileType): AppThunk => async (dispatch, getState) => {
     dispatch(setStatusAC("loading"))
     const profileDate = getState().profile
-    console.log(model)
     const apiModel: ProfileDataType = {
         name: profileDate.name,
         avatar: profileDate.avatar,

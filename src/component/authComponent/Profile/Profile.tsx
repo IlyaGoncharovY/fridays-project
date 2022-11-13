@@ -44,8 +44,6 @@ export const Profile = () => {
         }
     }
 
-
-
     return (
         <>
             {!isLogin
