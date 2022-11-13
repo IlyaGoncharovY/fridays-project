@@ -10,8 +10,6 @@ import {DeleteModal} from "../../../../../../common/ModalWindow/DeleteModal/Dele
 import {deletePackTC, editPackTC} from "../../../../../../bll/reducers/packsReducer";
 import {PATH} from "../../../../../../utils/path";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import img from "../../../../../../common/assets/images/react.png"
 import {transformImageInBase64} from "../../../../../../utils/transformImageInBase64";
 import {EditAndDeleteIcon} from "../../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
@@ -38,7 +36,7 @@ export const Pack = (props: PackType) => {
     const [isDelete, setIsDelete] = useState(false)
     const [title, setTitle] = useState(props.name)
     const [file,setFile] = useState("")
-    // const [image,setImage] = useState(props.deckCover)
+    const [isImgBroken, setIsImgBroken] = useState(false)
     const [isChecked,setIsChecked] = useState(false)
 
     useEffect(() => {
@@ -83,13 +81,15 @@ export const Pack = (props: PackType) => {
         }
     }
 
-    // const errorHandlerImage = ()=>{
-    //     setImage(img)
-    // }
     const PrivatePack = (event: ChangeEvent<HTMLInputElement>) => {
      setIsChecked(event.currentTarget.checked)
     }
 
+
+    const errorHandler = () => {
+        setIsImgBroken(true)
+            alert('С вашей картинкой для колоды, что то не так! Попробуйте другую!')
+    }
 
 
     return (
@@ -107,7 +107,10 @@ export const Pack = (props: PackType) => {
                                 autoFocus
                             />
                             : <div className={s.imgContainer} onClick={navigateToCard}>
-                                <img className={s.img} src={props.deckCover || img} alt="" onError={()=>{}}/>
+                                <img className={s.img}
+                                     src={ isImgBroken ? img : props.deckCover}
+                                     alt="pack img"
+                                     onError={errorHandler}/>
                                 <span className={s.name}>{props.name}</span>
                             </div>
                         }
