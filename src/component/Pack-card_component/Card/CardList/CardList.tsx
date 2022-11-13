@@ -99,7 +99,11 @@ export const CardList = () => {
                 {id === userID
                     ? <div className={s.CardListHeaderTitle}>
                         {pack.name || packName}
-                        <CardSettingsForPacks packID={cardsPack_id!} userID={userID} name={ pack.name || packName}/>
+                        <CardSettingsForPacks
+                            packID={cardsPack_id!}
+                            userID={userID}
+                            name={ pack.name || packName}
+                            cards={cards} />
                     </div>
                     : <div className={s.CardListHeaderTitle}>
                         Friend's Pack

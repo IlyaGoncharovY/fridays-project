@@ -88,7 +88,7 @@ export const Pack = (props: PackType) => {
 
     const errorHandler = () => {
         setIsImgBroken(true)
-            alert('С вашей картинкой для колоды, что то не так! Попробуйте другую!')
+            alert(`С вашей картинкой для колоды ${props.name}, что то не так! Попробуйте другую!`)
     }
 
 

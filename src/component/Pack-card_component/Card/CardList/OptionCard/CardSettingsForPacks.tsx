@@ -12,6 +12,7 @@ import {deletePackTC, editPackTC} from "../../../../../bll/reducers/packsReducer
 import {useAppDispatch} from "../../../../../common/hook/hook";
 import s from "./cardsSettings.module.scss"
 import {EditAndDeleteIcon} from "../../../../../common/EditAndDeleteIcon/EditAndDeleteIcon";
+import {CardType} from "../../../../../api/cardsAPI";
 
 
 const ITEM_HEIGHT = 48;
@@ -20,13 +21,13 @@ type CardSettingsForPacksType = {
     packID: string
     userID: string
     name: string | undefined
+    cards: CardType[]
 }
 
 export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -99,7 +100,7 @@ export const CardSettingsForPacks = (props: CardSettingsForPacksType) => {
                 }}
             >
                 <div className={s.icons}>
-                    <IconButton>
+                    <IconButton disabled={props.cards.length <= 0}>
                         <SchoolIcon onClick={schoolHandler} className={s.schoolIcon}/>
                     </IconButton>
                     <EditAndDeleteIcon openEdit={openEdit} openDelete={openDelete}/>
