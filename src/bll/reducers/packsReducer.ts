@@ -185,7 +185,6 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
     }
 }
 export const editPackTC = (_id: string, name: string ,deckCover?: string,isChecked?:boolean): AppThunk => async dispatch => {
-    debugger
     try {
         dispatch(setStatusAC("loading"))
        const res =  await packsAPI.updatePack({_id, name,deckCover, private : isChecked})

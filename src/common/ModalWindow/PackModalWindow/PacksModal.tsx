@@ -42,7 +42,6 @@ export const PacksModal = (props: ModalType) => {
                                     <Button style={{width: '100%'}} variant="contained" component="label">
                                         Download the cover for the pack
                                         <input hidden accept="image/*" multiple type="file" onChange={
-                                            // (e)=>props.getFile(e)
                                             props.getFile
                                         } />
                                     </Button>
