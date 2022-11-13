@@ -10,7 +10,6 @@ import Button from "@mui/material/Button/Button";
 import {PATH} from "../../../../utils/path";
 import {CardSettingsForPacks} from "./OptionCard/CardSettingsForPacks";
 import {convertFileToBase64} from "../../../../utils/convertFileToBase64";
-import defaultAva from "../../../../common/assets/images/defaultAva.png";
 import {SelectChangeEvent} from "@mui/material/Select";
 
 type InputFieldModType = "text" | "picture"
@@ -20,7 +19,7 @@ export const CardList = () => {
     const params = useParams()
 
     const {cardsPack_id, userID, packName} = params
-    const {cards, pageCount, cardQuestion, sortCards, page, cardsTotalCount} = useAppSelector(state => state.cards)
+    const {cards, pageCount, cardQuestion, sortCards, page, cardsTotalCount, questionImg} = useAppSelector(state => state.cards)
     const id = useAppSelector(state => state.profile._id)
     const pack = useAppSelector(state => state.packs.updatedCardsPack)
     const dispatch = useAppDispatch()
@@ -30,7 +29,7 @@ export const CardList = () => {
     const [open, setOpen] = useState(false)
     const [question, setQuestion] = useState("")
     const [answer, setAnswer] = useState("")
-    const [ava, setAva] = useState(defaultAva)
+    const [cardListImg, setCardListsImg] = useState(questionImg)
     const [modeQuestion, setModQuestion] = useState<InputFieldModType>("text")
 
     useEffect(() => {
@@ -57,7 +56,7 @@ export const CardList = () => {
 
     const addCardHandler = () => {
         if (question.trim() || answer.trim()) {
-            dispatch(addCardTC(question.trim(), answer.trim(), ava))
+            dispatch(addCardTC(question.trim(), answer.trim(), cardListImg!))
         }
         setQuestion("")
     }
@@ -83,9 +82,9 @@ export const CardList = () => {
         if (e.target.files && e.target.files.length) {
             const file = e.target.files[0]
             // console.log('file: ', file)
-            if (file.size < 4000000) {
+            if (file.size < 1000000) {
                 convertFileToBase64(file, (file64: string) => {
-                    setAva(file64)
+                    setCardListsImg(file64)
                 })
             } else {
                 console.error('Error: ', 'Файл слишком большого размера')
@@ -122,6 +121,7 @@ export const CardList = () => {
                         modeQuestion={modeQuestion}
                         modeHandleChange={modeHandleChange}
                         nameModal={"Add new card"}
+                        cardListImg={cardListImg}
                     />
                 </div>
             </div>

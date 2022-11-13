@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {ChangeEvent} from 'react';
+import {ChangeEvent, useState} from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Checkbox, FormControlLabel, TextField} from '@mui/material';
+import {TextField} from '@mui/material';
 import s from "./CardModal.module.scss"
 import {BasicModal} from "../BasicModal";
 import {SelectForCArd} from "./SelectForCard/SelectForCArd";
@@ -23,10 +23,19 @@ type ModalType = {
     modeQuestion?: string
     modeHandleChange?: (e: SelectChangeEvent) => void
     questionImg?: string
+    cardListImg?: string | null
 }
 
 export const CardModal = (props: ModalType) => {
-    console.log(props.questionImg)
+
+    const [isImgBroken, setIsImgBroken] = useState(false)
+
+    const errorHandler = () => {
+        setIsImgBroken(true)
+        alert('С вашей картинкой для карты, что то не так! Попробуйте другую!')
+    }
+
+
     return (
         <div>
             <BasicModal open={props.open} closeHandler={props.closeHandler}>
@@ -56,9 +65,10 @@ export const CardModal = (props: ModalType) => {
                                 <label className={s.questionImg}>
                                     <div className={s.img}>
                                         <img
-                                            src={props.questionImg || defaultAva}
+                                            src={isImgBroken ? defaultAva : props.questionImg || props.cardListImg!}
                                             style={{width: '100px'}}
                                             alt={"questionImg"}
+                                            onError={errorHandler}
                                         />
                                     </div>
                                     <Button variant="contained" component="span">
@@ -80,7 +90,6 @@ export const CardModal = (props: ModalType) => {
                             </>
                         }
 
-                        <FormControlLabel control={<Checkbox defaultChecked/>} label="Private pack"/>
                         <div className={s.buttons}>
                             <Button variant="outlined"
                                     style={{width: "100px"}}

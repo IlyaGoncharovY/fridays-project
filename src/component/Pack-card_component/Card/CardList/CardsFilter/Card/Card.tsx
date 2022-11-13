@@ -64,7 +64,7 @@ export const Card = (props: CardType) => {
         if (e.currentTarget.files && e.currentTarget.files.length) {
             const file = e.currentTarget.files[0]
             // console.log('file: ', file)
-            if (file.size < 4000000) {
+            if (file.size < 1000000) {
                 convertFileToBase64(file, (file64: string) => {
                     setQuestionImg(file64)
                 })
@@ -80,7 +80,11 @@ export const Card = (props: CardType) => {
                 ? <AppBar><LinearProgress/></AppBar>
                 : <tr>
                     <th style={{padding: "22px"}}>
-                        <div>{questionImg ? <img style={{width:'50px', height: '50px'}} src={questionImg} alt="question"/> : props.question}</div>
+                        <div>
+                            {questionImg ?
+                            <img style={{width:'50px', height: '50px'}} src={questionImg} alt="question"/> :
+                            question}
+                        </div>
                     </th>
                     <th>
                         <div>{props.answer}</div>
