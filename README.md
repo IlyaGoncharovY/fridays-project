@@ -25,7 +25,15 @@
 что загружать картинки придётся весом не более 1 мб.
 
 ## Технологии:
-React, Redux, TS, Axios, Redux-thunk, React-router-dom, Formik, MUI.
+![React](https://img.shields.io/badge/-React-090909?style=for-the-badge&logo=React)
+![Redux](https://img.shields.io/badge/-Redux-090909?style=for-the-badge&logo=Redux)
+![TypeScript](https://img.shields.io/badge/-TypeScript-090909?style=for-the-badge&logo=TypeScript)
+![Axios](https://img.shields.io/badge/-Axios-090909?style=for-the-badge&logo=Axios)
+![ReduxThunk](https://img.shields.io/badge/-ReduxThunk-090909?style=for-the-badge&logo=ReduxThunk)
+![ReactRouterDom](https://img.shields.io/badge/-ReactRouterDom-090909?style=for-the-badge&logo=ReactRouterDom)
+![Formik](https://img.shields.io/badge/-Formik-090909?style=for-the-badge&logo=Formik)
+![SASS](https://img.shields.io/badge/-sass-090909?style=for-the-badge&logo=sass)
+![MUI](https://img.shields.io/badge/-MUI-090909?style=for-the-badge&logo=MUI)
 
 ## Архитектура проекта:
 <ul>
