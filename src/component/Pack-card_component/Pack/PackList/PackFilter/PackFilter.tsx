@@ -18,7 +18,7 @@ export const PackFilter = () => {
     return (
         <div className={s.filterWindow}>
             <Settings/>
-            <table style={{textAlign: "left"}}>
+            <table style={{textAlign: "left", tableLayout: "fixed", width:"100%"}}>
                 <thead>
                 <tr style={{fontSize: "25px"}}>
                     <th>Name</th>

@@ -31,6 +31,13 @@
   display: flex;
 }
 .name {
+  /* white-space: normal; */
   align-self: center;
   margin-left: 10px;
+  max-width: 100px;
+  /* max-height: 100px; */
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  /* display: block; */
+  word-wrap: break-word;
 }
