@@ -65,7 +65,8 @@ export const CardModal = (props: ModalType) => {
                                 <label className={s.questionImg}>
                                     <div className={s.img}>
                                         <img
-                                            src={isImgBroken ? defaultAva : props.questionImg || props.cardListImg!}
+                                            // src={isImgBroken ? defaultAva : props.questionImg || props.cardListImg!}
+                                            src={props.questionImg || props.cardListImg! || defaultAva}
                                             style={{width: '100px'}}
                                             alt={"questionImg"}
                                             onError={errorHandler}
