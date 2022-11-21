@@ -80,7 +80,7 @@ export const Learn = () => {
                               <span>{!cards.length ?
                                   <Skeleton variant="text" sx={{fontSize: '1.2rem', width: '250px'}}
                                             component='span'/> :
-                                  randomQuestion.questionImg ?
+                                  randomQuestion?.questionImg ?
                                       <img src={randomQuestion?.questionImg} style={{width: "50px"}} alt={"questionImg"}/> :
                                       randomQuestion?.question}
                               </span>
