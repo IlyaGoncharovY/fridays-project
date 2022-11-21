@@ -36,7 +36,7 @@ export const Pack = (props: PackType) => {
     const [isDelete, setIsDelete] = useState(false)
     const [title, setTitle] = useState(props.name)
     const [file,setFile] = useState("")
-    const [isImgBroken, setIsImgBroken] = useState(false)
+    // const [isImgBroken, setIsImgBroken] = useState(false)
     const [isChecked,setIsChecked] = useState(false)
 
     useEffect(() => {
@@ -86,10 +86,10 @@ export const Pack = (props: PackType) => {
     }
 
 
-    const errorHandler = () => {
-        setIsImgBroken(true)
-            alert(`С вашей картинкой для колоды ${props.name}, что то не так! Попробуйте другую!`)
-    }
+    // const errorHandler = () => {
+    //     setIsImgBroken(true)
+    //         alert(`С вашей картинкой для колоды ${props.name}, что то не так! Попробуйте другую!`)
+    // }
 
 
     return (
@@ -108,9 +108,11 @@ export const Pack = (props: PackType) => {
                             />
                             : <div className={s.imgContainer} onClick={navigateToCard}>
                                 <img className={s.img}
-                                     src={ isImgBroken ? img : props.deckCover}
+                                     // src={ isImgBroken ? img : props.deckCover}
+                                     src={props.deckCover || img   }
                                      alt="pack img"
-                                     onError={errorHandler}/>
+                                     // onError={errorHandler}
+                                 />
                                 <span className={s.name}>{props.name}</span>
                             </div>
                         }
